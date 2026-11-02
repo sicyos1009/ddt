@@ -55,7 +55,7 @@ $$
 $$
 을 준다. 볼록성 상계와 Cauchy 추정으로 $\zeta'(\tfrac12+i\gamma)\ll_\varepsilon\gamma^{1/4+\varepsilon}$이므로 $r_\gamma=-2\zeta'(\rho)/\rho\ll_\varepsilon\gamma^{-3/4+\varepsilon}$이다. 영점 개수 $N(T+1)-N(T)\ll\log T$와 함께 Akbary–Ng–Shahabi의 따름정리 1.3(a)를 적용하면 $B^2$-거의 주기성과 극한분포의 존재가 따른다. LI 아래 곱 공식은 같은 논문의 정리 1.9이다. $\square$
 
-중복 영점은 계수가 $0$이므로 단순영점 가정이 필요 없다. [영점 기여 §4](zero-contributions.md#section-4)의 잔차 계수는 단순 영점에서 $a_\rho^{(M)}=-(a_\rho^{(\psi)})^2/a_\rho^{(2)}$이지만, 그 제곱합의 제어에는 여전히 역미분값의 추정이 필요하다. 이 결과로 Ng의 $J_{-1}$ 가정을 제거할 수는 없다.
+중복 영점은 계수가 $0$이므로 단순영점 가정이 필요 없다. [영점 기여 §4](zero-contributions.md#section-4)의 잔차 계수는 단순 영점에서 $a_\rho^{(M)}=-(a_\rho^{(\psi)})^2/a_\rho^{(2)}$이지만, 그 제곱합의 제어에는 여전히 역미분값의 추정이 필요하다. 이 결과로 Ng의 $J_{-1}$ 가정을 제거할 수는 없다. 그 가정의 약화와 소수·약수 쪽 쌍대는 [Ng 쌍대](ng-duality.md)에서 다룬다.
 
 <a id="section-3"></a>
 

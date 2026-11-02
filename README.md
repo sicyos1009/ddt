@@ -21,6 +21,7 @@ $A_x$는 제곱 인수 없는 모형, $\widetilde A_x$는 모든 정수의 $d_z$
 | [고차 베타 전개와 국소 특이점](docs/higher-order.md) | 고차 계수, 수렴 반경, 모멘트 상쇄, 세 점 핵 |
 | [영점의 국소 기여와 모멘트·복원](docs/zero-contributions.md) | 영점 중복도, 보조 통계, 영점 높이와 미분값 |
 | [RH 아래 보조 통계의 극한분포](docs/limiting-distribution.md) | 극한분포와 평균제곱 오차의 증명 |
+| [Ng 공식과 소수·약수 쪽 쌍대](docs/ng-duality.md) | Ng 분포의 가정 약화, 가정 없는 쌍대 극한분포, Mertens 함수와의 연결 |
 
 [후속 연구 안내](docs/further-results.md)에 문서별 범위와 수치 기록의 위치를 모았다. **[국소 계산]**, **[휴리스틱]**, **RH** 등의 표시는 각 주장의 범위와 가정을 구분한다.
 
@@ -33,19 +34,30 @@ $A_x$는 제곱 인수 없는 모형, $\widetilde A_x$는 모든 정수의 $d_z$
 | 평활화된 가법 공식 | [전역 공식 정리 3](docs/global-formula.md#section-2-3) |
 | 원래 정수합의 유한 공식과 정확한 가우스 합산 | [전역 공식 정리 4–5](docs/global-formula.md#section-3-4) |
 | RH 아래 극한분포 | [극한분포 명제 1](docs/limiting-distribution.md#section-2) |
+| 로그 가중 조건 아래 Mertens 함수의 극한분포 | [Ng 쌍대 명제 1.1](docs/ng-duality.md#section-1) |
+| 소수별 아크사인 곱과 $S_1$의 극한분포 (가정 없음) | [Ng 쌍대 정리 1–2](docs/ng-duality.md#section-2-2) |
+| 영점 봉우리의 국소 극한과 Ng의 분산 | [Ng 쌍대 명제 5.1–5.2](docs/ng-duality.md#section-5-2) |
 
 ## 검산
 
-Python과 mpmath를 사용한다.
+Python을 사용한다. 핵심 문서의 검산은 mpmath를, [Ng 쌍대](docs/ng-duality.md#checks)의 검산은 numpy와 scipy를 쓴다.
 
 | 스크립트 | 확인 범위 |
 |:--|:--|
 | [check_global_formula.py](scripts/check_global_formula.py) | 소수별 합성곱, 유한 영점 곱, 비틀림 없는 윤곽 적분 |
 | [check_smoothed_formula.py](scripts/check_smoothed_formula.py) | 비틀린 약수합, 가우스 꼬리 상계, 극점·영점 성분의 분해 |
 | [check_desmoothed_formula.py](scripts/check_desmoothed_formula.py) | 정수 격자의 평활화 오차, 경계가 영점 쌍을 가를 때의 윤곽 항등식 |
+| [check_ng_tail.py](scripts/check_ng_tail.py) | Ng 쌍대 §1의 Gallagher형 평균제곱 부등식과 로그 가중 부분합 |
+| [check_dual_product.py](scripts/check_dual_product.py) | Ng 쌍대 §2의 대칭 비틀기 항등식, 중심 원자 합, 소수별 아크사인 곱 |
+| [check_s1_distribution.py](scripts/check_s1_distribution.py) | Ng 쌍대 §3의 Littlewood 공식, 근사 오차, $S_1$의 분포와 왜도 |
+| [check_mertens_bridge.py](scripts/check_mertens_bridge.py) | Ng 쌍대 §5의 국소 극한, Plancherel 등식, $\lvert\zeta\rvert^{-2}$ 평균, Gonek 비율 |
 
     python -B scripts/check_global_formula.py
     python -B scripts/check_smoothed_formula.py
     python -B scripts/check_desmoothed_formula.py
+    python -B scripts/check_ng_tail.py
+    python -B scripts/check_dual_product.py
+    python -B scripts/check_s1_distribution.py
+    python -B scripts/check_mertens_bridge.py
 
 수치 검산은 증명을 대체하지 않는다. 주제별 부록의 기존 수치표는 계산 코드와 원자료가 없어 재현하지 않았으며, 위 스크립트의 검증 범위에 포함되지 않는다.
