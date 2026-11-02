@@ -2,28 +2,26 @@
 
 **2026-11-03 (DDT 도입 및 이산핵 확장)**
 
-DDT의 평균 아크사인 법칙에서 출발하여, 제곱 인수 없는 정수의 가중 약수합을 일반화된 베타핵으로 이차 항까지 전개한다. 이어 모든 정수의 소수 거듭제곱을 포함하는 약수별 이산핵을 정의하고, 그 정확한 총질량·생성함수와 평균의 이차 베타 법칙을 증명한다. 유효 Perron 공식과 제타함수의 고전적 영점 없는 영역을 사용한다.
+**DDT의 평균 법칙 → 일반화된 베타핵 → 약수별 이산핵**의 순서로 전개한다. 정리 1은 제곱 인수 없는 정수의 가중 약수합을, 정리 2는 모든 정수의 $d_z$ 가중 약수합을 이차 항까지 근사한다. 두 정리는 유효 Perron 공식과 고전적 영점 없는 영역을 사용하며 RH를 가정하지 않는다.
 
-**[개요]**는 증명의 뼈대만 제시한 부분이며, **RH**는 리만 가설을 뜻한다.
+주제별 확장은 [후속 연구 안내](further-results.md)에, 정확한 영점 표현과 이산핵 복원은 [전역 공식](global-formula.md)에 있다.
 
-이 문서의 흐름은 **DDT의 평균 법칙 → 일반화된 베타핵 → 약수별 이산핵과 정확한 변환**이다. **정리 1**은 제곱 인수 없는 모형, **정리 2**는 모든 정수에 대한 $d_z$ 모형을 다룬다. 뫼비우스 경우와 고차 전개, 영점 관련 기존 결과는 [후속 결과](further-results.md)에 있다.
-
-- [§0. DDT에서 베타핵으로](#section-0)
-- [§1. 주정리](#section-1)
-- [§2. 오일러 곱](#section-2)
-- [§3. 분포 핵과 모멘트](#section-3)
-- [§4. 이동 인수와 역라플라스 변환](#section-4)
-- [§5. 증명](#section-5)
-- [§6. 특수핵과 끝점 항](#section-6)
-- [§7. 약수별 이산핵으로의 확장](#section-7)
+- [§1. DDT에서 베타핵으로](#section-1)
+- [§2. 이차 베타 법칙](#section-2)
+- [§3. 오일러 곱](#section-3)
+- [§4. 분포 핵과 모멘트](#section-4)
+- [§5. 이동 인수와 역라플라스 변환](#section-5)
+- [§6. 증명](#section-6)
+- [§7. 특수핵과 끝점 항](#section-7)
+- [§8. 약수별 이산핵으로의 확장](#section-8)
 - [부록 A. 이동 균등 추정](#appendix-a)
 - [부록 B.1. 주정리의 수치 확인](#appendix-b-1)
 
-부록 B.2–B.4의 수치 확인은 [후속 결과의 부록 B](further-results.md#appendix-b)에 있다.
+주제별 수치 기록은 [후속 연구 안내](further-results.md#numerics)에서 찾을 수 있다.
 
-<a id="section-0"></a>
+<a id="section-1"></a>
 
-## 0. DDT에서 베타핵으로
+## 1. DDT에서 베타핵으로
 
 $\tau(n)$을 약수의 개수라 하고, $n\ge2$에서 약수를 균등하게 고르는 확률측도를
 
@@ -33,19 +31,19 @@ $$
 
 로 둔다. Deshouillers–Dress–Tenenbaum(DDT) 정리는 $0\le v\le1$에서 균등하게
 
-<a id="equation-0-1"></a>
+<a id="equation-1-1"></a>
 
 $$
 \frac1x\sum_{2\le n\le x}\nu_n([0,v])
 =\frac2\pi\arcsin\sqrt v+O\!\left((\log x)^{-1/2}\right)
-\tag{0.1}
+\tag{1.1}
 $$
 
 임을 말한다. $n=1$ 항의 생략은 $O(x^{-1})$ 차이만 만든다. 이 고전적 결과의 서술과 베타분포로의 확장은 [Bareikis–Manstavičius, *On the DDT theorem*](https://web.vu.lt/mif/e.manstavicius/wp-content/uploads/2016/08/EM-5.pdf), §1–2를 참조한다.
 
 극한밀도는 $a(u)=1/(\pi\sqrt{u(1-u)})$이다. 여기서 수렴하는 것은 정수들에 대한 평균이다. 개별 $\nu_n$의 수렴을 뜻하지 않는다. 예를 들어 소수 $p$에서는 항상 $\nu_p=(\delta_0+\delta_1)/2$이다.
 
-이 문서는 먼저 제곱 인수 없는 정수에서 이 구조를 살핀다. 이때 $\tau(n)=2^{\omega(n)}$이므로 $(z,w)=(1/2,1/2)$의 가중치는 정확히 $1/\tau(n)$이다. 정리 1은 이 제한된 합의 주항이 $x\langle a,F\rangle/\zeta(2)$임을 보이며, 제곱 인수 없는 정수의 개수로 정규화하면 같은 아크사인 법칙을 얻는다. 이는 모든 정수의 균등 약수를 다루는 (0.1)과 합산 대상이 다르다.
+이 문서는 먼저 제곱 인수 없는 정수에서 이 구조를 살핀다. 이때 $\tau(n)=2^{\omega(n)}$이므로 $(z,w)=(1/2,1/2)$의 가중치는 정확히 $1/\tau(n)$이다. 정리 1은 이 제한된 합의 주항이 $x\langle a,F\rangle/\zeta(2)$임을 보이며, 제곱 인수 없는 정수의 개수로 정규화하면 같은 아크사인 법칙을 얻는다. 이는 모든 정수의 균등 약수를 다루는 (1.1)과 합산 대상이 다르다.
 
 양의 실수 $z,w$로 가중치를 바꾸면 아크사인 핵은
 
@@ -53,13 +51,13 @@ $$
 \mathcal K_{z,w}(u)=\frac{u^{z-1}(1-u)^{w-1}}{\Gamma(z)\Gamma(w)}
 $$
 
-가 된다. 이 핵의 총질량은 $1/\Gamma(z+w)$이므로, 확률밀도는 $\Gamma(z+w)\mathcal K_{z,w}$이다. §3은 이를 복소 지수까지 분포의 의미로 연장하며, §1–6은 산술 합과 이 연속핵 사이의 이차 점근식을 다룬다.
+가 된다. 이 핵의 총질량은 $1/\Gamma(z+w)$이므로, 확률밀도는 $\Gamma(z+w)\mathcal K_{z,w}$이다. §4는 이를 복소 지수까지 분포의 의미로 연장하며, §2–7은 산술 합과 이 연속핵 사이의 이차 점근식을 다룬다.
 
-§7에서는 평균을 내기 전의 약수별 원자들을 $\mathscr K_n^{z,w}$에 보존한다. $d_z$ 가중치를 사용하여 모든 소수 거듭제곱을 포함하되, 제곱 인수 없는 정수에서는 기존 가중치와 일치하게 한다. 이렇게 얻는 이산핵의 평균을 다시 베타핵과 연결하고, 이후 전역 공식을 위한 정확한 Mellin–Fourier 변환을 마련한다.
+§8에서는 평균을 내기 전의 약수별 원자들을 $\mathscr K_n^{z,w}$에 보존한다. $d_z$ 가중치를 사용하여 모든 소수 거듭제곱을 포함하되, 제곱 인수 없는 정수에서는 기존 가중치와 일치하게 한다. 이렇게 얻는 이산핵의 평균을 다시 베타핵과 연결하고, 이후 전역 공식을 위한 정확한 Mellin–Fourier 변환을 마련한다.
 
-<a id="section-1"></a>
+<a id="section-2"></a>
 
-## 1. 정리
+## 2. 이차 베타 법칙
 
 $\omega(n)$은 서로 다른 소인수의 개수, $\mu$는 뫼비우스 함수이다. $z,w\in\mathbb C$, $F:[0,1]\to\mathbb C$에 대해
 
@@ -71,22 +69,22 @@ F\!\left(\frac{\log d}{\log n}\right),
 \qquad 0^0:=1
 $$
 
-로 둔다. 이하 $r=z+w$, $\beta=\Re r$, $L=\log x$이며, $L^\lambda=\exp(\lambda\log L)$이다. $\gamma$는 오일러 상수이다.
+로 둔다. 이하 $r=z+w$, $\beta=\Re r$, $L=\log x$이며, $L^\lambda=\exp(\lambda\log L)$이다. $\gamma_E$는 오일러 상수이다.
 
-<a id="equation-1-1"></a>
+<a id="equation-2-1"></a>
 
 $$
 C(r)=\prod_p\left(1+\frac rp\right)\left(1-\frac1p\right)^r,
 \qquad
 \mathcal K_{z,w}(u)=g_z(u)g_w(1-u),
-\tag{1.1}
+\tag{2.1}
 $$
 
-여기서 $g_\alpha(t)=t_+^{\alpha-1}/\Gamma(\alpha)$는 §3에서 정의하는 전체해석적 분포 가족이다. §2의 $H=H_{z,w}$에 대해 $H_s=\partial_sH(1,1)$, $H_t=\partial_tH(1,1)$로 쓴다. $H(1,1)=C(r)$이다.
+여기서 $g_\alpha(t)=t_+^{\alpha-1}/\Gamma(\alpha)$는 §4에서 정의하는 전체해석적 분포 가족이다. §3의 $H=H_{z,w}$에 대해 $H_s=\partial_sH(1,1)$, $H_t=\partial_tH(1,1)$로 쓴다. $H(1,1)=C(r)$이다.
 
 **정리 1 (이차 베타 법칙).** 고정된 $z,w$에 대해 충분히 큰 유한 정수 $N=N(z,w)$가 존재하여, $F\in C^N([0,1])$이면 $x\to\infty$일 때
 
-<a id="equation-1-2"></a>
+<a id="equation-2-2"></a>
 
 $$
 \boxed{
@@ -94,65 +92,65 @@ A_x^{z,w}(F)
 =xL^{r-1}\Big\langle C(r)\,\mathcal K_{z,w}+\frac1L\,\mathcal K^{(1)}_{z,w},\ F\Big\rangle
 +O_{F,z,w}(xL^{\beta-3}),
 }
-\tag{1.2}
+\tag{2.2}
 $$
 
-<a id="equation-1-3"></a>
+<a id="equation-2-3"></a>
 
 $$
 \mathcal K^{(1)}_{z,w}
-=\bigl(\gamma zC+H_s\bigr)\mathcal K_{z-1,w}
-+\bigl(\gamma wC+H_t\bigr)\mathcal K_{z,w-1}
+=\bigl(\gamma_E zC+H_s\bigr)\mathcal K_{z-1,w}
++\bigl(\gamma_E wC+H_t\bigr)\mathcal K_{z,w-1}
 -(r-1)\,C\,\mathcal K_{z,w},
 \qquad C=C(r).
-\tag{1.3}
+\tag{2.3}
 $$
 
-(2.4)의 $C\eta$를 전체함수로 연장하고 $C\kappa:=\gamma C+C\eta$로 읽으면, 모든 $r\in\mathbb C$에서
+(3.4)의 $C\eta$를 전체함수로 연장하고 $C\kappa:=\gamma_E C+C\eta$로 읽으면, 모든 $r\in\mathbb C$에서
 
-<a id="equation-1-4"></a>
+<a id="equation-2-4"></a>
 
 $$
 \mathcal K^{(1)}_{z,w}
 =(C\kappa)(r)\bigl(z\,\mathcal K_{z-1,w}+w\,\mathcal K_{z,w-1}\bigr)-(r-1)C(r)\mathcal K_{z,w},
 \qquad
-\kappa(r)=\gamma+\sum_p\frac{(r+1)\log p}{(p-1)(p+r)}.
-\tag{1.4}
+\kappa(r)=\gamma_E+\sum_p\frac{(r+1)\log p}{(p-1)(p+r)}.
+\tag{2.4}
 $$
 
-증명은 §5와 부록 A에 있다.
+증명은 §6과 부록 A에 있다.
 
 특히 $A_x^{z,w}(F)=C(r)xL^{r-1}\langle\mathcal K_{z,w},F\rangle+O_{F,z,w}(xL^{\beta-2})$이므로, 정규화한 합은 분포의 의미에서 $C(r)\mathcal K_{z,w}$로 수렴한다.
 
-**예.**
+**아크사인 예 $(\tfrac12,\tfrac12)$.** $a(u)=1/(\pi\sqrt{u(1-u)})$라 쓰면, §7의 핵 항등식에서
 
-- **아크사인 $(\tfrac12,\tfrac12)$.** $a(u)=1/(\pi\sqrt{u(1-u)})$라 쓰면, §6의 핵 항등식에서
-<a id="equation-1-5"></a>
+<a id="equation-2-5"></a>
 
 $$
 A_x^{1/2,1/2}(F)=\frac{x}{\zeta(2)}\Big[\int_0^1a(u)F(u)\,du+\frac{\kappa(1)}L\int_0^1\big(u-\tfrac12\big)a(u)F'(u)\,du\Big]+O\!\left(\frac x{L^2}\right),
-\tag{1.5}
+\tag{2.5}
 $$
 $$
-\kappa(1)=\gamma-2\frac{\zeta'(2)}{\zeta(2)}=1.7171378\ldots
+\kappa(1)=\gamma_E-2\frac{\zeta'(2)}{\zeta(2)}=1.7171378\ldots
 $$
-이차 보정은 질량을 양 끝점 쪽으로 옮긴다(B.1).
-- **총질량 $F=1$.** $\langle\mathcal K_{a,b},1\rangle=1/\Gamma(a+b)$에서
+이차 보정은 질량을 양 끝점 쪽으로 옮긴다([부록 B.1](#appendix-b-1)).
+
+**총질량 $F=1$.** $\langle\mathcal K_{a,b},1\rangle=1/\Gamma(a+b)$에서
 $$
 \langle\mathcal K^{(1)}_{z,w},1\rangle=\frac{\Phi'(1)}{\Gamma(r-1)},\qquad
 \Phi(s)=\frac{((s-1)\zeta(s))^rH(s,s)}{s}.
 $$
 이는 $\sum_{n\le x}\mu^2(n)r^{\omega(n)}$에 대한 Selberg–Delange 전개의 둘째 계수와 같다.
 
-양의 실수 $z,w$에서는 지시함수에도 1차 법칙이 성립한다(§5.3).
+양의 실수 $z,w$에서는 지시함수에도 1차 법칙이 성립한다(§6.3).
 
-<a id="section-2"></a>
+<a id="section-3"></a>
 
-## 2. 오일러 곱
+## 3. 오일러 곱
 
 $\mu^2(dm)=1$이면 각 소수는 $d,m$ 중 한쪽에만 속한다. 따라서 $\Re s,\Re t>1$에서
 
-<a id="equation-2-1"></a>
+<a id="equation-3-1"></a>
 
 $$
 \begin{aligned}
@@ -162,16 +160,16 @@ D_{z,w}(s,t)
 &=\prod_p(1+zp^{-s}+wp^{-t})\\
 &=\zeta(s)^z\zeta(t)^wH_{z,w}(s,t),
 \end{aligned}
-\tag{2.1}
+\tag{3.1}
 $$
 
-<a id="equation-2-2"></a>
+<a id="equation-3-2"></a>
 
 $$
 H_{z,w}(s,t)=
 \prod_p(1+zp^{-s}+wp^{-t})
 (1-p^{-s})^z(1-p^{-t})^w.
-\tag{2.2}
+\tag{3.2}
 $$
 
 거듭제곱의 가지는 오일러 곱의 로그로 정한다. 국소 인수의 일차항이 상쇄되어
@@ -183,25 +181,25 @@ $$
 
 그러므로 고정된 $\sigma_0>1/2$에서 $H$와 필요한 유한 차수 편미분들은 $\Re s,\Re t\ge\sigma_0$에서 균등 유계이다. 미분으로 생기는 $(\log p)^j$도 합산 가능하다. 이 논증은 $H$의 영점도 허용한다.
 
-<a id="equation-2-3"></a>
+<a id="equation-3-3"></a>
 
 $$
 H_{z,w}(1,1)=C(r),\qquad
 C(0)=C(-1)=1,\quad
 C(1)=\frac1{\zeta(2)},\quad C(-2)=0.
-\tag{2.3}
+\tag{3.3}
 $$
 
 특히 $z=w=1/2$일 때 $x$로 정규화한 총질량은 $1/\zeta(2)$이다. 제곱 인수 없는 정수의 개수로 정규화하면 질량 $1$의 아크사인 법칙이 된다.
 
 국소 인수를 $s$로 미분하면, 우선 $C(r)\ne0$에서
 
-<a id="equation-2-4"></a>
+<a id="equation-3-4"></a>
 
 $$
 H_s=C(r)\,z\,\eta(r),\qquad H_t=C(r)\,w\,\eta(r),\qquad
 \eta(r)=\sum_p\frac{(r+1)\log p}{(p-1)(p+r)},
-\tag{2.4}
+\tag{3.4}
 $$
 
 이다. $C$는 $r=-p$에서 단순영점, $\eta$는 같은 점에서 단순극을 가진다. 그 곱의 연장값은
@@ -209,11 +207,11 @@ $$
 (C\eta)(-p)=-\frac{\log p}{p}\left(1-\frac1p\right)^{-p}
 \prod_{q\ne p}\left(1-\frac pq\right)\left(1-\frac1q\right)^{-p}.
 $$
-국소 곱의 미분도 $H_s=zC\eta$, $H_t=wC\eta$의 같은 값을 주므로 (2.4)는 모든 $r$로 연장된다. $C\eta$와 $C\kappa=\gamma C+C\eta$는 전체함수이다.
+국소 곱의 미분도 $H_s=zC\eta$, $H_t=wC\eta$의 같은 값을 주므로 (3.4)는 모든 $r$로 연장된다. $C\eta$와 $C\kappa=\gamma_E C+C\eta$는 전체함수이다.
 
-<a id="section-2-1"></a>
+<a id="section-3-1"></a>
 
-### 2.1. 서로소 조건을 푼 변형
+### 3.1. 서로소 조건을 푼 변형
 
 제곱 인수 없는 $d,m$의 모든 쌍을 서로소 조건 없이 세면
 
@@ -223,14 +221,22 @@ D^\natural_{z,w}(s,t)=\sum_{d,m\ge1}\frac{\mu^2(d)\mu^2(m)z^{\omega(d)}w^{\omega
 =\zeta(s)^z\zeta(t)^wH^\natural(s,t),
 $$
 
-<a id="equation-2-5"></a>
+<a id="equation-3-5"></a>
 
 $$
 H^\natural(s,t)=H_z(s)H_w(t),\qquad H_\alpha(s)=\prod_p(1+\alpha p^{-s})(1-p^{-s})^\alpha
-\tag{2.5}
+\tag{3.5}
 $$
 
-이다. 국소 인수의 차이는 $H^\natural_p/H_p-1=zwp^{-s-t}/(1+zp^{-s}+wp^{-t})=O(p^{-\Re(s+t)})$로, 위의 $H_p-1$ 상계 안에 들어간다. 계수도 같은 $\tau_{k_0}$로 지배된다. 따라서
+이다. 국소 인수의 차이는 분모 없이
+
+$$
+H^\natural_p-H_p
+=zwp^{-s-t}(1-p^{-s})^z(1-p^{-t})^w
+=O_{z,w}\!\left(p^{-\Re(s+t)}\right)
+$$
+
+로 쓸 수 있어 $H_p=0$인 경우도 포함한다. 같은 반평면에서 $H^\natural$와 그 편미분이 유계이고, 계수도 $\tau_{k_0}$로 지배된다. 따라서
 
 $$
 A_x^{\natural}(F)=\sum_{2\le dm\le x}\mu^2(d)\mu^2(m)z^{\omega(d)}w^{\omega(m)}F\!\left(\frac{\log d}{\log dm}\right)
@@ -238,57 +244,57 @@ $$
 
 에 대해 정리 1이 그대로 성립하고, $C(r),H_s,H_t$가 각각 $C(z)C(w)$, $C(z)C(w)z\eta(z)$, $C(z)C(w)w\eta(w)$로 바뀐다. 위와 같이 곱을 연장하면 모든 $z,w$에서
 
-<a id="equation-2-6"></a>
+<a id="equation-3-6"></a>
 
 $$
 \mathcal K^{(1)\natural}_{z,w}=C(z)C(w)\Big[z\kappa(z)\mathcal K_{z-1,w}+w\kappa(w)\mathcal K_{z,w-1}-(r-1)\mathcal K_{z,w}\Big].
-\tag{2.6}
+\tag{3.6}
 $$
 
-<a id="section-2-2"></a>
+<a id="section-3-2"></a>
 
-### 2.2. $H$의 2차 구조
+### 3.2. $H$의 2차 구조
 
 $e_1=z(z+1)/2$, $e_2=w(w+1)/2$로 두면
 
-<a id="equation-2-7"></a>
+<a id="equation-3-7"></a>
 
 $$
 H(s,t)=\zeta(2s)^{-e_1}\,\zeta(s+t)^{-zw}\,\zeta(2t)^{-e_2}\,\widetilde H(s,t),
-\tag{2.7}
+\tag{3.7}
 $$
 
 $$
 \widetilde H_p=H_p\,(1-p^{-2s})^{-e_1}(1-p^{-s-t})^{-zw}(1-p^{-2t})^{-e_2}=1+O\!\left(p^{-3\min(\Re s,\Re t)}\right).
 $$
 
-$X=p^{-s}$, $Y=p^{-t}$로 두고 로그를 전개하면 이차항은 $-\tfrac12(zX+wY)^2-\tfrac z2X^2-\tfrac w2Y^2+e_1X^2+zwXY+e_2Y^2=0$으로 정확히 상쇄된다. 따라서 $\widetilde H$는 $\Re s,\Re t>\tfrac13$에서 해석적이다. 서로소 변형에서는 교차 인수 $\zeta(s+t)^{-zw}$가 없다. 즉 서로소 조건은 정확히 이 인수에 해당한다.
+$X=p^{-s}$, $Y=p^{-t}$로 두고 충분히 큰 $p$에서 로그를 전개하면 이차항은 $-\tfrac12(zX+wY)^2-\tfrac z2X^2-\tfrac w2Y^2+e_1X^2+zwXY+e_2Y^2=0$으로 상쇄된다. 따라서 $\widetilde H$는 $\Re s,\Re t>\tfrac13$에서 해석적이다. 서로소 조건을 푼 모형에서는 교차 인수 $\zeta(s+t)^{-zw}$가 없다. 이 인수는 두 모형의 **이차항 수준의 차이**를 나타내며, 삼차 이상을 담는 잔여 인자도 달라진다.
 
 실축 근처($|\Im s|,|\Im t|<7$)의 $\Re>\tfrac13$에서 $H$의 특이점은 $s=\tfrac12$, $s+t=1$, $t=\tfrac12$뿐이다. $\zeta(2s)$, $\zeta(s+t)$의 영점은 높이 $14$ 이상에서만 나오기 때문이다. 대각선에서는 세 인수가 합쳐져
 
-<a id="equation-2-8"></a>
+<a id="equation-3-8"></a>
 
 $$
 H(s,s)=\zeta(2s)^{-r(r+1)/2}\,\widetilde H(s,s)
-\tag{2.8}
+\tag{3.8}
 $$
 
 가 된다. $r=1$이면 $H(s,s)=\prod_p(1-p^{-2s})=1/\zeta(2s)$이고, $r=0,-1$이면 지수가 $0$이다.
 
-<a id="section-3"></a>
+<a id="section-4"></a>
 
-## 3. 분포 핵과 모멘트
+## 4. 분포 핵과 모멘트
 
 $\Re\alpha>0$에서 $g_\alpha=t_+^{\alpha-1}/\Gamma(\alpha)$는 국소 적분 가능 함수이다. 비음의 정수 $N$에 대해
 
-<a id="equation-3-1"></a>
+<a id="equation-4-1"></a>
 
 $$
 \langle g_\alpha,\varphi\rangle
 =\frac{(-1)^N}{\Gamma(\alpha+N)}
 \int_0^\infty t^{\alpha+N-1}\varphi^{(N)}(t)\,dt,
 \qquad \Re\alpha>-N
-\tag{3.1}
+\tag{4.1}
 $$
 
 로 연장한다. $\varphi\in C_c^\infty(\mathbb R)$이며, 겹치는 반평면에서 부분적분으로 일치하므로 전체해석적 분포 가족을 얻는다. 특히
@@ -302,7 +308,7 @@ $g_z(u)$와 $g_w(1-u)$의 특이 지지집합은 각각 $\{0\}$, $\{1\}$이다. 
 
 베타적분을 수렴 영역에서 계산한 뒤 연장하면
 
-<a id="equation-3-2"></a>
+<a id="equation-4-2"></a>
 
 $$
 \boxed{
@@ -310,7 +316,7 @@ $$
 =\frac{(z)_k}{\Gamma(r+k)}
 \qquad(k\ge0).
 }
-\tag{3.2}
+\tag{4.2}
 $$
 
 $(z)_k$는 상승계승이며 $(z)_0=1$, $1/\Gamma$는 전체함수로 읽는다. 특히 총질량은 $1/\Gamma(r)$이다. 질량이 영이어도 핵은 비영일 수 있다. 한 지수가 $0$이면
@@ -325,29 +331,29 @@ $$
 
 **핵 항등식.** $tg_{\alpha-1}(t)=(\alpha-1)g_\alpha(t)$와 $g_\alpha'=g_{\alpha-1}$에서
 
-<a id="equation-3-3"></a>
+<a id="equation-4-3"></a>
 
 $$
 u\,\mathcal K_{z-1,w}=(z-1)\mathcal K_{z,w},\qquad
 (1-u)\,\mathcal K_{z,w-1}=(w-1)\mathcal K_{z,w},\qquad
 \partial_u\mathcal K_{z,w}=\mathcal K_{z-1,w}-\mathcal K_{z,w-1}.
-\tag{3.3}
+\tag{4.3}
 $$
 
 이로부터 $(u\mathcal K_{z,w})'=(r-1)\mathcal K_{z,w}-\mathcal K_{z,w-1}$이고, 따라서
 
-<a id="equation-3-4"></a>
+<a id="equation-4-4"></a>
 
 $$
 \langle\mathcal K_{z,w},uF'\rangle=\langle\mathcal K_{z,w-1},F\rangle-(r-1)\langle\mathcal K_{z,w},F\rangle.
-\tag{3.4}
+\tag{4.4}
 $$
 
 또한 $u^a(1-u)^b\mathcal K_{z,w}=(z)_a(w)_b\,\mathcal K_{z+a,w+b}$이다.
 
 **로그 가중치.** 정수 $a,b\ge0$에 대해 위 항등식과 정리 1의 부분합산으로
 
-<a id="equation-3-5"></a>
+<a id="equation-4-5"></a>
 
 $$
 \begin{aligned}
@@ -358,28 +364,28 @@ z^{\omega(d)}w^{\omega(n/d)}(\log d)^a
 \langle\mathcal K_{z+a,w+b},F\rangle
 +O_{F,z,w,a,b}(xL^{\beta-2+a+b}).
 \end{aligned}
-\tag{3.5}
+\tag{4.5}
 $$
 
 실제로 가중치는 $(\log n)^{a+b}u^a(1-u)^bF(u)$이다. 아크사인에 $\log d\log(n/d)$를 곱하면 핵이 $\tfrac14\mathcal K_{3/2,3/2}=\pi^{-1}\sqrt{u(1-u)}$로 바뀌어, 정규화 후 반원 법칙을 얻는다.
 
 아크사인 핵의 푸리에 변환은 Bessel 함수 $J_0$로 표현된다.
 
-<a id="equation-3-6"></a>
+<a id="equation-4-6"></a>
 
 $$
 \langle\mathcal K_{1/2,1/2},e^{i\xi u}\rangle
 =e^{i\xi/2}J_0\!\left(\frac\xi2\right).
-\tag{3.6}
+\tag{4.6}
 $$
 
-<a id="section-4"></a>
+<a id="section-5"></a>
 
-## 4. 이동 인수와 역라플라스 변환
+## 5. 이동 인수와 역라플라스 변환
 
 실수 $\xi$에 대해
 
-<a id="equation-4-1"></a>
+<a id="equation-5-1"></a>
 
 $$
 \begin{aligned}
@@ -388,20 +394,20 @@ b_{\xi,L}(n)
 z^{\omega(d)}w^{\omega(n/d)}e^{i\xi\log d/L},\\
 S_x(\xi)&=\sum_{n\le x}b_{\xi,L}(n)
 \end{aligned}
-\tag{4.1}
+\tag{5.1}
 $$
 
 로 둔다. $n=1$ 항은 $1$이다. 대응하는 디리클레 급수는
 
-<a id="equation-4-2"></a>
+<a id="equation-5-2"></a>
 
 $$
 \mathfrak D_{\xi,L}(s)
 =D_{z,w}\!\left(s-\frac{i\xi}{L},s\right).
-\tag{4.2}
+\tag{5.2}
 $$
 
-(2.1)의 두 제타 인수는 $s=1$, $s=1+i\xi/L$에 특이점 후보를 갖는다. 후보는 합류하거나 상쇄될 수 있다. 예컨대 $r=0,\xi=0$이면 정확히 $D_{z,w}(s,s)=1$, $S_x(0)=1$이다.
+(3.1)의 두 제타 인수는 $s=1$, $s=1+i\xi/L$에 특이점 후보를 갖는다. 후보는 합류하거나 상쇄될 수 있다. 예컨대 $r=0,\xi=0$이면 정확히 $D_{z,w}(s,s)=1$, $S_x(0)=1$이다.
 
 $s=1+q/L$로 확대하면 주인수는 $L^rP_\xi(q)$이며
 
@@ -411,23 +417,23 @@ $$
 
 두 거듭제곱은 각각 왼쪽 수평 반직선을 절단선으로 하는 주가지를 쓴다. $Y>|\xi|+1$에 대해
 
-<a id="equation-4-3"></a>
+<a id="equation-5-3"></a>
 
 $$
 \mathcal U_Y:
 (-\infty-iY)\to(1-iY)\to(1+iY)\to(-\infty+iY)
-\tag{4.3}
+\tag{5.3}
 $$
 
 로 경로를 정한다. 이 경로는 두 후보에서 거리가 적어도 $1$이고 $\Re q\le1$이다.
 
-<a id="equation-4-4"></a>
+<a id="equation-5-4"></a>
 
 $$
 \mathcal B_{z,w}(\xi)
 :=\frac1{2\pi i}\int_{\mathcal U_Y}e^qP_\xi(q)\,dq
 =\langle\mathcal K_{z,w},e^{i\xi u}\rangle.
-\tag{4.4}
+\tag{5.4}
 $$
 
 **증명.** 먼저 $\Re z,\Re w>1$에서, $\Re q>0$인 수직선 위의 라플라스 변환
@@ -446,57 +452,57 @@ $$
 
 를 얻는다. 수직선을 $\mathcal U_Y$로 변형할 때, 왼쪽 보조 수직선 $\Re q=-R$, $|\Im q|\ge Y$의 적분은 $O_{z,w,\xi}(e^{-R}R^{1-\beta})$로 사라진다. 높이를 무한대로 보내는 수평 연결 적분도 사라진다.
 
-$\mathcal U_Y$의 적분은 모든 $z,w$에서 절대수렴하고, 매개변수의 콤팩트 집합에서 균등 수렴한다. 경로 높이의 독립성은 Cauchy 정리로, (4.4)의 전 매개변수 확장은 전체해석적 연장으로 따른다.
+$\mathcal U_Y$의 적분은 모든 $z,w$에서 절대수렴하고, 매개변수의 콤팩트 집합에서 균등 수렴한다. 경로 높이의 독립성은 Cauchy 정리로, (5.4)의 전 매개변수 확장은 전체해석적 연장으로 따른다.
 
-(4.4)는 모든 $z,w$에 대해 성립하므로, 특히 $(q-i\xi)P_\xi(q)$, $qP_\xi(q)$의 적분은 각각 $\mathcal B_{z-1,w}(\xi)$, $\mathcal B_{z,w-1}(\xi)$이다. 이차 법칙의 보정 핵은 이렇게 나온다.
+(5.4)는 모든 $z,w$에 대해 성립하므로, 특히 $(q-i\xi)P_\xi(q)$, $qP_\xi(q)$의 적분은 각각 $\mathcal B_{z-1,w}(\xi)$, $\mathcal B_{z,w-1}(\xi)$이다. 이차 법칙의 보정 핵은 이렇게 나온다.
 
 콤팩트 지지 분포의 유한 차수 성질에 의해, 각 고정된 $j$와 $(a,b)\in\{(0,0),(1,0),(0,1)\}$에 대해
 
-<a id="equation-4-5"></a>
+<a id="equation-5-5"></a>
 
 $$
 |\mathcal B_{z-a,w-b}^{(j)}(\xi)|
 \ll_{z,w,j}(1+|\xi|)^{M_j}
-\tag{4.5}
+\tag{5.5}
 $$
 
 인 $M_j\ge0$가 존재한다. 경로 표현을 미분할 때는 $\xi$의 작은 근방을 감싸는 하나의 $Y$를 고정한다.
 
-<a id="section-5"></a>
+<a id="section-6"></a>
 
-## 5. 산술 점근식의 증명
+## 6. 산술 점근식의 증명
 
-$H_s,H_t$는 §1과 같고, $C=C(r)$이다. 이 절에서
+$H_s,H_t$는 §2와 같고, $C=C(r)$이다. 이 절에서
 
-<a id="equation-5-0"></a>
+<a id="equation-6-1"></a>
 
 $$
-G_1=\gamma zC+H_s,\qquad G_2=\gamma wC+H_t-C
-\tag{5.0}
+G_1=\gamma_E zC+H_s,\qquad G_2=\gamma_E wC+H_t-C
+\tag{6.1}
 $$
 
 로 둔다. $G_1,G_2$는 부록 A.3의 국소 인수 $G$를 $(s_1,s_2)=(s-i\alpha,s)$에 대해 $(1,1)$에서 편미분한 값이다. $G_2$의 $-C$는 Perron 인자 $1/s$에서 온다.
 
-<a id="section-5-1"></a>
+<a id="section-6-1"></a>
 
-### 5.1. 이동 균등 추정
+### 6.1. 이동 균등 추정
 
 **보조정리 1.** 고정된 $z,w$에 대해 어떤 $B\ge0$가 존재하여 $j=0,1$, $|\xi|\le L^{1/4}$에서 균등하게
 
-<a id="equation-5-1"></a>
+<a id="equation-6-2"></a>
 
 $$
 \partial_\xi^jS_x(\xi)
 =xL^{r-1}\,\partial_\xi^j\Big[C\mathcal B_{z,w}(\xi)+\frac1L\big(G_1\mathcal B_{z-1,w}(\xi)+G_2\mathcal B_{z,w-1}(\xi)\big)\Big]
 +O_{z,w}\!\left(xL^{\beta-3}(1+|\xi|)^B\right).
-\tag{5.1}
+\tag{6.2}
 $$
 
 증명은 부록 A에 있다.
 
-<a id="section-5-2"></a>
+<a id="section-6-2"></a>
 
-### 5.2. 정규화 변수의 변경
+### 6.2. 정규화 변수의 변경
 
 $\Theta_x(\xi):=A_x^{z,w}(e^{i\xi u})$로 둔다. 각 항에 대해
 
@@ -508,13 +514,13 @@ $$
 
 를 $dm\le t\le x$에서 적분하고 합하면
 
-<a id="equation-5-2"></a>
+<a id="equation-6-3"></a>
 
 $$
 \Theta_x(\xi)
 =S_x(\xi)-1+
 \xi\int_2^x\frac{\partial_\xi S_t(\xi)}{t\log t}\,dt.
-\tag{5.2}
+\tag{6.3}
 $$
 
 여기서 $S_t$는 정규화 $\log t$를 쓴다. $k_0\ge\max(2,|z|+|w|)$인 정수를 고정하고, $\tau_{k_0}$를 $\zeta(s)^{k_0}$의 계수라 하자. 절댓값 합은
@@ -533,27 +539,27 @@ $$
 \ll_{z,w}|\xi|\sqrt x\,L^{k_0}.
 $$
 
-$|\xi|\le L^{1/8}$, $t\ge\sqrt x$이면 충분히 큰 $x$에서 $|\xi|\le(\log t)^{1/4}$이다. 이 구간에는 (5.1)을 $j=1$로 적용한다. 주항 $Ct(\log t)^{r-1}\mathcal B'(\xi)$의 기여는
+$|\xi|\le L^{1/8}$, $t\ge\sqrt x$이면 충분히 큰 $x$에서 $|\xi|\le(\log t)^{1/4}$이다. 이 구간에는 (6.2)을 $j=1$로 적용한다. 주항 $Ct(\log t)^{r-1}\mathcal B'(\xi)$의 기여는
 
 $$
 \xi\,C\mathcal B_{z,w}'(\xi)\int_{\sqrt x}^x(\log t)^{r-2}\,dt
 =\xi\,C\mathcal B_{z,w}'(\xi)\,xL^{r-2}\bigl(1+O(L^{-1})\bigr)
 $$
 
-이고, 나머지는 (4.5)에 의해 $O(xL^{\beta-3}(1+|\xi|)^{M})$이다. $S_x(\xi)$에 (5.1)을 $j=0$으로 대입하면, 어떤 $M_*\ge0$에 대해 $|\xi|\le L^{1/8}$에서
+이고, 나머지는 (5.5)에 의해 $O(xL^{\beta-3}(1+|\xi|)^{M})$이다. $S_x(\xi)$에 (6.2)을 $j=0$으로 대입하면, 어떤 $M_*\ge0$에 대해 $|\xi|\le L^{1/8}$에서
 
-<a id="equation-5-3"></a>
+<a id="equation-6-4"></a>
 
 $$
 \Theta_x(\xi)
 =xL^{r-1}\Big[C\mathcal B_{z,w}+\frac1L\big(G_1\mathcal B_{z-1,w}+G_2\mathcal B_{z,w-1}+C\,\xi\mathcal B_{z,w}'\big)\Big](\xi)
 +O_{z,w}\!\left(xL^{\beta-3}(1+|\xi|)^{M_*}\right).
-\tag{5.3}
+\tag{6.4}
 $$
 
-<a id="section-5-3"></a>
+<a id="section-6-3"></a>
 
-### 5.3. 푸리에 적분
+### 6.3. 푸리에 적분
 
 $F$의 연장 $\widetilde F\in C_c^N(\mathbb R)$를 $\|\widetilde F\|_{C^N}\ll_N\|F\|_{C^N}$이 되도록 고정한다. 푸리에 규약은
 
@@ -562,7 +568,7 @@ $$
 \int_{\mathbb R}\widehat{\widetilde F}(\xi)e^{i\xi u}\,d\xi
 $$
 
-이며 $|\widehat{\widetilde F}(\xi)|\ll_N\|F\|_{C^N}(1+|\xi|)^{-N}$이다. $N>M_*+1$로 잡고 $R=L^{1/8}$로 나누면 저주파의 오차 적분은 (5.3)에 의해 $O_{F,z,w}(xL^{\beta-3})$이다. 고주파에서는
+이며 $|\widehat{\widetilde F}(\xi)|\ll_N\|F\|_{C^N}(1+|\xi|)^{-N}$이다. $N>M_*+1$로 잡고 $R=L^{1/8}$로 나누면 저주파의 오차 적분은 (6.4)에 의해 $O_{F,z,w}(xL^{\beta-3})$이다. 고주파에서는
 
 $$
 \begin{aligned}
@@ -581,7 +587,7 @@ $$
 =C\langle\mathcal K_{z,w},F\rangle+\frac1L\Big(G_1\langle\mathcal K_{z-1,w},F\rangle+G_2\langle\mathcal K_{z,w-1},F\rangle+C\langle\mathcal K_{z,w},uF'\rangle\Big).
 $$
 
-(3.4)를 쓰면 $G_2\langle\mathcal K_{z,w-1},F\rangle+C\langle\mathcal K_{z,w},uF'\rangle=(G_2+C)\langle\mathcal K_{z,w-1},F\rangle-(r-1)C\langle\mathcal K_{z,w},F\rangle$이고, $G_2+C=\gamma wC+H_t$이므로 (1.2)–(1.3)이 따른다. 분포와 적분의 교환은 (4.5)와 위의 감소 추정으로 정당화된다. 오차 상수는 $\|F\|_{C^N}$에 선형으로 의존한다.
+(4.4)를 쓰면 $G_2\langle\mathcal K_{z,w-1},F\rangle+C\langle\mathcal K_{z,w},uF'\rangle=(G_2+C)\langle\mathcal K_{z,w-1},F\rangle-(r-1)C\langle\mathcal K_{z,w},F\rangle$이고, $G_2+C=\gamma_E wC+H_t$이므로 (2.2)–(2.3)이 따른다. 분포와 적분의 교환은 (5.5)와 위의 감소 추정으로 정당화된다. 오차 상수는 $\|F\|_{C^N}$에 선형으로 의존한다.
 
 **양의 지수와 지시함수.** $z,w>0$, $0<v<1$이면 가중치가 양수이므로 $\mathbf1_{(v,1]}$를 폭 $\varepsilon$의 매끄러운 함수로 위아래에서 끼울 수 있다. 정규화한 오차는 $O(\varepsilon+L^{-1}\varepsilon^{-N})$이므로, $\delta=1/(N+1)$에 대해
 $$
@@ -589,11 +595,11 @@ A_x^{z,w}(\mathbf1_{(v,1]})
 =C(r)xL^{r-1}\int_v^1\frac{u^{z-1}(1-u)^{w-1}}{\Gamma(z)\Gamma(w)}\,du
 +O_{z,w,v}(xL^{r-1-\delta}).
 $$
-부호가 섞이는 §6의 두 경우에는 이 양의 가중치 논증을 적용할 수 없다.
+부호가 섞이는 §7의 두 경우에는 이 양의 가중치 논증을 적용할 수 없다.
 
-<a id="section-6"></a>
+<a id="section-7"></a>
 
-## 6. 특수핵과 끝점 항의 확인
+## 7. 특수핵과 끝점 항의 확인
 
 $$
 a(u)=\frac{\mathbf1_{(0,1)}(u)}{\pi\sqrt{u(1-u)}},
@@ -613,37 +619,37 @@ $$
 
 **한쪽 지수가 음수인 경우**
 
-<a id="equation-6-1"></a>
+<a id="equation-7-1"></a>
 
 $$
 \mathcal K_{-1/2,1/2}=h_1',
-\tag{6.1}
+\tag{7.1}
 $$
 
-<a id="equation-6-2"></a>
+<a id="equation-7-2"></a>
 
 $$
 \langle\mathcal K_{-1/2,1/2},F\rangle
 =-\frac1\pi\int_0^1\sqrt{\frac{1-u}{u}}\,F'(u)\,du.
-\tag{6.2}
+\tag{7.2}
 $$
 
 **두 지수가 음수인 경우**
 
-<a id="equation-6-3"></a>
+<a id="equation-7-3"></a>
 
 $$
 \mathcal K_{-1/2,-1/2}=h_2',
-\tag{6.3}
+\tag{7.3}
 $$
 
-<a id="equation-6-4"></a>
+<a id="equation-7-4"></a>
 
 $$
 \langle\mathcal K_{-1/2,-1/2},F\rangle
 =-\frac1\pi\int_0^1
 \frac{u-1/2}{\sqrt{u(1-u)}}\,F'(u)\,du.
-\tag{6.4}
+\tag{7.4}
 $$
 
 두 작용 적분은 보통의 수렴 적분이다. 반면 내부 $0<u<1$의 식은
@@ -660,7 +666,7 @@ $$
 
 이며, 각각 $0$ 또는 양 끝에서 적분 불가능하므로 전체 구간의 밀도로 사용할 수 없다.
 
-**증명.** (3.3)은 분포 항등식이므로
+**증명.** (4.3)은 분포 항등식이므로
 
 $$
 \begin{aligned}
@@ -670,7 +676,7 @@ $$
 \end{aligned}
 $$
 
-따라서 끝점 항을 포함해 (6.1), (6.3)이 성립한다. $\square$
+따라서 끝점 항을 포함해 (7.1), (7.3)이 성립한다. $\square$
 
 | $(z,w)$ | $\langle\mathcal K,1\rangle$ | $\langle\mathcal K,u\rangle$ | $\langle\mathcal K,u^2\rangle$ | $\langle\mathcal K,u^3\rangle$ |
 |:--|--:|--:|--:|--:|
@@ -678,50 +684,50 @@ $$
 | $(-1/2,1/2)$ | $0$ | $-1/2$ | $-1/4$ | $-3/16$ |
 | $(-1/2,-1/2)$ | $0$ | $0$ | $-1/4$ | $-3/8$ |
 
-세 경우의 산술 상수는 각각 $1/\zeta(2),1,1$이고 기준 규모는 $x,x/L,x/L^2$이다. 마지막 경우의 산술적 의미는 [§8.4](further-results.md#section-8-4)에 있다.
+세 경우의 산술 상수는 각각 $1/\zeta(2),1,1$이고 기준 규모는 $x,x/L,x/L^2$이다. 마지막 경우의 산술적 의미는 [뫼비우스 경우 §4](mobius-cases.md#section-4)에 있다.
 
 **꼬리값.** $0<v<1$이고 $h$가 $[0,1]$에 지지된 적분 가능 함수이며 $v$ 근방에서 매끄러우면
 $\mathbf1_{(v,\infty)}h'=(\mathbf1_{(v,\infty)}h)'-h(v)\delta_v$를 만족한다.
 따라서 $T_{z,w}(v):=\langle\mathbf1_{(v,\infty)}\mathcal K_{z,w},\chi\rangle$라 두면
 ($\chi\in C_c^\infty(\mathbb R)$는 $[0,1]$ 근방에서 $1$),
 
-<a id="equation-6-5"></a>
+<a id="equation-7-5"></a>
 
 $$
 T_{-1/2,1/2}(v)=-\frac1\pi\sqrt{\frac{1-v}{v}},\qquad
 T_{-1/2,-1/2}(v)=\frac{1-2v}{2\pi\sqrt{v(1-v)}}.
-\tag{6.5}
+\tag{7.5}
 $$
 
 이는 분포의 꼬리값이다. 산술 꼬리합의 점근식을 얻으려면 $u=v$ 근방의 합을 추가로 제어해야 하며, 정리 1의 매끄러운 시험함수에 대한 수렴만으로는 충분하지 않다.
 
-<a id="section-7"></a>
+<a id="section-8"></a>
 
-## 7. 약수별 이산핵으로의 확장
+## 8. 약수별 이산핵으로의 확장
 
-베타핵 $\mathcal K_{z,w}$는 평균의 연속적인 모양을 기술한다. 이제 각 정수의 약수에 놓인 원자들을 따로 기록한다. 새 모형에는 $\widetilde A,\widetilde D,\widetilde S$를 사용하여 §1–6의 제곱 인수 없는 모형과 구분한다.
+베타핵 $\mathcal K_{z,w}$는 평균의 연속적인 모양을 기술한다. 이제 각 정수의 약수에 놓인 원자들을 따로 기록한다. 새 모형에는 $\widetilde A,\widetilde D,\widetilde S$를 사용하여 §2–7의 제곱 인수 없는 모형과 구분한다.
 
-<a id="section-7-1"></a>
+<a id="section-8-1"></a>
 
-### 7.1. 일반화된 약수계수와 이산핵
+### 8.1. 일반화된 약수계수와 이산핵
 
 $d_z(n)$을 $\zeta(s)^z$의 디리클레 계수로 정의한다. $\Re s>1$에서 오일러 곱의 로그를 사용하면
 
-<a id="equation-7-1"></a>
+<a id="equation-8-1"></a>
 
 $$
 \zeta(s)^z=\sum_{n\ge1}\frac{d_z(n)}{n^s},
 \qquad
 d_z(p^a)=\frac{(z)_a}{a!},
 \qquad d_z(1)=1.
-\tag{7.1}
+\tag{8.1}
 $$
 
 $d_z$는 곱셈적이고, 고정된 $n$에서는 $z$의 다항식이다. 특히 $d_0(n)=\mathbf1_{n=1}$, $d_1(n)=1$, $d_{-1}(n)=\mu(n)$이다.
 
 **정의 7.1 (약수별 이산핵).** $n\ge2$에서 $[0,1]$ 위의 유한 복소측도를
 
-<a id="equation-7-2"></a>
+<a id="equation-8-2"></a>
 
 $$
 \boxed{
@@ -729,20 +735,20 @@ $$
 =\sum_{d\mid n}d_z(d)d_w(n/d)\,
 \delta_{\log d/\log n}
 }
-\tag{7.2}
+\tag{8.2}
 $$
 
 로 둔다. 따라서 $\langle\mathscr K_n^{z,w},F\rangle$는 약수마다 $F$를 평가한 정확한 유한합이다. 아래 합산 변환의 $n=1$ 항은 별도로 $1$로 정의하며, $\log1/\log1$은 사용하지 않는다.
 
-**명제 7.1 (총질량과 반사).** $R(u)=1-u$라 하면 모든 $z,w\in\mathbb C$와 $n\ge2$에 대해
+**명제 8.1 (총질량과 반사).** $R(u)=1-u$라 하면 모든 $z,w\in\mathbb C$와 $n\ge2$에 대해
 
-<a id="equation-7-3"></a>
+<a id="equation-8-3"></a>
 
 $$
 \langle\mathscr K_n^{z,w},1\rangle=d_{z+w}(n),
 \qquad
 R_*\mathscr K_n^{z,w}=\mathscr K_n^{w,z}.
-\tag{7.3}
+\tag{8.3}
 $$
 
 특히 $z=w$이면 $\langle\mathscr K_n^{z,z},u\rangle=d_{2z}(n)/2$이다.
@@ -760,13 +766,13 @@ $$
 
 에 놓인다. 일반적인 $n=\prod_p p^{a_p}$에서는 각 $0\le j_p\le a_p$의 선택이 $d=\prod_p p^{j_p}$와 대응하며, 원자 위치는 $\sum_p j_p\log p/\log n$이다. 이산핵은 이 소수 거듭제곱별 선택을 모두 보존한다.
 
-<a id="section-7-2"></a>
+<a id="section-8-2"></a>
 
-### 7.2. 기존 모형과의 관계 및 생성함수
+### 8.2. 기존 모형과의 관계 및 생성함수
 
 제곱 인수 없는 $n$과 그 약수 $d$에 대해서는 $d_z(d)=z^{\omega(d)}$이다. 그러므로
 
-<a id="equation-7-4"></a>
+<a id="equation-8-4"></a>
 
 $$
 A_x^{z,w}(F)
@@ -775,14 +781,14 @@ A_x^{z,w}(F)
 \qquad
 \widetilde A_x^{z,w}(F)
 :=\sum_{2\le n\le x}\langle\mathscr K_n^{z,w},F\rangle.
-\tag{7.4}
+\tag{8.4}
 $$
 
-새 모형은 기존 가중치의 제곱 인수 없는 부분을 그대로 포함한다. 다만 $\mu^2(n)$ 제한을 없앨 때 소수 거듭제곱의 가중치는 (7.1)로 정한다. §2.1의 서로소 조건 해제 모형은 $d,m$ 각각에 제곱 인수 없는 제한을 유지하므로, 현재의 $d_z$ 모형과 다르다.
+새 모형은 기존 가중치의 제곱 인수 없는 부분을 그대로 포함한다. 다만 $\mu^2(n)$ 제한을 없앨 때 소수 거듭제곱의 가중치는 (8.1)로 정한다. §3.1의 서로소 조건 해제 모형은 $d,m$ 각각에 제곱 인수 없는 제한을 유지하므로, 현재의 $d_z$ 모형과 다르다.
 
-**명제 7.2 (정확한 두 변수 변환).** $\Re s,\Re t>1$에서
+**명제 8.2 (정확한 두 변수 변환).** $\Re s,\Re t>1$에서
 
-<a id="equation-7-5"></a>
+<a id="equation-8-5"></a>
 
 $$
 \boxed{
@@ -792,20 +798,20 @@ $$
 \qquad
 \widetilde D_{z,w}(s,s)=\zeta(s)^{z+w}.
 }
-\tag{7.5}
+\tag{8.5}
 $$
 
 **증명.** $(1-v)^{-z}=\sum_{a\ge0}(z)_a v^a/a!$를 각 소수에 적용한다. $|(z)_a|\le(|z|)_a$이므로 각 급수는 주어진 영역에서 절대수렴한다. 두 급수를 곱하면 첫 항등식을 얻고, 대각선에서는 오일러 곱으로 선택한 로그가 같으므로 두 번째 항등식을 얻는다. $\square$
 
-즉 (2.1)의 분해와 비교하면 새 모형의 해석적 인자는 $\widetilde H\equiv1$이다. 기존의 $H$와 그 미분은 제곱 인수 없는 제한의 산술 효과를 담고, 새 모형에서는 이 인자가 사라진다.
+즉 새 모형에서는 (3.1)의 $H$에 해당하는 해석적 인자가 $1$이다.
 
-<a id="section-7-3"></a>
+<a id="section-8-3"></a>
 
-### 7.3. 이산핵 평균의 이차 베타 법칙
+### 8.3. 이산핵 평균의 이차 베타 법칙
 
 **정리 2 (이산핵 평균의 이차 베타 법칙).** 고정된 $z,w$에 대해 충분히 큰 유한 정수 $N=N(z,w)$가 존재하여, $F\in C^N([0,1])$이면 $x\to\infty$일 때
 
-<a id="equation-7-6"></a>
+<a id="equation-8-6"></a>
 
 $$
 \boxed{
@@ -814,38 +820,38 @@ $$
 \left\langle\mathcal K_{z,w}+\frac1L\widetilde{\mathcal K}^{(1)}_{z,w},F\right\rangle
 +O_{F,z,w}(xL^{\beta-3}),
 }
-\tag{7.6}
+\tag{8.6}
 $$
 
-<a id="equation-7-7"></a>
+<a id="equation-8-7"></a>
 
 $$
 \widetilde{\mathcal K}^{(1)}_{z,w}
-=\gamma z\mathcal K_{z-1,w}
-+\gamma w\mathcal K_{z,w-1}
+=\gamma_E z\mathcal K_{z-1,w}
++\gamma_E w\mathcal K_{z,w-1}
 -(r-1)\mathcal K_{z,w}.
-\tag{7.7}
+\tag{8.7}
 $$
 
-여기서 $r=z+w$, $\beta=\Re r$, $L=\log x$이며, $\gamma$는 §1과 같은 오일러 상수이다.
+여기서 $r=z+w$, $\beta=\Re r$, $L=\log x$이며, $\gamma_E$는 §2와 같은 오일러 상수이다.
 
 **증명.** 정리 1의 증명에서 사용한 계수 지배와 국소 전개를 새 모형에 대해 확인한다. $k_0\ge\max(2,|z|+|w|)$인 정수를 택하면
 
-<a id="equation-7-8"></a>
+<a id="equation-8-8"></a>
 
 $$
 \sum_{d\mid n}|d_z(d)d_w(n/d)|
 \le(d_{|z|}*d_{|w|})(n)
 =d_{|z|+|w|}(n)
 \le\tau_{k_0}(n).
-\tag{7.8}
+\tag{8.8}
 $$
 
 마지막 부등식은 소수 거듭제곱에서 $(|z|+|w|)_a\le(k_0)_a$를 적용한 것이다. 이 지배는 (A.1)의 $j=0,1$ 주파수 미분에도 적용된다.
 
-§4와 같이
+§5와 같이
 
-<a id="equation-7-9"></a>
+<a id="equation-8-9"></a>
 
 $$
 \begin{aligned}
@@ -854,10 +860,10 @@ $$
 \sum_{n\ge1}\frac{\sum_{d\mid n}d_z(d)d_w(n/d)e^{i\xi\log d/L}}{n^s}
 &=\zeta(s-i\xi/L)^z\zeta(s)^w.
 \end{aligned}
-\tag{7.9}
+\tag{8.9}
 $$
 
-로 둔다. (7.8)에 의해 부록 A.1의 Perron 절단 오차가 그대로 성립하고, 부록 A.2에서는 $H\equiv1$을 사용한다. 부록 A.3의 국소 인자는
+로 둔다. (8.8)에 의해 부록 A.1의 Perron 절단 오차가 그대로 성립하고, 부록 A.2에서는 $H\equiv1$을 사용한다. 부록 A.3의 국소 인자는
 
 $$
 \widetilde G(s_1,s_2)
@@ -865,24 +871,24 @@ $$
 \qquad Z(s)=(s-1)\zeta(s)
 $$
 
-이며, $(1,1)$에서 값은 $1$, 두 편미분은 각각 $\gamma z$, $\gamma w-1$이다. 따라서 어떤 $B\ge0$에 대해 $j=0,1$, $|\xi|\le L^{1/4}$에서
+이며, $(1,1)$에서 값은 $1$, 두 편미분은 각각 $\gamma_E z$, $\gamma_E w-1$이다. 따라서 어떤 $B\ge0$에 대해 $j=0,1$, $|\xi|\le L^{1/4}$에서
 
-<a id="equation-7-10"></a>
+<a id="equation-8-10"></a>
 
 $$
 \partial_\xi^j\widetilde S_x^{z,w}(\xi)
 =xL^{r-1}\partial_\xi^j
 \left[
 \mathcal B_{z,w}(\xi)
-+\frac{\gamma z\mathcal B_{z-1,w}(\xi)+(\gamma w-1)\mathcal B_{z,w-1}(\xi)}L
++\frac{\gamma_E z\mathcal B_{z-1,w}(\xi)+(\gamma_E w-1)\mathcal B_{z,w-1}(\xi)}L
 \right]
 +O_{z,w}\!\left(xL^{\beta-3}(1+|\xi|)^B\right).
-\tag{7.10}
+\tag{8.10}
 $$
 
-분모 $\log x$를 원래 이산핵의 $\log n$으로 바꾸려면 §5.2의 정확한 항등식을 사용한다.
+분모 $\log x$를 원래 이산핵의 $\log n$으로 바꾸려면 §6.2의 정확한 항등식을 사용한다.
 
-<a id="equation-7-11"></a>
+<a id="equation-8-11"></a>
 
 $$
 \widetilde\Theta_x^{z,w}(\xi)
@@ -890,18 +896,18 @@ $$
 =\widetilde S_x^{z,w}(\xi)-1
 +\xi\int_2^x
 \frac{\partial_\xi\widetilde S_t^{z,w}(\xi)}{t\log t}\,dt.
-\tag{7.11}
+\tag{8.11}
 $$
 
-여기서 $\widetilde S_t$의 정규화는 $\log t$이고, $-1$은 $n=1$ 항을 제거한다. (7.8)은 §5.2의 작은 $t$ 구간과 §5.3의 고주파 꼬리에도 같은 지배를 준다. 따라서 (7.10)을 넣고 $F$의 푸리에 역변환을 적용하면 보정항은
+여기서 $\widetilde S_t$의 정규화는 $\log t$이고, $-1$은 $n=1$ 항을 제거한다. (8.8)은 §6.2의 작은 $t$ 구간과 §6.3의 고주파 꼬리에도 같은 지배를 준다. 따라서 (8.10)을 넣고 $F$의 푸리에 역변환을 적용하면 보정항은
 
 $$
-\gamma z\langle\mathcal K_{z-1,w},F\rangle
-+(\gamma w-1)\langle\mathcal K_{z,w-1},F\rangle
+\gamma_E z\langle\mathcal K_{z-1,w},F\rangle
++(\gamma_E w-1)\langle\mathcal K_{z,w-1},F\rangle
 +\langle\mathcal K_{z,w},uF'\rangle
 $$
 
-이다. (3.4)로 마지막 항을 바꾸면 (7.7)을 얻는다. 필요한 유한 차수 $N$과 오차의 제어는 §5.3과 같다. $\square$
+이다. (4.4)로 마지막 항을 바꾸면 (8.7)을 얻는다. 필요한 유한 차수 $N$과 오차의 제어는 §6.3과 같다. $\square$
 
 특히 $z,w>0$이면 양의 측도들의 정규화한 합이
 
@@ -914,9 +920,9 @@ $$
 
 로 약수렴한다. 매끄러운 시험함수에서의 수렴과 양성으로 연속함수까지 확장할 수 있다. 이 평균은 정수 $n$을 $d_r(n)$에 비례해 고르고, 그 안에서 $\mathscr K_n^{z,w}/d_r(n)$를 사용하는 가중 평균이다. $r=1$이면 $d_r(n)=1$이므로 정수를 균등하게 고르는 평균이 된다.
 
-<a id="section-7-4"></a>
+<a id="section-8-4"></a>
 
-### 7.4. 양의 아크사인 핵과 음의 뫼비우스 핵
+### 8.4. 양의 아크사인 핵과 음의 뫼비우스 핵
 
 **양의 지수 $(1/2,1/2)$.** 각 $\mathscr K_n^{1/2,1/2}$는 총질량 $1$의 확률측도이다. 하지만 일반적인 정수에서는 DDT의 균등 약수측도 $\nu_n$과 다르다. 예를 들어
 
@@ -927,21 +933,21 @@ $$
 \nu_{p^2}=\frac13(\delta_0+\delta_{1/2}+\delta_1).
 $$
 
-두 모형은 평균에서 같은 아크사인 극한을 갖는다. 새 모형에서는 정리 2와 §6의 핵 항등식으로 더 정확히
+두 모형은 평균에서 같은 아크사인 극한을 갖는다. 새 모형에서는 정리 2와 §7의 핵 항등식으로 더 정확히
 
-<a id="equation-7-12"></a>
+<a id="equation-8-12"></a>
 
 $$
 \widetilde A_x^{1/2,1/2}(F)
 =x\left[
 \int_0^1a(u)F(u)\,du
-+\frac{\gamma}{L}\int_0^1\left(u-\frac12\right)a(u)F'(u)\,du
++\frac{\gamma_E}{L}\int_0^1\left(u-\frac12\right)a(u)F'(u)\,du
 \right]
 +O_F\!\left(\frac{x}{L^2}\right).
-\tag{7.12}
+\tag{8.12}
 $$
 
-를 얻는다. 기존 (1.5)와 비교하면 주항의 산술 상수 $1/\zeta(2)$가 $1$로, 보정계수 $\kappa(1)$이 $\gamma$로 바뀐다. $F=u^2$에서는 $\widetilde A_x^{1/2,1/2}(u^2)/x=3/8+\gamma/(4L)+O(L^{-2})$이다.
+를 얻는다. 기존 (2.5)와 비교하면 주항의 산술 상수 $1/\zeta(2)$가 $1$로, 보정계수 $\kappa(1)$이 $\gamma_E$로 바뀐다. $F=u^2$에서는 $\widetilde A_x^{1/2,1/2}(u^2)/x=3/8+\gamma_E/(4L)+O(L^{-2})$이다.
 
 **음의 지수 $(-1/2,-1/2)$.** 총질량은 $\mu(n)$이며, 소수 거듭제곱에서는 부호가 섞인 원자들이 상쇄된다. 예를 들어
 
@@ -950,21 +956,21 @@ $$
 =-\frac18\delta_0+\frac14\delta_{1/2}-\frac18\delta_1.
 $$
 
-이 측도는 총질량이 $0$이지만 영측도는 아니다. 명제 7.1에서 정확히
+이 측도는 총질량이 $0$이지만 영측도는 아니다. 명제 8.1에서 정확히
 
-<a id="equation-7-13"></a>
+<a id="equation-8-13"></a>
 
 $$
 \widetilde A_x^{-1/2,-1/2}(1)=M(x)-1,
 \qquad
 \widetilde A_x^{-1/2,-1/2}(u)=\frac{M(x)-1}{2},
 \qquad M(x)=\sum_{n\le x}\mu(n).
-\tag{7.13}
+\tag{8.13}
 $$
 
-이다. 이 총질량과 일차 모멘트는 기존 제곱 인수 없는 모형의 [§8.4](further-results.md#section-8-4)와 같다. 더 높은 모멘트에서는 제곱 인수가 있는 정수의 원자들이 영향을 줄 수 있다.
+이다. 이 총질량과 일차 모멘트는 기존 제곱 인수 없는 모형의 [뫼비우스 경우 §4](mobius-cases.md#section-4)와 같다. 더 높은 모멘트에서는 제곱 인수가 있는 정수의 원자들이 영향을 줄 수 있다.
 
-정리 2의 주항은 $xL^{-2}\langle\mathcal K_{-1/2,-1/2},F\rangle$이다. §6에서 이 핵은 $F=1,u$에 대해 $0$이므로 (7.13)과 양립한다. $F=u^2$에서는 $\langle\mathcal K_{-1/2,-1/2},u^2\rangle=-1/4$이므로
+정리 2의 주항은 $xL^{-2}\langle\mathcal K_{-1/2,-1/2},F\rangle$이다. §7에서 이 핵은 $F=1,u$에 대해 $0$이므로 (8.13)과 양립한다. $F=u^2$에서는 $\langle\mathcal K_{-1/2,-1/2},u^2\rangle=-1/4$이므로
 
 $$
 \widetilde A_x^{-1/2,-1/2}(u^2)
@@ -973,13 +979,13 @@ $$
 
 총질량의 뫼비우스 상쇄와 약수 위치에 따른 비영인 주항이 하나의 이산핵 안에 공존한다.
 
-<a id="section-7-5"></a>
+<a id="section-8-5"></a>
 
-### 7.5. 두 로그 좌표와 정확한 Mellin–Fourier 변환
+### 8.5. 두 로그 좌표와 정확한 Mellin–Fourier 변환
 
 원래 이산핵의 좌표는 $\log d/\log n$이고, $\widetilde S_x$의 좌표는 $\log d/\log x$이다. $T_c(u)=cu$라 쓰면 후자의 유한 복소측도는 정확히
 
-<a id="equation-7-14"></a>
+<a id="equation-8-14"></a>
 
 $$
 \mathscr Q_x^{z,w}
@@ -988,14 +994,14 @@ $$
 \qquad
 \widetilde S_x^{z,w}(\xi)
 =\langle\mathscr Q_x^{z,w},e^{i\xi u}\rangle.
-\tag{7.14}
+\tag{8.14}
 $$
 
-여기서 $\langle(T_c)_*\nu,F\rangle=\langle\nu,F(cu)\rangle$이다. (7.11)은 이 좌표 변경을 합 수준에서 되돌리는 항등식이며, 이차 보정항을 계산할 때도 필요하다.
+여기서 $\langle(T_c)_*\nu,F\rangle=\langle\nu,F(cu)\rangle$이다. (8.11)은 이 좌표 변경을 합 수준에서 되돌리는 항등식이며, 이차 보정항을 계산할 때도 필요하다.
 
-**명제 7.3 (정확한 Perron 표현).** $x>1$이 정수가 아니고 $L=\log x$, $c>1$, $\xi\in\mathbb R$이면
+**명제 8.3 (정확한 Perron 표현).** $x>1$이 정수가 아니고 $L=\log x$, $c>1$, $\xi\in\mathbb R$이면
 
-<a id="equation-7-15"></a>
+<a id="equation-8-15"></a>
 
 $$
 \boxed{
@@ -1004,26 +1010,26 @@ $$
 \int_{c-iT}^{c+iT}
 \zeta(s-i\xi/L)^z\zeta(s)^w\,\frac{x^s}{s}\,ds.
 }
-\tag{7.15}
+\tag{8.15}
 $$
 
 두 복소 거듭제곱은 $\Re s>1$의 오일러 곱 로그로 정의한다.
 
-**증명.** (7.8)로 디리클레 급수 (7.9)가 $\Re s>1$에서 절대수렴한다. $x$를 고정하고 $L$도 고정한 상태에서 유효 Perron 공식을 적용한다. 정수가 아닌 $x$에서는 절단오차의 각 항이 $T\to\infty$일 때 $0$으로 가며, 절대수렴하는 계수합으로 지배되므로 (7.15)를 얻는다. 정수 $x$에서는 Perron 적분이 끝점에 반가중치를 주므로 해당 항의 절반을 추가해야 한다. $\square$
+**증명.** (8.8)로 디리클레 급수 (8.9)가 $\Re s>1$에서 절대수렴한다. $x$를 고정하고 $L$도 고정한 상태에서 유효 Perron 공식을 적용한다. 정수가 아닌 $x$에서는 절단오차의 각 항이 $T\to\infty$일 때 $0$으로 가며, 절대수렴하는 계수합으로 지배되므로 (8.15)를 얻는다. 정수 $x$에서는 Perron 적분이 끝점에 반가중치를 주므로 해당 항의 절반을 추가해야 한다. $\square$
 
 음의 대칭 지수에서는 $\mathfrak M_x(\xi):=\widetilde S_x^{-1/2,-1/2}(\xi)$로 두면
 
-<a id="equation-7-16"></a>
+<a id="equation-8-16"></a>
 
 $$
 \mathfrak M_x(0)=M(x),
 \qquad
-\mathfrak D_{\xi,L}(s)
+F_{\xi/L}(s)
 =\exp\!\left[-\frac12\left\{\log\zeta(s-i\xi/L)+\log\zeta(s)\right\}\right].
-\tag{7.16}
+\tag{8.16}
 $$
 
-따라서 $\mathfrak D_{\xi,L}(s)$를 $1/\sqrt{\zeta(s-i\xi/L)\zeta(s)}$로 쓸 때도 위 로그로 정한 가지를 뜻한다. $\xi=0$이면 정확히 $1/\zeta(s)$가 된다.
+따라서 $F_{\xi/L}(s)$를 $1/\sqrt{\zeta(s-i\xi/L)\zeta(s)}$로 쓸 때도 위 로그로 정한 가지를 뜻한다. $\xi=0$이면 정확히 $1/\zeta(s)$가 된다. §5의 제곱 인수 없는 모형 $\mathfrak D_{\xi,L}$와는 구분한다.
 
 고정된 $x$에서 모든 실수 $\xi$의 값을 알면 푸리에 변환의 유일성으로 $\mathscr Q_x$가 결정된다. $x$도 변화시키면 $n\ge2$에서의 약한 좌우 극한의 차이가
 
@@ -1036,9 +1042,7 @@ $$
 
 이므로 정수별 이산핵을 구분할 수 있다. 기존 항들은 좌표가 연속적으로 움직이고, 새로 들어오는 $n$의 항에서 $\log n/\log x\to1$이기 때문이다.
 
-여기까지 얻은 것은 이산핵의 정확한 변환과 그 평균의 베타 점근식이다. 이어지는 전역 공식은 (7.15)의 경로를 옮겨 특이점별 기여와 나머지를 정량화하는 문제로 설정한다. 그때는 로그 보정항을 유한 개 남긴 점근식과, 약수 정보를 보존하는 정확한 변환을 구분해야 한다.
-
-[전역 공식 문서 §11](global-formula.md#section-11)은 먼저 FTA의 소수별 합성곱을 Hadamard 영점 곱으로 옮겨 정확한 재구성과 절단오차를 제시하고, 이어 유한 높이에서 특이점별 윤곽 적분을 분리한다.
+[전역 공식](global-formula.md)은 이 정확한 변환을 Hadamard 영점 곱과 연결하고, 특이점별 윤곽 적분을 분리한다. [전역 공식 §2](global-formula.md#section-2)는 가우스 평활화된 합을, [전역 공식 §3](global-formula.md#section-3)은 영점 쪽 가우스 합산 규칙으로 원래 정수합과 그 도약을 복원하는 공식을 다룬다.
 
 <a id="appendix-a"></a>
 
@@ -1048,7 +1052,7 @@ $$
 
 ### A.1. 계수 상계와 Perron 절단
 
-§5의 $k_0$를 쓰고 $j=0,1$로 둔다. 계수는
+§6의 $k_0$를 쓰고 $j=0,1$로 둔다. 계수는
 
 <a id="equation-a-1"></a>
 
@@ -1183,11 +1187,11 @@ G(s_1,s_2)=
 $$
 
 로 정의한다. 이는 $(1,1)$ 근방에서 해석적이며 $G(1,1)=C(r)$이다. $\Re s>1$에서
-$\log\zeta(s)=\log Z(s)-\log(s-1)$이므로, 이 국소 가지는 A.2에서 선택한 가지와 일치한다. $Z'(1)=\gamma$이므로
+$\log\zeta(s)=\log Z(s)-\log(s-1)$이므로, 이 국소 가지는 A.2에서 선택한 가지와 일치한다. $Z'(1)=\gamma_E$이므로
 
 $$
-\partial_{s_1}G(1,1)=\gamma zC+H_s=G_1,\qquad
-\partial_{s_2}G(1,1)=\gamma wC+H_t-C=G_2.
+\partial_{s_1}G(1,1)=\gamma_E zC+H_s=G_1,\qquad
+\partial_{s_2}G(1,1)=\gamma_E wC+H_t-C=G_2.
 $$
 
 $G_L(q,\xi)=G(1+(q-i\xi)/L,\,1+q/L)$라 쓰면 2차 테일러 정리로
@@ -1243,20 +1247,22 @@ $$
 \ll_{z,w}e^{-\delta L}(1+\delta L+Y)^{m+1}
 $$
 
-이다. 앞의 $xL^{r-1}$을 곱해도 지수적으로 작아 (A.9)의 오차에 흡수된다. (4.4)와 그 미분판을 $(z,w)$, $(z-1,w)$, $(z,w-1)$에 적용하면
+이다. 앞의 $xL^{r-1}$을 곱해도 지수적으로 작아 (A.9)의 오차에 흡수된다. (5.4)와 그 미분판을 $(z,w)$, $(z-1,w)$, $(z,w-1)$에 적용하면
 
 $$
 \frac1{2\pi i}\int_{\mathcal U_Y}e^q\,\partial_\xi^j\Big[P_\xi(q)\Big(C+G_1\frac{q-i\xi}L+G_2\frac qL\Big)\Big]dq
 =\partial_\xi^j\Big[C\mathcal B_{z,w}+\frac1L\big(G_1\mathcal B_{z-1,w}+G_2\mathcal B_{z,w-1}\big)\Big](\xi)
 $$
 
-이고, 이를 대입하면 (5.1)을 얻는다. 추정 과정에서 $\xi$로 나누지 않았으므로 후보의 합류와 상쇄도 포함한다. 테일러 전개를 $J$차까지 늘리면 같은 방법으로 [(9.2)](further-results.md#equation-9-2)를 얻는다.
+이고, 이를 대입하면 (6.2)을 얻는다. 추정 과정에서 $\xi$로 나누지 않았으므로 후보의 합류와 상쇄도 포함한다. 테일러 전개를 $J$차까지 늘리면 같은 방법으로 [고차 전개 (1.2)](higher-order.md#equation-1-2)를 얻는다.
 
 <a id="appendix-b"></a>
 
 ## 부록 B. 수치 확인
 
-**방법.** 제곱 인수 없는 수와 $\omega$를 체로 구하고 약수 쌍을 직접 합했다($x\le10^7$).
+아래 표는 초기 원고에 보고된 수치이다. 해당 계산의 코드와 원자료는 현재 저장소에 없어 이번 점검에서는 재현하지 않았다. [전역 공식의 검산 스크립트](global-formula.md#checks)는 별도의 항등식과 윤곽 적분을 확인한다.
+
+**보고된 방법.** 제곱 인수 없는 수와 $\omega$를 체로 구하고 약수 쌍을 직접 합했다($x\le10^7$).
 
 <a id="appendix-b-1"></a>
 

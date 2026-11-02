@@ -1,4 +1,4 @@
-"""Numerical checks for the Gaussian formula in docs/global-formula.md, section 12.
+"""Numerical checks for the Gaussian formula in docs/global-formula.md, section 2.
 
 Run: python scripts/check_smoothed_formula.py
 Requires mpmath. These are numerical consistency checks, not interval-certified
@@ -17,7 +17,7 @@ def normal_cdf(t):
 
 
 def direct_sum(x, h, alpha, cutoff):
-    """Compute (12.1), with a bound for the omitted arithmetic tail."""
+    """Compute (2.1), with a bound for the omitted arithmetic tail."""
     weights = [mp.mpf(0)]
     for n in range(1, cutoff + 1):
         value = divisor_coefficient(Fraction(-1, 2), n)
