@@ -1,0 +1,210 @@
+# M과 ψ: 코사인 핵과 사인 핵
+
+Mertens 함수 $M(x)=\sum_{n\le x}\mu(n)$과 Chebyshev 함수 $\psi(x)=\sum_{n\le x}\Lambda(n)$을 같은 이산핵 틀에서 비교한다. $M$은 지수 $(-\tfrac12,-\tfrac12)$에서, $\psi$는 $(-\tfrac12,\tfrac12)$에서 나온다. 소수마다 전자는 코사인 동전을, 후자는 사인 동전을 가지며, 두 함수의 극점·영점 성분은 모두 아크사인 핵에서 만들어진다. 절·명제·수식 번호는 이 문서 안에서 독립적이다.
+
+기호는 [주정리 §8](main-theorem.md#section-8)의 $d_z$, 이산핵 $\mathscr K_n^{z,w}$, 지수합 $\widetilde S_x^{z,w}(\xi)$를 따르고, 베타핵 $\mathcal K_{z,w}$와 그 변환 $\mathcal B_{z,w}(\xi)=\langle\mathcal K_{z,w},e^{i\xi u}\rangle$는 [주정리 §4](main-theorem.md#section-4)와 [주정리 (5.4)](main-theorem.md#equation-5-4)를 따른다. $L=\log x$, $\alpha=\xi/L$이고, $a(u)=1/(\pi\sqrt{u(1-u)})$는 아크사인 밀도, $\varepsilon=d_0$는 디리클레 합성곱의 항등원이다.
+
+| 결과 | 내용 | 범위 |
+|:--|:--|:--|
+| [명제 1.1](#section-1) | $d_{-1/2}*d_{1/2}=\varepsilon$의 로그 모멘트와 $\Lambda$, $\Lambda_2$ | 정확한 항등식 |
+| [명제 2.1](#section-2) | $\psi$의 극·영점 국소 핵, 1차에서는 정확 | **[국소 계산]** |
+| [표 (2.4)](#equation-2-4) | $M$과 $\psi$의 네 국소 핵을 아크사인 각도로 쓴 꼬리 | **[국소 계산]** |
+| [(3.2)](#section-3) | 사인 쪽의 주파수 판: $\arg\zeta$의 극한분포 | Bohr–Jessen, 가정 없음 |
+
+- [§1. 두 분해와 소수별 동전](#section-1)
+- [§2. 국소 핵](#section-2)
+- [§3. M과 ψ의 비교](#section-3)
+- [검산](#checks)
+- [참고 문헌](#references)
+
+<a id="section-1"></a>
+
+## 1. 두 분해와 소수별 동전
+
+$\zeta^{-1}=\zeta^{-1/2}\zeta^{-1/2}$와 $1=\zeta^{-1/2}\zeta^{1/2}$에서
+
+<a id="equation-1-1"></a>
+
+$$
+d_{-1/2}*d_{-1/2}=\mu,\qquad d_{-1/2}*d_{1/2}=\varepsilon
+\tag{1.1}
+$$
+
+이다. $\mathfrak M_x(\xi)=\widetilde S_x^{-1/2,-1/2}(\xi)$([주정리 (8.16)](main-theorem.md#equation-8-16))와 함께
+
+$$
+\mathfrak P_x(\xi):=\widetilde S_x^{-1/2,1/2}(\xi)=\sum_{dm\le x}d_{-1/2}(d)\,d_{1/2}(m)\,e^{i\xi\log d/L}
+$$
+
+로 둔다. [주정리 (8.15)](main-theorem.md#equation-8-15)에서 Perron 피적분함수는 $\zeta(s-i\alpha)^{-1/2}\zeta(s)^{1/2}x^s/s$이다. $\mathfrak P_x(0)=1$이므로 정보는 모두 $\xi$ 방향, 즉 약수의 위치에 있다.
+
+**명제 1.1.** 모든 $n\ge1$에서
+
+<a id="equation-1-2"></a>
+
+$$
+\sum_{dm=n}d_{-1/2}(d)d_{1/2}(m)\log d=-\tfrac12\Lambda(n),
+\qquad
+\sum_{dm=n}d_{-1/2}(d)d_{1/2}(m)\log^2d=\tfrac14\Lambda_2(n)-\tfrac34\Lambda(n)\log n
+\tag{1.2}
+$$
+
+이다. $\Lambda_2=\Lambda\log+\Lambda*\Lambda$는 Selberg의 일반화 폰 망골트 함수이다. 따라서
+
+<a id="equation-1-3"></a>
+
+$$
+\mathfrak M_x(0)=M(x),
+\qquad
+\mathfrak P_x'(0)=-\frac{i\,\psi(x)}{2L},
+\qquad
+\mathfrak P_x''(0)=-\frac1{L^2}\sum_{n\le x}\Big(\tfrac14\Lambda_2(n)-\tfrac34\Lambda(n)\log n\Big).
+\tag{1.3}
+$$
+
+**증명.** 왼쪽은 $(-\partial_{s_1})^k\zeta(s_1)^{-1/2}\big|_{s_1=s}\cdot\zeta(s)^{1/2}$의 디리클레 계수이다. $k=1$이면 $\tfrac12\zeta'/\zeta$이고, $k=2$이면 $\tfrac34(\zeta'/\zeta)^2-\tfrac12\zeta''/\zeta=\tfrac14(\zeta'/\zeta)^2-\tfrac12(\zeta'/\zeta)'$이다. $-\zeta'/\zeta=\sum\Lambda(n)n^{-s}$를 넣는다. $\square$
+
+$\log n$ 좌표에서는 $\widetilde A_x^{-1/2,1/2}(u)=-\tfrac12\sum_{2\le n\le x}\Lambda(n)/\log n$이다. 이는 [주정리 정리 2](main-theorem.md#section-8-3)의 주항 $(x/L)\langle\mathcal K_{-1/2,1/2},u\rangle=-x/(2L)$과 맞는다. $M$의 대응식은 [주정리 (8.13)](main-theorem.md#equation-8-13)이다.
+
+**소수별 동전.** 제곱 인수 없는 $n$에서는 $d_z(d)=z^{\omega(d)}$이므로
+
+<a id="equation-1-4"></a>
+
+$$
+\sum_{d\mid n}d_z(d)\,d_w(n/d)\,d^{i\alpha}
+=n^{i\alpha/2}\prod_{p\mid n}\big[(z+w)\cos\theta_p+i(z-w)\sin\theta_p\big],
+\qquad\theta_p=\tfrac\alpha2\log p
+\tag{1.4}
+$$
+
+이다. $z=w$이면 코사인, $z=-w$이면 사인만 남는다. DDT의 $(\tfrac12,\tfrac12)$는 $\cos\theta_p$, $M$의 $(-\tfrac12,-\tfrac12)$는 $-\cos\theta_p$, $\psi$의 $(-\tfrac12,\tfrac12)$는 $-i\sin\theta_p$를 준다. $\alpha=\xi/L$이고 $p\le x$이면 $\theta_p=\tfrac\xi2\cdot\log p/L$이다. 따라서 $0\le\xi\le2\pi$에서 $\arccos(\cos\theta_p)$는 접힘 없이 약수 좌표 $\log p/L$을 돌려준다.
+
+<a id="section-2"></a>
+
+## 2. 국소 핵
+
+$g_{x,\alpha}(s)=\zeta(s-i\alpha)^{-1/2}\zeta(s)^{1/2}x^s/s$로 둔다. 쌍 $\{1,1+i\alpha\}$와 각 영점 쌍 $\{\rho,\rho+i\alpha\}$에서 두 지수의 합이 $0$이다. 그러므로 이 쌍들을 잇는 선분을 제거한 영역에서 $g_{x,\alpha}$는 일가이고, 오른쪽의 Euler 가지에 맞춘다. $\alpha=0$이면 $g_{x,0}=x^s/s$이다. [전역 공식 (1.13)](global-formula.md#equation-1-13)처럼 각 선분만 감싸는 작은 폐곡선 $\Gamma_1$, $\Gamma_\rho$를 잡고
+
+$$
+\mathcal P^\psi_1(x,\xi)=\frac1{2\pi i}\int_{\Gamma_1}g_{x,\alpha}(s)\,ds,
+\qquad
+\mathcal I^\psi_\rho(x,\xi)=\frac1{2\pi i}\int_{\Gamma_\rho}g_{x,\alpha}(s)\,ds
+$$
+
+로 둔다.
+
+**명제 2.1 (ψ의 국소 핵).** $R>0$을 고정하고 $|\xi|\le R$이라 하자. $\rho$의 중복도가 $m$이면
+
+<a id="equation-2-1"></a>
+
+$$
+\mathcal I^\psi_\rho(x,\xi)=\frac{x^\rho}{\rho L}\,\mathcal B_{m/2,-m/2}(\xi)+O_{\rho,R}\!\left(\frac{x^{\Re\rho}}{L^2}\right),
+\qquad
+\mathcal P^\psi_1(x,\xi)=\frac xL\,\mathcal B_{-1/2,1/2}(\xi)+O_R\!\left(\frac x{L^2}\right)
+\tag{2.1}
+$$
+
+이다. $\xi=0$에서의 1차 미분은 오차 없이
+
+<a id="equation-2-2"></a>
+
+$$
+\partial_\xi\mathcal I^\psi_\rho(x,0)=\frac{im}{2L}\cdot\frac{x^\rho}{\rho},
+\qquad
+\partial_\xi\mathcal P^\psi_1(x,0)=-\frac{i}{2L}\,x
+\tag{2.2}
+$$
+
+이다.
+
+**증명.** $s=\rho+q/L$로 두고 $\zeta(\rho+h)=b_\rho h^m(1+O_\rho(h))$를 쓰면 $\zeta(s)/\zeta(s-i\alpha)=q^m(q-i\xi)^{-m}(1+O_{\rho,R}(L^{-1}))$이다. 계수 $b_\rho$는 약분되고, 큰 $|q|$에서 $1$에 가까운 가지가 Euler 가지와 이어진다. $x^s=x^\rho e^q$, $ds=dq/L$, $1/s=1/\rho+O_\rho(L^{-1})$이므로 [주정리 (5.4)](main-theorem.md#equation-5-4)를 $P_\xi(q)=(q-i\xi)^{-m/2}q^{m/2}$에 적용하면 첫 식을 얻는다. 극에서는 $\zeta(1+h)=h^{-1}(1+O(h))$이므로 $P_\xi(q)=(q-i\xi)^{1/2}q^{-1/2}$이다. (2.2)는 $\partial_\alpha g_{x,\alpha}\big|_{\alpha=0}=\tfrac i2(\zeta'/\zeta)(s)\,x^s/s$의 유수이다. $\square$
+
+(2.2)는 고전 명시공식 $\psi(x)=x-\sum_\rho x^\rho/\rho-\cdots$의 항과 같다. 실제로 $\mathfrak P_x'(0)=-i\psi(x)/(2L)$에 극은 $x$를, 각 영점은 $-m\,x^\rho/\rho$를 준다. 따라서 $\psi$에서 새로 얻는 정보는 1차를 넘는 $\xi$ 의존성, 즉 핵의 모양이다. 영점을 무한히 합하는 문제는 [전역 공식 §1.5](global-formula.md#section-1-5)의 주의와 같다.
+
+**네 핵의 아크사인 표현.** [주정리 (7.1)](main-theorem.md#equation-7-1)의 $\mathcal K_{-1/2,1/2}=[(1-u)a]'$와 반사 $R_*$에서 $\mathcal K_{1/2,-1/2}=-(ua)'$이다. [주정리 (4.6)](main-theorem.md#equation-4-6)과 $\langle a,(2u-1)e^{i\xi u}\rangle=ie^{i\xi/2}J_1(\xi/2)$를 쓰면
+
+<a id="equation-2-3"></a>
+
+$$
+\begin{aligned}
+\mathcal B_{1/2,-1/2}(\xi)&=i\xi\,\langle a,u\,e^{i\xi u}\rangle=\tfrac{i\xi}2e^{i\xi/2}\big(J_0+iJ_1\big)(\tfrac\xi2),\\
+\mathcal B_{-1/2,1/2}(\xi)&=-i\xi\,\langle a,(1-u)\,e^{i\xi u}\rangle=-\tfrac{i\xi}2e^{i\xi/2}\big(J_0-iJ_1\big)(\tfrac\xi2),\\
+\mathcal B_{-1/2,-1/2}(\xi)&=-\tfrac12\big(\mathcal B_{-1/2,1/2}+\mathcal B_{1/2,-1/2}\big)(\xi)=\tfrac\xi2e^{i\xi/2}J_1(\tfrac\xi2)
+\end{aligned}
+\tag{2.3}
+$$
+
+이다. $\psi$의 두 핵은 아크사인 밀도에 $u$ 또는 $1-u$를 곱해 미분한 것이고, $M$의 극 핵은 그 둘의 평균에 $-1$을 곱한 것이다.
+
+$\vartheta=\arccos(2v-1)\in(0,\pi)$로 두면 아크사인 분포는 $\vartheta$에 대해 균등하다. [주정리 (7.5)](main-theorem.md#equation-7-5)의 분포 꼬리값 $T_{z,w}(v)=\langle\mathbf 1_{(v,\infty)}\mathcal K_{z,w},\chi\rangle$과 반사를 쓰면, 단순 영점에서 네 성분은 표 (2.4)와 같다.
+
+<a id="equation-2-4"></a>
+
+**(2.4) 네 국소 핵**
+
+| 성분 | 크기 | 핵 | 꼬리 $T(v)$ |
+|:--|:--|:--|:--|
+| $M$의 영점 | $x^\rho/(\rho\zeta'(\rho))$ | $\mathcal K_{1/2,1/2}=a$ | $\vartheta/\pi$ |
+| $M$의 극 | $x/L^2$ | $\mathcal K_{-1/2,-1/2}=[(u-\tfrac12)a]'$ | $-\cot\vartheta/\pi$ |
+| $\psi$의 극 | $x/L$ | $\mathcal K_{-1/2,1/2}=[(1-u)a]'$ | $-\tan(\vartheta/2)/\pi$ |
+| $\psi$의 영점 | $x^\rho/(\rho L)$ | $\mathcal K_{1/2,-1/2}=-(ua)'$ | $\cot(\vartheta/2)/\pi$ |
+
+$M$의 두 줄은 [전역 공식 (1.18)–(1.19)](global-formula.md#equation-1-18)이다. $T$는 분포의 꼬리값이며, 산술 꼬리합의 점근식을 주지는 않는다.
+
+**2차 모멘트.** $\langle\mathcal K_{-1/2,1/2},u^2\rangle=-\tfrac14$이므로 (1.3)과 극 성분에서 $\sum_{n\le x}(\tfrac14\Lambda_2-\tfrac34\Lambda\log n)$의 주항은 $-\tfrac14xL$이다. 이는 Selberg 공식 $\sum_{n\le x}\Lambda_2(n)=2xL+O(x)$와 $\sum_{n\le x}\Lambda(n)\log n=xL+O(x)$의 조합과 맞는다. 영점 쪽 2차 계수는 $\langle\mathcal K_{1/2,-1/2},u^2\rangle=\tfrac34$이며, 1차와 달리 $O(x^{\Re\rho}/L^2)$의 보정을 가진다.
+
+<a id="section-3"></a>
+
+## 3. M과 ψ의 비교
+
+- **동전.** $M$은 코사인(대칭, $z=w$), $\psi$는 사인(반대칭, $z=-w$)이다.
+- **진폭.** $M$의 영점 진폭 $1/(\rho\zeta'(\rho))$는 미분값에 의존하고, 중복 영점에서는 $L^{m-1}$로 커진다([전역 공식 (1.17)](global-formula.md#equation-1-17)). $\psi$에서는 지수 합이 $0$이라 $b_\rho$가 약분되므로 진폭이 늘 $1/\rho$이다. 중복도는 핵 $\mathcal K_{m/2,-m/2}$의 모양과 중심 $\langle\mathcal K_{m/2,-m/2},u\rangle=m/2$에만 나타난다.
+- **위치.** $M$의 영점 성분은 아크사인 꼴로 약수 좌표 전체에 퍼진다. $\psi$의 성분은 끝점에 몰린다. 영점 성분은 $\vartheta\to0$, 즉 $u\to1$인 $d_{-1/2}$ 쪽에, 극 성분은 $\vartheta\to\pi$, 즉 $u\to0$인 $d_{1/2}$ 쪽에 쏠린다. $\Lambda$가 소수 거듭제곱에만 놓인다는 사실이 약수 좌표에서는 이렇게 보인다.
+- **규모.** $M$의 극 성분 $x/L^2$은 $F=1,u$에서 사라지고 $\xi=0$에서는 정확히 $0$이므로([전역 공식 §1.5](global-formula.md#section-1-5)), $M(x)$의 진동은 영점 성분이 맡는다. $\psi$의 극 성분 $x/L$은 1차 모멘트에서 주항 $x$가 된다.
+
+**주파수 쪽.** 두 변수 변환 [주정리 (8.5)](main-theorem.md#equation-8-5)에 $s=\sigma-i\alpha$, $t=\sigma+i\alpha$를 넣으면, 실수 $z$와 $\sigma>1$에서
+
+<a id="equation-3-1"></a>
+
+$$
+\sum_{d,m\ge1}\frac{d_z(d)d_z(m)}{(dm)^\sigma}\Big(\frac dm\Big)^{i\alpha}=|\zeta(\sigma+i\alpha)|^{2z},
+\qquad
+\sum_{d,m\ge1}\frac{d_{-z}(d)d_z(m)}{(dm)^\sigma}\Big(\frac dm\Big)^{i\alpha}=e^{2iz\arg\zeta(\sigma+i\alpha)}
+\tag{3.1}
+$$
+
+이다. 코사인 쪽은 크기를, 사인 쪽은 위상을 준다. 첫 식은 [Ng 쌍대 (2.1)](ng-duality.md#equation-2-1)이고 그 극한분포가 [Ng 쌍대 정리 1](ng-duality.md#section-2-2)이다. 둘째 식의 짝은 Bohr–Jessen 정리의 허수부이다. $\sigma>\tfrac12$에서 $\alpha\in[0,A]$를 균등하게 고르면, $A\to\infty$일 때 $\arg\zeta(\sigma+i\alpha)$(오른쪽에서 수평으로 이어 붙인 가지)는 독립 균등 위상 $\theta_p$에 대한 $\sum_p\arctan\big(p^{-\sigma}\sin\theta_p/(1-p^{-\sigma}\cos\theta_p)\big)$의 분포로 수렴하고, 그 특성함수는
+
+<a id="equation-3-2"></a>
+
+$$
+\prod_p{}_2F_1\!\left(-\tfrac\eta2,\tfrac\eta2;1;p^{-2\sigma}\right)
+=\sum_{d\ge1}\frac{d_{-\eta/2}(d)\,d_{\eta/2}(d)}{d^{2\sigma}}
+\tag{3.2}
+$$
+
+이다. 오른쪽은 [Ng 쌍대 (2.4)](ng-duality.md#equation-2-4)와 같은 중심 원자 합이고, 각 인수의 선도항은 아크사인 인수 $J_0(\eta p^{-\sigma})$이다.
+
+<a id="checks"></a>
+
+## 검산
+
+[검산 스크립트](../scripts/check_mertens_psi.py)는 numpy와 scipy를 사용하며 다음을 확인한다.
+
+- (1.1)–(1.2): $n\le2\times10^4$에서 기계 정밀도로 성립한다.
+- (1.4): 제곱 인수 없는 $n$과 여러 $(z,w)$에서 소수별 동전으로의 분해를 확인한다.
+- (2.3)–(2.4): 모멘트 (4.2)로 계산한 $\mathcal B_{z,w}$와 Bessel 표현, 아크사인 평균 표현, 꼬리값의 $\vartheta$ 표현이 $10^{-14}$ 안에서 일치한다.
+- (2.1), (2.4): 첫 영점 $\rho_1$과 $s=1$ 주위의 윤곽 적분을 계산한다. $\xi=1,4$에서 네 성분의 상대오차는 $L=25$에서 $400$까지 $L$이 두 배가 될 때마다 반으로 줄어 $O(1/L)$을 따른다. (2.2)의 1차 미분은 $L$과 무관하게 $10^{-8}$ 안에서 정확하다.
+- (3.2): $\sigma=2$, $\alpha\in[0,3000]$에서 $e^{i\eta\arg\zeta}$의 경험적 평균과 ${}_2F_1$ 곱의 차이는 $\eta=2,5,10$에서 $2\times10^{-5}$–$10^{-4}$이다. $J_0$ 선도항만 쓰면 차이가 $10^{-3}$–$6\times10^{-3}$으로 커져 소수 거듭제곱 보정이 보인다.
+
+이 수치 확인은 증명을 대체하지 않으며, 국소 핵은 하나의 영점에서만 확인했다.
+
+    python -B scripts/check_mertens_psi.py
+
+<a id="references"></a>
+
+## 참고 문헌
+
+- A. Selberg, An elementary proof of the prime-number theorem, Ann. of Math. (2) 50 (1949), 305–313: $\Lambda_2=\Lambda\log+\Lambda*\Lambda$와 대칭 공식 $\sum_{n\le x}\Lambda_2(n)=2x\log x+O(x)$.
+- H. Davenport, *Multiplicative Number Theory*, 3rd ed., GTM 74 (2000), 17장: $\psi(x)$의 명시공식.
+- H. Bohr, B. Jessen, Über die Werteverteilung der Riemannschen Zetafunktion, Acta Math. 54 (1930), 1–35; 58 (1932), 1–55: $\sigma>\tfrac12$에서 $\log\zeta(\sigma+it)$의 극한분포.
