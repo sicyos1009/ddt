@@ -22,6 +22,7 @@ $A_x$는 제곱 인수 없는 모형, $\widetilde A_x$는 모든 정수의 $d_z$
 | [영점의 국소 기여와 모멘트·복원](docs/zero-contributions.md) | 영점 중복도, 보조 통계, 영점 높이와 미분값 |
 | [RH 아래 보조 통계의 극한분포](docs/limiting-distribution.md) | 극한분포와 평균제곱 오차의 증명 |
 | [Ng 공식과 소수·약수 쪽 쌍대](docs/ng-duality.md) | Ng 분포의 가정 약화, 가정 없는 쌍대 극한분포, Mertens 함수와의 연결 |
+| [M과 ψ: 코사인 핵과 사인 핵](docs/mertens-psi.md) | $\mu=d_{-1/2}*d_{-1/2}$와 $\varepsilon=d_{-1/2}*d_{1/2}$, ψ의 국소 핵, 네 핵의 아크사인 표현 |
 
 [후속 연구 안내](docs/further-results.md)에 문서별 범위와 수치 기록의 위치를 모았다. **[국소 계산]**, **[휴리스틱]**, **RH** 등의 표시는 각 주장의 범위와 가정을 구분한다.
 
@@ -37,10 +38,11 @@ $A_x$는 제곱 인수 없는 모형, $\widetilde A_x$는 모든 정수의 $d_z$
 | 로그 가중 조건 아래 Mertens 함수의 극한분포 | [Ng 쌍대 명제 1.1](docs/ng-duality.md#section-1) |
 | 소수별 아크사인 곱과 $S_1$의 극한분포 (가정 없음) | [Ng 쌍대 정리 1–2](docs/ng-duality.md#section-2-2) |
 | 영점 봉우리의 국소 극한과 Ng의 분산 | [Ng 쌍대 명제 5.1–5.2](docs/ng-duality.md#section-5-2) |
+| ψ의 극·영점 국소 핵과 M과의 비교 | [M과 ψ 명제 2.1, 표 (2.4)](docs/mertens-psi.md#section-2) |
 
 ## 검산
 
-Python을 사용한다. 핵심 문서의 검산은 mpmath를, [Ng 쌍대](docs/ng-duality.md#checks)의 검산은 numpy와 scipy를 쓴다.
+Python을 사용한다. 핵심 문서의 검산은 mpmath를, [Ng 쌍대](docs/ng-duality.md#checks)와 [M과 ψ](docs/mertens-psi.md#checks)의 검산은 numpy와 scipy를 쓴다.
 
 | 스크립트 | 확인 범위 |
 |:--|:--|
@@ -51,6 +53,7 @@ Python을 사용한다. 핵심 문서의 검산은 mpmath를, [Ng 쌍대](docs/n
 | [check_dual_product.py](scripts/check_dual_product.py) | Ng 쌍대 §2의 대칭 비틀기 항등식, 중심 원자 합, 소수별 아크사인 곱 |
 | [check_s1_distribution.py](scripts/check_s1_distribution.py) | Ng 쌍대 §3의 Littlewood 공식, 근사 오차, $S_1$의 분포와 왜도 |
 | [check_mertens_bridge.py](scripts/check_mertens_bridge.py) | Ng 쌍대 §5의 국소 극한, Plancherel 등식, $\lvert\zeta\rvert^{-2}$ 평균, Gonek 비율 |
+| [check_mertens_psi.py](scripts/check_mertens_psi.py) | M과 ψ의 합성곱 항등식, 소수별 동전, 네 국소 핵, $\arg\zeta$의 특성함수 |
 
     python -B scripts/check_global_formula.py
     python -B scripts/check_smoothed_formula.py
@@ -59,5 +62,6 @@ Python을 사용한다. 핵심 문서의 검산은 mpmath를, [Ng 쌍대](docs/n
     python -B scripts/check_dual_product.py
     python -B scripts/check_s1_distribution.py
     python -B scripts/check_mertens_bridge.py
+    python -B scripts/check_mertens_psi.py
 
 수치 검산은 증명을 대체하지 않는다. 주제별 부록의 기존 수치표는 계산 코드와 원자료가 없어 재현하지 않았으며, 위 스크립트의 검증 범위에 포함되지 않는다.
