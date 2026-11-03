@@ -2,18 +2,20 @@
 
 Run: python -B scripts/check_mertens_psi.py
 Zeta values come from the Euler-Maclaurin formula in double precision. The
-local kernels are checked at the first zero and at s = 1 only. These are
-consistency checks, not a proof.
+local kernels are checked at the first zero and at s = 1 only. Zeros for
+section 4 are located from sign changes of Hardy's Z up to height 400. These
+are consistency checks, not a proof.
 """
 
 import math
 import cmath
 
 import numpy as np
-from scipy.special import jv, poch, rgamma
+from scipy.special import jv, poch, psi as digamma, rgamma
 
 from check_dual_product import (BERNOULLI, divisor_function, primes_up_to,
                                 smallest_prime_factor, zeta_line)
+from check_ng_tail import zeros_up_to
 
 RHO_1 = 0.5 + 14.134725141734693j
 
@@ -208,12 +210,106 @@ def check_phase(sigma=2.0, alpha_max=3000.0, samples=60000):
         assert abs(empirical - product) < abs(empirical - leading)
 
 
+def band_limited_pair(big_p):
+    """g(u) = cos^4(pi u / 2X) on |u| < X = log P, and h(t) = int g(u) e^{iut} du."""
+    big_x = math.log(big_p)
+    terms = ((3 / 8, 0.0), (1 / 2, math.pi / big_x), (1 / 8, 2 * math.pi / big_x))
+
+    def g(u):
+        u = np.asarray(u, dtype=float)
+        inside = sum(c * np.cos(w * u) for c, w in terms)
+        return np.where(np.abs(u) < big_x, inside, 0.0)
+
+    def sinc_part(v):
+        v = np.asarray(v, dtype=complex)
+        small = np.abs(v) < 1e-12
+        return np.where(small, big_x, np.sin(v * big_x) / np.where(small, 1, v))
+
+    def h(t):
+        t = np.asarray(t, dtype=complex)
+        return sum(c * (sinc_part(t - w) + sinc_part(t + w)) for c, w in terms)
+
+    return g, h
+
+
+def prime_powers_below(big_p):
+    ns, lams = [], []
+    for p in primes_up_to(big_p):
+        p, q = int(p), int(p)
+        while q < big_p:
+            ns.append(q)
+            lams.append(math.log(p))
+            q *= p
+    return np.array(ns, dtype=float), np.array(lams)
+
+
+def theta_prime(t):
+    """theta'(t) = Re psi(1/4 + it/2)/2 - log(pi)/2 for the Riemann-Siegel theta."""
+    return 0.5 * digamma(0.25 + 0.5j * np.asarray(t)).real - 0.5 * math.log(math.pi)
+
+
+def check_explicit_formula(gammas, big_p=1000):
+    """(4.3) with h_{t0}(t) = h(t - t0) + h(t + t0): zero sum = primes below P."""
+    g, h = band_limited_pair(big_p)
+    ns, lams = prime_powers_below(big_p)
+    t = np.arange(0.0, 3000.0, 0.002)
+    print(f"(4.3) P={big_p}, zeros below 400 (tail negligible):")
+    for t0 in (0.0, 20.0, 50.0):
+        def shifted(s):
+            return h(s - t0) + h(s + t0)
+        zero_sum = 2 * shifted(gammas).sum().real
+        gamma_term = 2 / math.pi * np.trapezoid(shifted(t).real * theta_prime(t), t)
+        primes = 2 * np.sum(lams * ns ** -0.5 * 2 * g(np.log(ns)) * np.cos(t0 * np.log(ns)))
+        right = (shifted(0.5j) + shifted(-0.5j)).real + gamma_term - primes
+        print(f"    t0={t0:4}: zero sum {zero_sum:+.10f}, prime side {right:+.10f}")
+        assert abs(zero_sum - right) < 1e-9
+
+
+def smoothed_zero_density(big_p, ts):
+    """Right side of (4.3) for h_{t0}, with the Gamma term replaced by 4 theta'(t0)."""
+    g, h = band_limited_pair(big_p)
+    ns, lams = prime_powers_below(big_p)
+    logs = np.log(ns)
+    weights = lams * ns ** -0.5 * g(logs)
+    primes = np.concatenate([np.cos(np.outer(ts[i:i + 2000], logs)) @ weights
+                             for i in range(0, len(ts), 2000)])
+    pole = (h(0.5j - ts) + h(0.5j + ts) + h(-0.5j - ts) + h(-0.5j + ts)).real
+    return pole - 4 * primes + 4 * theta_prime(ts), h(0.0).real
+
+
+def check_zero_detection(gammas):
+    """Peaks of the prime-side density against the zeros (section 4 numerics)."""
+    print("(4.4) peaks of the smoothed zero density built from primes below P:")
+    for big_p, height in ((10 ** 4, 100.0), (10 ** 5, 300.0)):
+        ts = np.arange(10.0, height, 0.005)
+        density, top = smoothed_zero_density(big_p, ts)
+        inner = (density[1:-1] > density[:-2]) & (density[1:-1] > density[2:])
+        peaks = ts[1:-1][inner & (density[1:-1] > top / 2)]
+        for cut in sorted({min(height, 150.0), height}):
+            true = gammas[(gammas > 10.5) & (gammas < cut - 0.5)]
+            found = peaks[(peaks > 10.5) & (peaks < cut - 0.5)]
+            errors = np.array([np.abs(found - y).min() for y in true])
+            missed = true[errors > 0.3]
+            spurious = [p for p in found if np.abs(true - p).min() > 0.3]
+            print(f"    P=10^{round(math.log10(big_p))}, t<{cut:.0f}: {len(true)} zeros, "
+                  f"{len(found)} peaks, max error {errors[errors <= 0.3].max():.4f}, "
+                  f"missed {np.round(missed, 3).tolist()}, spurious {np.round(spurious, 2).tolist()}")
+            if cut <= 150:
+                assert len(missed) == 0 and not spurious and errors.max() < 0.02
+            else:
+                # The pair 294.965, 295.573 (gap 0.61) is below the resolution 2 pi / log P.
+                assert len(missed) == 2 and np.diff(missed)[0] < 2 * math.pi / math.log(big_p) * 1.2
+
+
 def main():
     check_identities()
     check_coins()
     check_kernels()
     check_local()
     check_phase()
+    gammas = zeros_up_to(400.0)
+    check_explicit_formula(gammas)
+    check_zero_detection(gammas)
 
 
 if __name__ == "__main__":
