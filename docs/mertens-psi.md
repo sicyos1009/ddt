@@ -1,6 +1,6 @@
 # M과 ψ: 코사인 핵과 사인 핵
 
-Mertens 함수 $M(x)=\sum_{n\le x}\mu(n)$과 Chebyshev 함수 $\psi(x)=\sum_{n\le x}\Lambda(n)$을 같은 이산핵 틀에서 비교한다. $M$은 지수 $(-\tfrac12,-\tfrac12)$에서, $\psi$는 $(-\tfrac12,\tfrac12)$에서 나온다. 소수마다 전자는 코사인 동전을, 후자는 사인 동전을 가지며, 두 함수의 극점·영점 성분은 모두 아크사인 핵에서 만들어진다. 절·명제·수식 번호는 이 문서 안에서 독립적이다.
+Mertens 함수 $M(x)=\sum_{n\le x}\mu(n)$과 Chebyshev 함수 $\psi(x)=\sum_{n\le x}\Lambda(n)$을 같은 이산핵 틀에서 비교한다. $M$은 지수 $(-\tfrac12,-\tfrac12)$에서, $\psi$는 $(-\tfrac12,\tfrac12)$에서 나온다. 소수마다 전자는 코사인 동전을, 후자는 사인 동전을 가지며, 두 함수의 극점·영점 성분은 모두 아크사인 핵에서 만들어진다. §4는 $\psi$ 쪽 소수핵으로 영점 측도를 정확히 쓴다. 절·명제·수식 번호는 이 문서 안에서 독립적이다.
 
 기호는 [주정리 §8](main-theorem.md#section-8)의 $d_z$, 이산핵 $\mathscr K_n^{z,w}$, 지수합 $\widetilde S_x^{z,w}(\xi)$를 따르고, 베타핵 $\mathcal K_{z,w}$와 그 변환 $\mathcal B_{z,w}(\xi)=\langle\mathcal K_{z,w},e^{i\xi u}\rangle$는 [주정리 §4](main-theorem.md#section-4)와 [주정리 (5.4)](main-theorem.md#equation-5-4)를 따른다. $L=\log x$, $\alpha=\xi/L$이고, $a(u)=1/(\pi\sqrt{u(1-u)})$는 아크사인 밀도, $\varepsilon=d_0$는 디리클레 합성곱의 항등원이다.
 
@@ -10,10 +10,12 @@ Mertens 함수 $M(x)=\sum_{n\le x}\mu(n)$과 Chebyshev 함수 $\psi(x)=\sum_{n\l
 | [명제 2.1](#section-2) | $\psi$의 극·영점 국소 핵, 1차에서는 정확 | **[국소 계산]** |
 | [표 (2.4)](#equation-2-4) | $M$과 $\psi$의 네 국소 핵을 아크사인 각도로 쓴 꼬리 | **[국소 계산]** |
 | [(3.2)](#section-3) | 사인 쪽의 주파수 판: $\arg\zeta$의 극한분포 | Bohr–Jessen, 가정 없음 |
+| [명제 4.1](#section-4) | 대역 제한 시험함수에서 영점합이 $P$ 아래 소수핵의 유한합과 같음 | Guinand–Weil, 가정 없음 |
 
 - [§1. 두 분해와 소수별 동전](#section-1)
 - [§2. 국소 핵](#section-2)
 - [§3. M과 ψ의 비교](#section-3)
+- [§4. 소수핵으로 쓴 영점 측도](#section-4)
 - [검산](#checks)
 - [참고 문헌](#references)
 
@@ -185,6 +187,83 @@ $$
 
 이다. 오른쪽은 [Ng 쌍대 (2.4)](ng-duality.md#equation-2-4)와 같은 중심 원자 합이고, 각 인수의 선도항은 아크사인 인수 $J_0(\eta p^{-\sigma})$이다.
 
+<a id="section-4"></a>
+
+## 4. 소수핵으로 쓴 영점 측도
+
+§2에서 $\psi$의 영점 성분은 진폭에 $\zeta'(\rho)$가 없고 중복도만 남았다. 같은 이유로 $\psi$ 쪽의 소수별 양은 영점 측도를 준다. 이 절에서는 $\theta_p=t\log p$로 쓴다.
+
+[Ng 쌍대 (2.3)](ng-duality.md#equation-2-3)의 $z=\tfrac12$ 동전 $Y_p(\sigma,t)=-\log\lvert1-p^{-\sigma}e^{-i\theta_p}\rvert=\sum_kp^{-k\sigma}\cos(k\theta_p)/k$에 대해, $\sigma>1$에서
+
+<a id="equation-4-1"></a>
+
+$$
+\sum_pY_p=\log|\zeta(\sigma+it)|,
+\qquad
+\sum_p\partial_\sigma Y_p=\Re\frac{\zeta'}{\zeta}(\sigma+it)=\partial_t\arg\zeta(\sigma+it)
+\tag{4.1}
+$$
+
+이다. 중복도 $m$인 영점 $\rho=\beta+i\gamma$ 근처에서 $\Re(\zeta'/\zeta)\approx m(\sigma-\beta)/\big((\sigma-\beta)^2+(t-\gamma)^2\big)$이므로, $\sigma\downarrow\beta$에서 넓이 $m\pi$인 Lorentz 봉우리가 생긴다. Riemann–von Mangoldt 공식 $N(t)=\theta(t)/\pi+1+S(t)$와 함께 보면 임계선 위 영점의 측도는 형식적으로
+
+<a id="equation-4-2"></a>
+
+$$
+dN(t)\;\approx\;\Big(\frac{\theta'(t)}\pi+\frac1\pi\sum_p\partial_\sigma Y_p(\tfrac12,t)\Big)dt,
+\qquad
+\theta'(t)=\tfrac12\Re\frac{\Gamma'}{\Gamma}\big(\tfrac14+\tfrac{it}2\big)-\tfrac12\log\pi
+\tag{4.2}
+$$
+
+이다. $\theta$는 Riemann–Siegel 세타 함수이다. 오른쪽 소수합은 $\sigma=\tfrac12$에서 수렴하지 않으므로, (4.2)는 아래 (4.3)의 형식적 판이다.
+
+**σ 방향의 계단.** [Ng 쌍대 §4.3](ng-duality.md#section-4-3)의 미분·누적 단계에 한 단을 더하면 다음과 같다. 마지막 열은 $\sigma=\tfrac12$에서 소수별 진폭의 제곱합이다.
+
+| 단계 | 소수별 양 | 합 | 성질 | 진폭 제곱합 |
+|:--|:--|:--|:--|:--|
+| $\int_{1/2}^\infty d\sigma$ | $\sum_k\cos(k\theta_p)/(k^2p^{k/2}\log p)$ | $\pi S_1(t)$ | 가정 없는 극한분포 ([Ng 쌍대 정리 2](ng-duality.md#section-3-2)) | $\sum_p1/(p\log^2p)<\infty$ |
+| 그대로 | $Y_p$ | $\log\lvert\zeta\rvert$ | $\sigma=\tfrac12$에서 퇴화, Selberg 중심극한정리 | $\sum_p1/p=\infty$ |
+| $\partial_\sigma$ | $-\log p\sum_kp^{-k\sigma}\cos(k\theta_p)$ | $\Re\zeta'/\zeta$ | 영점 측도, 시험함수로만 의미가 있음 | $\sum_p\log^2p/p=\infty$ |
+
+**명제 4.1 (Guinand–Weil, 대역 제한판).** $P\ge2$이고 $g$가 $[-\log P,\log P]$에 지지된 짝인 $C^2$ 함수이며 $h(t)=\int g(u)e^{iut}du$라 하자. 그러면
+
+<a id="equation-4-3"></a>
+
+$$
+\boxed{
+\sum_\rho h(\gamma_\rho)
+=h(\tfrac i2)+h(-\tfrac i2)
++\frac1\pi\int_{\mathbb R}h(t)\,\theta'(t)\,dt
+-2\sum_{n<P}\frac{\Lambda(n)}{\sqrt n}\,g(\log n)
+}
+\tag{4.3}
+$$
+
+이다. 왼쪽은 모든 비자명 영점 $\rho=\tfrac12+i\gamma_\rho$를 중복도와 함께 더하고, 임계선 밖 영점은 복소수 $\gamma_\rho$로 들어간다. RH를 쓰지 않는다.
+
+$\int h(t)\cos(t\log n)\,dt=2\pi g(\log n)$이므로 마지막 항은 $\frac1\pi\int h(t)\sum_{p^k<P}\partial_\sigma\big[p^{-k\sigma}\cos(k\theta_p)/k\big]_{\sigma=1/2}dt$이다. 즉 시험함수의 대역을 $\log P$로 제한하면 (4.2)의 소수합이 정확히 $P$ 아래에서 끊기고, 매끄럽게 한 영점 측도가 유한개 소수핵의 합과 같아진다. $h(\pm\tfrac i2)$는 완비 제타함수의 극 $s=0,1$에서 오며, $s=1$ 쪽이 §2의 $\psi$ 극 성분에 해당한다. $\theta'$ 항은 영점 밀도의 매끄러운 부분이다.
+
+**영점 찾기.** $h_{t_0}(t)=h(t-t_0)+h(t+t_0)$, 즉 $g$ 대신 $2g(u)\cos(t_0u)$를 넣으면
+
+<a id="equation-4-4"></a>
+
+$$
+\mathcal Z_P(t_0):=\sum_\rho\big[h(\gamma_\rho-t_0)+h(\gamma_\rho+t_0)\big]
+\tag{4.4}
+$$
+
+를 (4.3)의 오른쪽, 곧 $P$ 아래의 소수만으로 계산할 수 있다. $\mathcal Z_P$는 영점마다 높이 $h(0)$인 봉우리를 갖는다. 봉우리의 폭은 $1/\log P$에 비례하므로, 해상도는 $\log P$에 반비례해서만 좋아진다. 아래 시험함수 $g(u)=\cos^4(\pi u/2\log P)$에서는 봉우리 주엽의 반폭(첫 영점까지의 거리)이 $3\pi/\log P$이고, 간격이 이보다 꽤 작은 영점 쌍은 한 봉우리로 합쳐진다. 간격 $\delta$인 쌍을 가르려면 대략 $\log P\gtrsim3\pi/\delta$가 필요하다 **[휴리스틱]**.
+
+**[수치]** $g(u)=\cos^4(\pi u/2\log P)$로 둔다.
+
+- (4.3): $P=10^3$, $t_0=0,20,50$에서 높이 $400$ 아래 영점의 합과 소수 쪽이 $10^{-12}$ 안에서 일치한다.
+- (4.4): Γ 항을 $4g(0)\theta'(t_0)$로 근사하고 봉우리를 찾았다.
+  - $P=10^4$이면 높이 $100$ 아래 영점 29개를 모두 찾고, 위치 오차는 최대 $0.0044$이다.
+  - $P=10^5$이면 높이 $150$ 아래 52개를 모두 찾고, 최대 오차는 $0.0105$이다.
+  - $P=10^5$, 높이 $300$ 아래 137개 중에서는 간격 $0.61$인 쌍 $294.965$, $295.573$이 한 봉우리($295.27$)로 합쳐진다. 반폭 $3\pi/\log P=0.82$보다 좁은 쌍이다. 나머지 135개는 오차 $0.071$ 안에서 찾는다.
+
+**M 쪽.** 코사인 쪽에서는 [Ng 쌍대 명제 5.1](ng-duality.md#section-5-2)이 영점의 미분값을 준다. $\sigma\downarrow\tfrac12$에서 $\lvert1/(s\zeta(s))\rvert^2$의 봉우리 넓이가 $1/\lvert\rho\zeta'(\rho)\rvert^2$이다. $\sigma>1$에서는 $\lvert\zeta\rvert^{-2}=\prod_p(1-2p^{-\sigma}\cos\theta_p+p^{-2\sigma})$이지만, $\sigma\le1$에서는 이 곱을 점마다 쓸 수 없고 (4.3) 같은 유한 정확식도 없다. 차이는 덧셈꼴과 곱셈꼴에 있다. $\psi$는 $\log\zeta$의 미분이므로 소수에 대해 덧셈꼴이고, 명시공식의 반대쪽이 소수 거듭제곱에만 놓인다. $M$은 $1/\zeta$이므로 반대쪽이 $\mu(n)$, 즉 모든 제곱 인수 없는 정수이다. 그래서 영점의 위치와 중복도는 $\psi$ 쪽 소수핵으로 정확히 쓸 수 있고, 미분값은 $M$ 쪽에서 극한으로만 읽는다. 이는 [영점 기여 §4](zero-contributions.md#section-4)의 역할 분담, 즉 영점은 $\psi$에서 찾고 미분값은 따로 추정하는 방식과 같다.
+
 <a id="checks"></a>
 
 ## 검산
@@ -196,6 +275,7 @@ $$
 - (2.3)–(2.4): 모멘트 (4.2)로 계산한 $\mathcal B_{z,w}$와 Bessel 표현, 아크사인 평균 표현, 꼬리값의 $\vartheta$ 표현이 $10^{-14}$ 안에서 일치한다.
 - (2.1), (2.4): 첫 영점 $\rho_1$과 $s=1$ 주위의 윤곽 적분을 계산한다. $\xi=1,4$에서 네 성분의 상대오차는 $L=25$에서 $400$까지 $L$이 두 배가 될 때마다 반으로 줄어 $O(1/L)$을 따른다. (2.2)의 1차 미분은 $L$과 무관하게 $10^{-8}$ 안에서 정확하다.
 - (3.2): $\sigma=2$, $\alpha\in[0,3000]$에서 $e^{i\eta\arg\zeta}$의 경험적 평균과 ${}_2F_1$ 곱의 차이는 $\eta=2,5,10$에서 $2\times10^{-5}$–$10^{-4}$이다. $J_0$ 선도항만 쓰면 차이가 $10^{-3}$–$6\times10^{-3}$으로 커져 소수 거듭제곱 보정이 보인다.
+- (4.3)–(4.4): §4의 [수치] 항목. 영점은 Hardy $Z$ 함수의 부호 변화로 높이 $400$까지 구한다.
 
 이 수치 확인은 증명을 대체하지 않으며, 국소 핵은 하나의 영점에서만 확인했다.
 
@@ -208,3 +288,7 @@ $$
 - A. Selberg, An elementary proof of the prime-number theorem, Ann. of Math. (2) 50 (1949), 305–313: $\Lambda_2=\Lambda\log+\Lambda*\Lambda$와 대칭 공식 $\sum_{n\le x}\Lambda_2(n)=2x\log x+O(x)$.
 - H. Davenport, *Multiplicative Number Theory*, 3rd ed., GTM 74 (2000), 17장: $\psi(x)$의 명시공식.
 - H. Bohr, B. Jessen, Über die Werteverteilung der Riemannschen Zetafunktion, Acta Math. 54 (1930), 1–35; 58 (1932), 1–55: $\sigma>\tfrac12$에서 $\log\zeta(\sigma+it)$의 극한분포.
+- A. P. Guinand, A summation formula in the theory of prime numbers, Proc. London Math. Soc. (2) 50 (1948), 107–119: 영점합과 소수합의 합산 공식.
+- A. Weil, Sur les « formules explicites » de la théorie des nombres premiers, Comm. Sém. Math. Univ. Lund (1952), 252–265: 명시공식의 시험함수 형태.
+- H. Iwaniec, E. Kowalski, *Analytic Number Theory*, AMS Colloq. Publ. 53 (2004), §5.5: (4.3)의 형태와 시험함수 조건.
+- E. C. Titchmarsh, *The Theory of the Riemann Zeta-Function*, 2nd ed. (1986), §9.3: Riemann–von Mangoldt 공식 $N(t)=\theta(t)/\pi+1+S(t)$.
