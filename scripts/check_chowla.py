@@ -124,6 +124,55 @@ def check_square_coincidences(n_max=5000, h_max=60):
           f"max count/(tau/2) = {worst:.2f}")
 
 
+def squarefree_class(n, h):
+    """q_h(n) = n(n+h)/gcd(n,h)^2 (arrays allowed)."""
+    g = np.gcd(n, h)
+    return (n // g) * ((n + h) // g)
+
+
+def check_square_classes(mu):
+    """(1.6)-(1.8): square-class identity, layer densities, classification, a 4-point relation."""
+    m = mu.astype(np.int64)
+    for h in range(1, 31):
+        n = np.arange(1, 2001, dtype=np.int64)
+        ok = (m[n] != 0) & (m[n + h] != 0)
+        q = squarefree_class(n[ok], h)
+        assert np.all(m[q] == m[n[ok]] * m[n[ok] + h]), h
+    ps = prime_list(10 ** 6).astype(float)
+    worst = 0.0
+    s2, _, _ = densities(2000)
+    base = float(np.prod(1 - 2 / ps ** 2))
+    for h in range(1, 2001):
+        total = 0.0
+        for g in range(1, h + 1):
+            if h % g or mu[g] == 0:
+                continue
+            k = h // g
+            d = base
+            for p in prime_factors(g * k):
+                d /= 1 - 2 / p ** 2
+                d *= (1 - 1 / p) if k % p == 0 else (1 - 2 / p)
+            total += d / g
+        worst = max(worst, abs(total - s2[h]) / s2[h])
+    print(f"(1.6) mu(n)mu(n+h) = mu(q_h(n)) for n<=2000, h<=30; (1.7) S2(h) = sum_g mu^2(g) "
+          f"delta^[g](h/g)/g for h<=2000: max rel. error {worst:.1e}")
+    assert worst < 1e-12
+    count, bad = 0, 0
+    for k in range(2, 60):
+        vals = {}
+        for u in range(1, 2000):
+            vals.setdefault(u * (u + k), []).append(u)
+        for l in range(1, k):
+            for v in range(1, 2000):
+                for u in vals.get(v * (v + l), ()):
+                    count += 1
+                    bad += not (4 * u < k * k - l * l)
+    q = [n * (n + 1) for n in (2, 5, 6, 14)]
+    print(f"(1.8) u(u+k) = v(v+l), l<k<60, u,v<2000: {count} solutions, {bad} with u >= (k^2-l^2)/4; "
+          f"h=1, n=2,5,6,14: q = {q}, product = {math.isqrt(math.prod(q))}^2")
+    assert bad == 0 and math.isqrt(math.prod(q)) ** 2 == math.prod(q)
+
+
 def autocorrelation(a, h_max, x_cut):
     """C_h = sum_{n <= x_cut} a(n) a(n+h) for 0 <= h <= h_max (a indexed from 0)."""
     size = 1 << int(np.ceil(np.log2(2 * len(a))))
@@ -143,7 +192,7 @@ def check_variance_law(mu, h_max):
     z = c / np.sqrt(s2 * x)
     z[0] = np.nan
     sel = h >= 1
-    print(f"(1.5) N={big_n}, h<={h_max}: Var C_h/sqrt(S2 x) = {np.nanvar(z):.3f}, "
+    print(f"(1.1) N={big_n}, h<={h_max}: Var C_h/sqrt(S2 x) = {np.nanvar(z):.3f}, "
           f"kurtosis {stats.kurtosis(z[sel]):+.3f}")
     classes = {"h odd": h % 2 == 1, "4|h": h % 4 == 0, "9|h": h % 9 == 0,
                "3||h": (h % 3 == 0) & (h % 9 != 0)}
@@ -161,7 +210,7 @@ def check_variance_law(mu, h_max):
             return (1 - 1 / p) / (1 - 2 / p ** 2)
         return (1 - 2 / p) / (1 - 2 / p ** 2)
 
-    print("(1.6) covariance lattice E[z_ak z_bk]: empirical / predicted")
+    print("(1.5) covariance lattice E[z_ak z_bk]: empirical / predicted")
     for a, b in ((1, 2), (1, 3), (2, 3), (1, 5), (1, 4), (2, 9)):
         ks = np.arange(1, h_max // max(a, b) + 1)
         emp = float(np.mean(z[a * ks] * z[b * ks]))
@@ -436,6 +485,34 @@ def check_m4(mu, x0, seed=3):
     assert abs(rows[:, 0].mean() - 1) < 0.05 and abs(rows[:, 1].mean() - 2) < 0.25
 
 
+def class_keys(mu, x, y):
+    """Set of (k, q_k(b)) over b, b+k squarefree in (x, x+y], 0 < k < y; and whether q_k is injective."""
+    n = np.arange(x + 1, x + y + 1, dtype=np.int64)
+    a = n[mu[x + 1:x + y + 1] != 0]
+    keys, injective = set(), True
+    for k in range(1, y):
+        b = a[np.isin(a + k, a)]
+        q = squarefree_class(b, k)
+        injective &= len(np.unique(q)) == len(q)
+        keys.update(zip([k] * len(q), q.tolist()))
+    return keys, injective
+
+
+def check_multiplicative_m4(mu):
+    """Proposition 4.4 (2): for Rademacher f, (4.4)-(4.5) hold exactly when Y^2 <= X/4."""
+    rows = []
+    for x, y in ((10 ** 6, 500), (4 * 10 ** 6, 1000), (10 ** 4, 50)):
+        assert 4 * y * y <= x
+        ki, inj_i = class_keys(mu, x, y)
+        kj, inj_j = class_keys(mu, x + 3 * y, y)
+        rows.append(f"X={x}, Y={y}: q_k injective {inj_i and inj_j}, common keys of I and J {len(ki & kj)}")
+        assert inj_i and inj_j and not ki & kj
+    _, inj_short = class_keys(mu, 0, 15)
+    print("(4.4') " + "; ".join(rows) + f"; on (0,15] (Y^2 > X/4): injective {inj_short} "
+          "(6+10 = 1+15, 6*10*1*15 = 30^2)")
+    assert not inj_short
+
+
 # ---------------------------------------------------------------- section 4.4
 
 D_POLY = {2: (2, -1, 0), 3: (6, -9, 4, 0), 4: (24, -72, 82, -33, 0)}
@@ -699,6 +776,45 @@ def check_ladder_k3(mu, spf, x0, y, n_max, scan, seed=7):
     print(line)
 
 
+def coincidences(mu, x, y):
+    """Squarefree k=3 multisets in (x, x+y] with equal products; returns (Q, list of classes)."""
+    v = np.arange(x + 1, x + y + 1, dtype=np.int64)[mu[x + 1:x + y + 1] != 0]
+    q = len(v)
+
+    def chunks():
+        for i in range(q):
+            j, l = np.triu_indices(q - i)
+            yield i, j + i, l + i, v[i] * v[j + i] * v[l + i]
+
+    keys = np.concatenate([c[3] for c in chunks()])
+    keys.sort()
+    dup = np.unique(keys[1:][keys[1:] == keys[:-1]])
+    del keys
+    found = {}
+    for i, j, l, key in chunks():
+        hit = np.isin(key, dup)
+        for jj, ll, kk in zip(j[hit], l[hit], key[hit]):
+            found.setdefault(int(kk), []).append((int(v[i]), int(v[jj]), int(v[ll])))
+    return q, list(found.values())
+
+
+def check_top_rung(mu):
+    """Proposition 4.8: the top rung is not exactly diagonal at Y = 2 sqrt X, but nearly so."""
+    u, w = (100061, 100317, 100558), (100147, 100191, 100598)
+    assert math.prod(u) == math.prod(w) and all(mu[n] != 0 for n in u + w) and not set(u) & set(w)
+    grid = [[math.gcd(a, b) for b in w] for a in u]
+    print(f"(4.12) {'*'.join(map(str, u))} = {'*'.join(map(str, w))}, all squarefree; gcd matrix {grid}")
+    for x, c in ((10 ** 5, 2), (2.5 * 10 ** 5, 2), (10 ** 6, 1)):
+        x = int(x)
+        y = int(c * math.sqrt(x))
+        q, classes = coincidences(mu, x, y)
+        proper = sum(1 for cl in classes for s, t in itertools.combinations(cl, 2) if not set(s) & set(t))
+        print(f"      X={x}, Y={y} (c={c}): Q={q}, {len(classes)} products shared by two squarefree "
+              f"triples, {proper} with no common element; D_3(Q) = {diag_poly(q, 3):.2e}, "
+              f"Y^4/X = {y ** 4 / x:.0f}")
+        assert len(classes) <= y ** 4 / x
+
+
 # ---------------------------------------------------------------- section 5
 
 def d_half(a):
@@ -924,6 +1040,7 @@ def main():
     print(f"N = {big_n}, M(N) = {int(mu.astype(np.int64).sum())}")
     check_exact_identities(mu)
     check_square_coincidences()
+    check_square_classes(mu)
     check_variance_law(mu, 200_000 if full else 20_000)
     check_pole_functional()
     check_no_zero_lines(mu, 1000 if full else 300)
@@ -931,7 +1048,9 @@ def main():
     check_ou(mu, 1000 if full else 300)
     check_short_interval_lemma()
     check_m4(mu, 10_000_000 if full else 1_000_000)
+    check_multiplicative_m4(mu)
     check_moment_ladder(mu)
+    check_top_rung(mu)
     check_sign_model()
     check_m2k(mu, spf, 10_000_000 if full else 1_000_000)
     check_ladder_k3(mu, spf, 10_000_000 if full else 1_000_000, 80 if full else 50, 20_000,
