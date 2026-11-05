@@ -9,11 +9,13 @@ identities are asserted exactly; statistical checks use tolerances in units of
 the empirical standard error. These are consistency checks, not a proof.
 """
 
+import itertools
 import math
 import sys
+from fractions import Fraction
 
 import numpy as np
-from scipy import stats
+from scipy import sparse, stats
 from scipy.special import poch, rgamma
 
 GAMMAS = [14.134725, 21.022040, 25.010858, 30.424876, 32.935062,
@@ -434,6 +436,269 @@ def check_m4(mu, x0, seed=3):
     assert abs(rows[:, 0].mean() - 1) < 0.05 and abs(rows[:, 1].mean() - 2) < 0.25
 
 
+# ---------------------------------------------------------------- section 4.4
+
+D_POLY = {2: (2, -1, 0), 3: (6, -9, 4, 0), 4: (24, -72, 82, -33, 0)}
+
+
+def diag_count(q, k):
+    """D_k(Q) = (k!)^2 [z^k] (sum_{m<=k} z^m/(m!)^2)^Q, computed exactly."""
+    base = [Fraction(1, math.factorial(m) ** 2) for m in range(k + 1)]
+    out = [Fraction(1)] + [Fraction(0)] * k
+    for _ in range(q):
+        out = [sum(out[i] * base[j - i] for i in range(j + 1)) for j in range(k + 1)]
+    return int(out[k] * math.factorial(k) ** 2)
+
+
+def diag_poly(q, k):
+    return np.polyval(np.array(D_POLY[k], dtype=np.float64), np.asarray(q, dtype=np.float64))
+
+
+def check_moment_ladder(mu):
+    """Theorem 4.5: rung r separates equal power sums p_1..p_r; top rung is a rearrangement."""
+    cases = ((2, 1, 4000, 31), (3, 1, 4000, 29), (4, 1, 20000, 45),
+             (3, 2, 10 ** 6, 50), (4, 2, 10 ** 7, 60), (4, 3, 10 ** 9, 25))
+    for k, r, x, y in cases:
+        ms = np.array(list(itertools.combinations_with_replacement(range(1, y + 1), k)), dtype=np.int64)
+        base = x ** k
+        v = [math.prod(int(x + m) for m in row) - base for row in ms]
+        keys = np.stack([(ms ** j).sum(1) for j in range(1, r + 1)], 1)
+        eta = k * r * y ** (r + 1) / ((r + 1) * (x - y))
+        kept, spread = {}, 0.0
+        for key, val in zip(map(tuple, keys.tolist()), v):
+            lo, hi = kept.get(key, (val, val))
+            kept[key] = (min(lo, val), max(hi, val))
+        for lo, hi in kept.values():
+            spread = max(spread, math.log1p((hi - lo) / (lo + base)))
+        order = sorted(range(len(v)), key=v.__getitem__)
+        ks = keys[order]
+        vs = [v[i] for i in order]
+        cut = np.nonzero(np.any(ks[1:] != ks[:-1], axis=1))[0]
+        gap = min(math.log1p((vs[i + 1] - vs[i]) / (vs[i] + base)) for i in cut)
+        print(f"(4.7) k={k}, r={r}, X={x}, Y={y}: eta={eta:.3f}; equal p_1..p_r: |lambda| X^r <= "
+              f"{spread * x ** r:.2e} (bound {eta / r:.2e}); otherwise >= {gap * x ** r:.3f} "
+              f"(bound {(1 - eta) / r:.3f})")
+        assert eta < 1 / 3 and spread * x ** r <= eta / r and gap * x ** r >= (1 - eta) / r
+    x, y, k = 10 ** 6, 500, 3
+    vals = [int(n) for n in range(x + 1, x + y + 1) if mu[n] != 0]
+    seen, bad = {}, 0
+    for c in itertools.combinations_with_replacement(vals, k):
+        p = math.prod(c)
+        bad += p in seen
+        seen[p] = c
+    print(f"(4.8) X={x}, Y={y} (Y^3 > X): {len(vals)} squarefree n, {bad} products n1n2n3 = n4n5n6 "
+          f"that are not rearrangements")
+    assert bad == 0
+
+
+def brute_sign_mean(a_set, k, r):
+    """E_eps V_{k,r} for independent signs on a_set: count (n,n') with equal p_1..p_r, even multiplicities."""
+    idx = {v: i for i, v in enumerate(a_set)}
+    groups = {}
+    for t in itertools.product(a_set, repeat=k):
+        par = [0] * len(a_set)
+        for v in t:
+            par[idx[v]] ^= 1
+        key = (tuple(sum(v ** j for v in t) for j in range(1, r + 1)), tuple(par))
+        groups[key] = groups.get(key, 0) + 1
+    return sum(c * c for c in groups.values())
+
+
+def additive_counts(a_set):
+    """E*(A) (distinct a+b=c+d, ordered) and AP3(A) = #{(a,b,c): b != c, b+c = 2a}."""
+    a = np.zeros(max(a_set) + 1, dtype=np.int64)
+    a[list(a_set)] = 1
+    r2 = np.convolve(a, a)
+    q = len(a_set)
+    ap3 = int(sum(r2[2 * v] for v in a_set)) - q
+    return int((r2 ** 2).sum()) - (2 * q * q - q) - 2 * ap3, ap3
+
+
+def shifted_model3(a2, thetas):
+    """Proposition 4.6 (2): perm G - sum |G_jl|^2 + 4Q with G_jl = sum a2_m e(m(theta_j - theta_l))."""
+    m = np.arange(a2.shape[-1])
+    g = [[a2 @ np.exp(2j * np.pi * m * (tj - tl)) for tl in thetas] for tj in thetas]
+    perm = sum(g[0][s[0]] * g[1][s[1]] * g[2][s[2]] for s in itertools.permutations(range(3)))
+    return perm.real - sum(np.abs(g[j][l]) ** 2 for j in range(3) for l in range(3)) + 4 * a2.sum(-1)
+
+
+def check_sign_model(seed=2):
+    """Proposition 4.6: exact independent-sign means, by enumeration over small sets."""
+    for q, k in ((0, 2), (1, 3), (5, 4), (9, 3), (12, 4)):
+        assert diag_count(q, k) == round(diag_poly(q, k))
+    rng = np.random.default_rng(seed)
+    for _ in range(5):
+        a_set = sorted(rng.choice(np.arange(1, 41), int(rng.integers(5, 9)), replace=False).tolist())
+        q = len(a_set)
+        e_star, ap3 = additive_counts(a_set)
+        for k, r in ((2, 1), (3, 1), (3, 2), (4, 1), (4, 2)):
+            want = diag_count(q, k) + (9 * e_star + 6 * ap3 if (k, r) == (4, 1) else 0)
+            assert brute_sign_mean(a_set, k, r) == want, (a_set, k, r)
+    worst = 0.0
+    for _ in range(4):
+        y, size = 24, 128
+        a2 = np.zeros(y)
+        a2[rng.choice(y, 9, replace=False)] = 1
+        supp = np.nonzero(a2)[0]
+        th = [0.0] + rng.random(2).tolist()
+        mean = 0.0
+        for signs in itertools.product((-1.0, 1.0), repeat=len(supp)):
+            a = np.zeros(y)
+            a[supp] = signs
+            vals = np.ones(size)
+            for t in th:
+                vals *= np.abs(np.fft.fft(a * np.exp(2j * np.pi * np.arange(y) * t), size)) ** 2
+            mean += vals.mean()
+        mean /= 2 ** len(supp)
+        worst = max(worst, abs(mean - shifted_model3(a2, th)) / mean)
+    print(f"(4.9) independent signs: E V_(k,r) = D_k(Q) (+9E*+6AP3 at k=4, r=1) on 5 random sets; "
+          f"shifted k=3 formula exact to {worst:.0e}")
+    assert worst < 1e-12
+
+
+def sign_models(mu, spf, seed):
+    """mu, independent signs on squarefree n, and a Rademacher random multiplicative function, on [0, N]."""
+    big_n = len(mu) - 1
+    rng = np.random.default_rng(seed)
+    sq = mu != 0
+    indep = rng.choice(np.array([-1, 1], dtype=np.int8), size=big_n + 1) * sq
+    eps_p = rng.choice(np.array([-1, 1], dtype=np.int8), size=big_n + 1)
+    mult = np.ones(big_n + 1, dtype=np.int8)
+    m = np.arange(big_n + 1, dtype=np.int64)
+    m[0] = 1
+    while True:
+        act = np.nonzero(m > 1)[0]
+        if len(act) == 0:
+            break
+        p = spf[m[act]].astype(np.int64)
+        mult[act] *= eps_p[p]
+        m[act] //= p
+    return {"mu": mu, "independent": indep.astype(np.int8), "multiplicative": (mult * sq).astype(np.int8)}
+
+
+TRIPLES = {"0,0,0": (0.0, 0.0, 0.0), "0,0,1/4": (0.0, 0.0, 0.25), "0,1/4,1/2": (0.0, 0.25, 0.5),
+           "0,1/9,2/9": (0.0, 1 / 9, 2 / 9), "0,1/4,1/9": (0.0, 0.25, 1 / 9),
+           "generic": (0.0, 0.318309886, 0.123456789)}
+
+
+def check_m2k(mu, spf, x0, seed=7):
+    """Conjecture 4.7: 2k-th moments (k=2,3,4) and shifted sixth moments against the sign model."""
+    big_n = len(mu) - 1
+    y = int(math.sqrt(x0) / 2)
+    starts = intervals(big_n, x0, y)
+    seqs = sign_models(mu, spf, seed)
+    size = 1 << int(np.ceil(np.log2(4 * y)))
+    m = np.arange(y)
+    thetas = sorted({t for tr in TRIPLES.values() for t in tr})
+    phase = {t: np.exp(2j * np.pi * m * t) for t in thetas}
+    sq = mu != 0
+    names = list(seqs)
+    rows = {(nm, key): [] for nm in names for key in ["k2", "k3", "k4"] + list(TRIPLES)}
+    model = {key: [] for key in ["k2", "k3", "k4"] + list(TRIPLES)}
+    qs = []
+    for b0 in range(0, len(starts), 400):
+        idx = starts[b0:b0 + 400, None] + 1 + m[None, :]
+        a2 = sq[idx].astype(np.float64)
+        q = a2.sum(1)
+        qs.extend(q.tolist())
+        f2 = np.fft.rfft(a2, size, axis=1)
+        r2 = np.rint(np.fft.irfft(f2 * f2, size, axis=1))
+        ap3 = np.array([r2[i, 2 * m[a2[i] > 0]].sum() for i in range(len(q))]) - q
+        e_star = (r2 ** 2).sum(1) - (2 * q * q - q) - 2 * ap3
+        model["k2"].extend(diag_poly(q, 2).tolist())
+        model["k3"].extend(diag_poly(q, 3).tolist())
+        model["k4"].extend((diag_poly(q, 4) + 9 * e_star + 6 * ap3).tolist())
+        for key, tr in TRIPLES.items():
+            model[key].extend(shifted_model3(a2, tr).tolist())
+        for nm in names:
+            a = seqs[nm][idx].astype(np.float64)
+            s2 = {t: np.abs(np.fft.fft(a * phase[t], size, axis=1)) ** 2 for t in thetas}
+            for k in (2, 3, 4):
+                rows[(nm, f"k{k}")].extend((s2[0.0] ** k).mean(1).tolist())
+            for key, tr in TRIPLES.items():
+                rows[(nm, key)].extend((s2[tr[0]] * s2[tr[1]] * s2[tr[2]]).mean(1).tolist())
+    qs = np.array(qs)
+    print(f"(4.10) Y={y}, {len(starts)} intervals: int|S_I|^(2k) / exact sign-model mean "
+          "(mean, SE, sd over intervals)")
+    for k in (2, 3, 4):
+        mk = np.array(model[f"k{k}"])
+        line = f"    k={k}: "
+        for nm in names:
+            v = np.array(rows[(nm, f"k{k}")]) / mk
+            se = v.std() / math.sqrt(len(v))
+            line += f"{nm} {v.mean():.5f} (SE {se:.5f}, sd {v.std():.3f})  "
+            assert abs(v.mean() - 1) < 4 * se + 1e-3
+        print(line)
+    print("(4.10) shifted sixth moments: model/Q^3 and (int prod|S(a+theta_j)|^2 - model)/Q^3")
+    for key in TRIPLES:
+        mk = np.array(model[key])
+        line = f"    theta=({key:9s}): model/Q^3 {np.mean(mk / qs ** 3):.4f};"
+        for nm in names:
+            d = (np.array(rows[(nm, key)]) - mk) / qs ** 3
+            se = d.std() / math.sqrt(len(d))
+            line += f"  {nm} {d.mean():+.5f} (SE {se:.5f})"
+            assert abs(d.mean()) < 4 * se + 1e-3
+        print(line)
+
+
+def rung1_ratio(seq, starts, y, k):
+    """int |S_I|^(2k) / D_k(Q_I) on (s, s+y] for every start s (exact integer coefficients)."""
+    size = 1 << int(np.ceil(np.log2(k * y)))
+    out = []
+    for b0 in range(0, len(starts), 20000):
+        idx = starts[b0:b0 + 20000, None] + 1 + np.arange(y)[None, :]
+        a = seq[idx].astype(np.float64)
+        c = np.rint(np.fft.irfft(np.fft.rfft(a, size, axis=1) ** k, size, axis=1))
+        out.append((c * c).sum(1) / diag_poly((a != 0).sum(1), k))
+    return np.concatenate(out)
+
+
+def check_ladder_k3(mu, spf, x0, y, n_max, scan, seed=7):
+    """Theorem 4.5 at k=3 on (X, X+Y]: rung 1 int|S|^6, rung 2 (equal p1, p2), rung 3 = D_3(Q)."""
+    big_n = len(mu) - 1
+    assert 6 * y ** 3 < x0 - y and y ** 3 <= x0
+    seqs = sign_models(mu, spf, seed)
+    seqs = {"mu": seqs["mu"], "mu^2": (mu != 0).astype(np.int8), "independent": seqs["independent"]}
+    starts = intervals(big_n, x0, y)
+    sub_starts = starts[::max(1, len(starts) // n_max)]
+    ms = np.array(list(itertools.combinations_with_replacement(range(y), 3)), dtype=np.int64)
+    perms = np.array([6 // math.prod(math.factorial(c) for c in np.unique(r, return_counts=True)[1])
+                      for r in ms], dtype=np.float64)
+    _, gid, gsize = np.unique(ms.sum(1) * (3 * y * y + 1) + (ms ** 2).sum(1),
+                              return_inverse=True, return_counts=True)
+    sub = np.nonzero(gsize[gid] > 1)[0]
+    _, gsub = np.unique(gid[sub], return_inverse=True)
+    incidence = sparse.csr_matrix((np.ones(len(sub)), (gsub, np.arange(len(sub)))))
+    print(f"(4.11) k=3 ladder, Y={y}: rung 1 on all {len(starts)} intervals, rung 2 on {len(sub_starts)}; "
+          f"{len(ms)} multisets, {len(sub)} in (p1,p2) classes with more than one member")
+    for nm, seq in seqs.items():
+        r1 = rung1_ratio(seq, starts, y, 3)
+        rung2, qs = [], []
+        for b0 in range(0, len(sub_starts), 200):
+            idx = sub_starts[b0:b0 + 200, None] + 1 + np.arange(y)[None, :]
+            a = seq[idx].astype(np.float64)
+            qs.extend((a != 0).sum(1).tolist())
+            x = perms[sub] * a[:, ms[sub, 0]] * a[:, ms[sub, 1]] * a[:, ms[sub, 2]]
+            rung2.extend((((incidence @ x.T) ** 2).sum(0) - (x * x).sum(1)).tolist())
+        r2 = np.array(rung2) / diag_poly(np.array(qs), 3)
+        se1, se2 = r1.std() / math.sqrt(len(r1)), r2.std() / math.sqrt(len(r2))
+        print(f"    {nm:11s}: rung 1 V31/D3 = {r1.mean():.4f} (SE {se1:.4f}); rung 2 (V32-D3)/D3 = "
+              f"{r2.mean():+.1e} (SE {se2:.1e}); rung 3 = 1")
+        if nm == "mu^2":
+            assert r2.mean() > 0.1
+        else:
+            assert abs(r1.mean() - 1) < 4 * se1 + 1e-3 and abs(r2.mean()) < 4 * se2 + 1e-5
+    line = "    rung 1 on all intervals, other Y (mu / independent):"
+    for yy in scan:
+        st = intervals(big_n, x0, yy)
+        v = {nm: rung1_ratio(seqs[nm], st, yy, 3) for nm in ("mu", "independent")}
+        line += f"  Y={yy}: " + " / ".join(f"{x.mean():.4f}" for x in v.values()) \
+            + f" (SE {v['mu'].std() / math.sqrt(len(st)):.4f})"
+        for x in v.values():
+            assert abs(x.mean() - 1) < 4 * x.std() / math.sqrt(len(st)) + 1e-3
+    print(line)
+
+
 # ---------------------------------------------------------------- section 5
 
 def d_half(a):
@@ -666,6 +931,11 @@ def main():
     check_ou(mu, 1000 if full else 300)
     check_short_interval_lemma()
     check_m4(mu, 10_000_000 if full else 1_000_000)
+    check_moment_ladder(mu)
+    check_sign_model()
+    check_m2k(mu, spf, 10_000_000 if full else 1_000_000)
+    check_ladder_k3(mu, spf, 10_000_000 if full else 1_000_000, 80 if full else 50, 20_000,
+                    (20, 200) if full else (20, 120))
     check_kernel_coins()
     check_dirichlet_limit(mu, spf)
     x_kernel = 10_000_000 if full else 1_000_000
