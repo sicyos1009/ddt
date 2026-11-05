@@ -9,6 +9,7 @@ Mertens 함수 $M(x)=\sum_{n\le x}\mu(n)$과 Chebyshev 함수 $\psi(x)=\sum_{n\l
 | [명제 1.1](#section-1) | $d_{-1/2}*d_{1/2}=\varepsilon$의 로그 모멘트와 $\Lambda$, $\Lambda_2$ | 정확한 항등식 |
 | [명제 2.1](#section-2) | $\psi$의 극·영점 국소 핵, 1차에서는 정확 | **[국소 계산]** |
 | [표 (2.4)](#equation-2-4) | $M$과 $\psi$의 네 국소 핵을 아크사인 각도로 쓴 꼬리 | **[국소 계산]** |
+| [명제 2.2](#proposition-2-2) | $M$과 $\psi$의 영점 성분을 선분 위 아크사인 가중 적분으로 쓴 표현, $M$의 $1/L$ 전개 (2.7) | (2.5)는 정확한 항등식(단순 영점), (2.7)은 점근 전개 |
 | [(3.2)](#section-3) | 사인 쪽의 주파수 판: $\arg\zeta$의 극한분포 | Bohr–Jessen, 가정 없음 |
 | [명제 4.1](#section-4) | 대역 제한 시험함수에서 영점합이 $P$ 아래 소수핵의 유한합과 같음 | Guinand–Weil, 가정 없음 |
 
@@ -151,9 +152,82 @@ $\vartheta=\arccos(2v-1)\in(0,\pi)$로 두면 아크사인 분포는 $\vartheta$
 | $\psi$의 극 | $x/L$ | $\mathcal K_{-1/2,1/2}=[(1-u)a]'$ | $-\tan(\vartheta/2)/\pi$ |
 | $\psi$의 영점 | $x^\rho/(\rho L)$ | $\mathcal K_{1/2,-1/2}=-(ua)'$ | $\cot(\vartheta/2)/\pi$ |
 
-$M$의 두 줄은 [전역 공식 (1.18)–(1.19)](global-formula.md#equation-1-18)이다. $T$는 분포의 꼬리값이며, 산술 꼬리합의 점근식을 주지는 않는다.
+$M$의 두 줄은 [전역 공식 (1.18)–(1.19)](global-formula.md#equation-1-18)이다. 두 영점 줄은 [명제 2.2](#proposition-2-2)의 정확한 선분 표현에서 $R\equiv1$로 둔 것이기도 하다. $T$는 분포의 꼬리값이며, 산술 꼬리합의 점근식을 주지는 않는다.
 
 **2차 모멘트.** $\langle\mathcal K_{-1/2,1/2},u^2\rangle=-\tfrac14$이므로 (1.3)과 극 성분에서 $\sum_{n\le x}(\tfrac14\Lambda_2-\tfrac34\Lambda\log n)$의 주항은 $-\tfrac14xL$이다. 이는 Selberg 공식 $\sum_{n\le x}\Lambda_2(n)=2xL+O(x)$와 $\sum_{n\le x}\Lambda(n)\log n=xL+O(x)$의 조합과 맞는다. 영점 쪽 2차 계수는 $\langle\mathcal K_{1/2,-1/2},u^2\rangle=\tfrac34$이며, 1차와 달리 $O(x^{\Re\rho}/L^2)$의 보정을 가진다.
+
+<a id="proposition-2-2"></a>
+
+**선분 표현.** 명제 2.1과 표 (2.4)의 영점 핵은 $L\to\infty$에서의 국소 근사이다. 단순 영점에서는 윤곽을 선분 위로 줄여 정확한 식을 얻는다. $M$의 Perron 피적분함수 $h_{x,\alpha}(s)=\zeta(s-i\alpha)^{-1/2}\zeta(s)^{-1/2}x^s/s$([주정리 (8.15)](main-theorem.md#equation-8-15))도 쌍 $\{\rho,\rho+i\alpha\}$에서 지수 합이 정수 $-1$이다. 그러므로 $g_{x,\alpha}$와 같이 선분을 제거한 영역에서 일가인 가지를 오른쪽의 Euler 가지에 맞추고
+
+$$
+\mathcal I^M_\rho(x,\xi)=\frac1{2\pi i}\int_{\Gamma_\rho}h_{x,\alpha}(s)\,ds
+$$
+
+로 둔다. $\alpha=0$이면 $h_{x,0}=x^s/(s\zeta(s))$이다.
+
+**명제 2.2 (영점 성분의 선분 표현).** $\rho$를 단순 영점이라 하고, 닫힌 선분 $[\rho-i|\alpha|,\rho+i|\alpha|]$ 위에 $\rho$ 외의 영점이 없다고 하자. $f(s)=\zeta(s)/(s-\rho)$, $s_u=\rho+i\alpha u$로 쓰면
+
+<a id="equation-2-5"></a>
+
+$$
+\mathcal I^M_\rho(x,\xi)=\frac{x^\rho}{\rho\,\zeta'(\rho)}\int_0^1a(u)\,e^{i\xi u}R_\alpha(u)\,du,
+\qquad
+\mathcal I^\psi_\rho(x,\xi)=\frac{x^\rho}{\rho}\cdot\frac{i\xi}L\int_0^1u\,a(u)\,e^{i\xi u}R^\psi_\alpha(u)\,du
+\tag{2.5}
+$$
+
+이다. 여기서
+
+<a id="equation-2-6"></a>
+
+$$
+R_\alpha(u)=\frac{\rho}{s_u}\cdot\frac{\zeta'(\rho)}{\sqrt{f(s_u)\,f(s_u-i\alpha)}},
+\qquad
+R^\psi_\alpha(u)=\frac{\rho}{s_u}\sqrt{\frac{f(s_u)}{f(s_u-i\alpha)}}
+\tag{2.6}
+$$
+
+이고, 제곱근은 $(\alpha,u)$에 대해 연속이며 $\alpha=0$에서 각각 $\zeta'(\rho)$, $1$이 되는 가지이다. 따라서 $R_0=R^\psi_0\equiv1$이다.
+
+$x^{s_u}=x^\rho e^{i\xi u}$이므로 선분의 매개변수 $u$가 곧 약수 좌표이다. $M$의 아크사인 밀도는 선분 양 끝에 놓인 지수 $-\tfrac12$의 두 분기점에서 나온다. $\psi$에서는 $s=\rho$ 쪽의 지수가 $+\tfrac12$로 바뀌어 무게가 $u\,a(u)=\pi^{-1}\sqrt{u/(1-u)}$가 된다. $R\equiv1$로 두면 (2.5)는 표 (2.4)의 두 영점 줄 $\frac{x^\rho}{\rho\zeta'(\rho)}\mathcal B_{1/2,1/2}(\xi)$와 $\frac{x^\rho}{\rho L}\mathcal B_{1/2,-1/2}(\xi)$가 된다([주정리 (4.6)](main-theorem.md#equation-4-6), (2.3)). (2.5)는 $L$에 대한 극한식이 아니며, $\rho_1$에서는 $|\alpha|<\gamma_2-\gamma_1\approx6.89$이면 성립한다.
+
+**증명.** 선분 근방에서 $\zeta(s)\zeta(s-i\alpha)=(s-\rho)(s-\rho-i\alpha)f(s)f(s-i\alpha)$이고, 가정에 의해 $f(s)f(s-i\alpha)$는 선분 근방에서 영이 아니다. $Q(s)=[(s-\rho)(s-\rho-i\alpha)]^{-1/2}$를 선분 밖에서 일가이고 무한대에서 $1/(s-\rho)$처럼 행동하는 가지로 잡는다. $\Gamma_\rho$ 위에서 $h_{x,\alpha}$와 $Q\,[f(s)f(s-i\alpha)]^{-1/2}x^s/s$는 제곱이 같은 일가함수이므로 부호만 다를 수 있다. $\Gamma_\rho$에서 선분 오른쪽의 한 점을 잡으면 두 값은 모두 $\alpha$에 대해 연속이고, $\alpha=0$에서는 둘 다 $x^s/(s\zeta(s))$이다. 따라서 부호는 $+$이다.
+
+선분 근방에서 해석적인 $\Psi$에 대해 $\Gamma_\rho$를 선분으로 줄인다. 끝점의 특이성은 $|s-\rho|^{-1/2}$, $|s-\rho-i\alpha|^{-1/2}$ 정도이므로 끝점을 감싸는 작은 원의 기여는 사라진다. 선분 위에서는 $(s_u-\rho)(s_u-\rho-i\alpha)=\alpha^2u(1-u)>0$이므로 양쪽 경계값은 $\pm\big(|\alpha|\sqrt{u(1-u)}\big)^{-1}$이다. 따라서 $\Psi$와 무관한 상수 $c$에 대해 $\frac1{2\pi i}\int_{\Gamma_\rho}Q\Psi\,ds=c\int_0^1\Psi(s_u)\,du/\sqrt{u(1-u)}$이다. $\Psi\equiv1$이면 $\Gamma_\rho$를 무한히 키울 수 있어 왼쪽이 $1$이므로 $c=1/\pi$이고,
+
+$$
+\frac1{2\pi i}\int_{\Gamma_\rho}Q(s)\Psi(s)\,ds=\int_0^1a(u)\,\Psi(s_u)\,du
+$$
+
+이다. $\Psi(s)=[f(s)f(s-i\alpha)]^{-1/2}x^s/s$를 넣으면 (2.5)의 첫 식을 얻는다.
+
+$\psi$에서는 $Q^\psi(s)=(s-\rho)^{1/2}(s-\rho-i\alpha)^{-1/2}$를 무한대에서 $1$에 가까운 가지로 잡고, 부호는 앞과 같이 $\alpha=0$에서 정한다. 선분 위의 경계값은 $\pm i\sqrt{u/(1-u)}$이므로 같은 논증으로 $\frac1{2\pi i}\int_{\Gamma_\rho}Q^\psi\Psi\,ds=c^\psi\int_0^1\sqrt{u/(1-u)}\,\Psi(s_u)\,du$이다. 무한대에서 $Q^\psi=1+\tfrac{i\alpha}2(s-\rho)^{-1}+O(|s|^{-2})$이므로 $\Psi\equiv1$일 때 왼쪽은 $i\alpha/2$이고, $c^\psi=i\alpha/\pi$이다. 즉 $\frac1{2\pi i}\int_{\Gamma_\rho}Q^\psi\Psi\,ds=i\alpha\int_0^1u\,a(u)\Psi(s_u)\,du$이다. $\Psi(s)=[f(s)/f(s-i\alpha)]^{1/2}x^s/s$를 넣고 $\alpha=\xi/L$을 쓰면 둘째 식이다. $\square$
+
+**$1/L$ 전개.** $f'(\rho)/f(\rho)=\zeta''(\rho)/(2\zeta'(\rho))=:\kappa_\rho$이므로 (2.6)에서 $u$에 균등하게
+
+$$
+R_\alpha(u)=1-i\alpha\Big[\frac u\rho+\Big(u-\frac12\Big)\kappa_\rho\Big]+O_\rho(\alpha^2)
+$$
+
+이다. $-i\xi\langle T,e^{i\xi u}\rangle=\langle T',e^{i\xi u}\rangle$와 $(ua)'=-\mathcal K_{1/2,-1/2}$, $\big((u-\tfrac12)a\big)'=\mathcal K_{-1/2,-1/2}$를 쓰면 $|\xi|\le R$에서
+
+<a id="equation-2-7"></a>
+
+$$
+\mathcal I^M_\rho(x,\xi)=\frac{x^\rho}{\rho\,\zeta'(\rho)}\Big[\mathcal B_{1/2,1/2}(\xi)+\frac1L\Big(\kappa_\rho\,\mathcal B_{-1/2,-1/2}(\xi)-\frac{\mathcal B_{1/2,-1/2}(\xi)}{\rho}\Big)\Big]+O_{\rho,R}\!\left(\frac{x^{\Re\rho}}{L^2}\right)
+\tag{2.7}
+$$
+
+이다. 보정항의 두 모양은 $M$의 극 핵과 $\psi$의 영점 핵이다. $\rho=\tfrac12+i\gamma$가 임계선 위에 있으면 $\zeta(\tfrac12+it)=e^{-i\vartheta_{\rm RS}(t)}Z(t)$에서
+
+$$
+\kappa_\rho=-\vartheta_{\rm RS}'(\gamma)-\frac i2\,\frac{Z''(\gamma)}{Z'(\gamma)},
+\qquad
+\Re\kappa_\rho=-\vartheta_{\rm RS}'(\gamma)=-\tfrac12\log\frac{\gamma}{2\pi}+O(\gamma^{-2})
+$$
+
+이다. $\vartheta_{\rm RS}$는 Riemann–Siegel 세타함수로 표 (2.4)의 각도 $\vartheta$와 다르며, $Z$는 Hardy 함수이다. 따라서 보정의 크기는 대략 $\log\gamma/L$이며, 높은 영점일수록 아크사인 모양이 나타나는 데 더 큰 $L$이 필요하다. $\rho_1$에서는 $\kappa_{\rho_1}=-0.405274\ldots-0.082158\ldots i$이다.
 
 <a id="section-3"></a>
 
@@ -277,9 +351,15 @@ $$
 - (3.2): $\sigma=2$, $\alpha\in[0,3000]$에서 $e^{i\eta\arg\zeta}$의 경험적 평균과 ${}_2F_1$ 곱의 차이는 $\eta=2,5,10$에서 $2\times10^{-5}$–$10^{-4}$이다. $J_0$ 선도항만 쓰면 차이가 $10^{-3}$–$6\times10^{-3}$으로 커져 소수 거듭제곱 보정이 보인다.
 - (4.3)–(4.4): §4의 [수치] 항목. 영점은 Hardy $Z$ 함수의 부호 변화로 높이 $400$까지 구한다.
 
+[선분 표현 검산 스크립트](../scripts/check_mertens_segment.py)도 numpy와 scipy만 사용하며, $\zeta$는 Euler–Maclaurin 합으로 계산한다.
+
+- (2.5)–(2.6): $\rho_1$ 둘레에서 Euler 가지를 따라 계산한 윤곽 적분과 선분 위의 Gauss–Chebyshev 적분을 비교한다. $\alpha=\xi/L$이 $\pm5$까지일 때 $M$과 $\psi$ 모두 상대오차 $3\times10^{-10}$ 안에서 일치한다. $L=5$와 같이 국소 근사가 맞지 않는 범위에서도 일치하므로 (2.5)가 극한식이 아님을 확인한다.
+- (2.7): $\xi=1,4$, $L=25$–$400$에서 나머지에 $L^2$을 곱한 값이 거의 일정하여 $O(L^{-2})$을 따른다. $\Re\kappa_{\rho_1}=-\vartheta_{\rm RS}'(\gamma_1)$도 $10^{-13}$ 안에서 성립한다.
+
 이 수치 확인은 증명을 대체하지 않으며, 국소 핵은 하나의 영점에서만 확인했다.
 
     python -B scripts/check_mertens_psi.py
+    python -B scripts/check_mertens_segment.py
 
 <a id="references"></a>
 
