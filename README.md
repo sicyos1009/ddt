@@ -23,6 +23,7 @@ $A_x$는 제곱 인수 없는 모형, $\widetilde A_x$는 모든 정수의 $d_z$
 | [RH 아래 보조 통계의 극한분포](docs/limiting-distribution.md) | 극한분포와 평균제곱 오차의 증명 |
 | [Ng 공식과 소수·약수 쪽 쌍대](docs/ng-duality.md) | Ng 분포의 가정 약화, 가정 없는 쌍대 극한분포, Mertens 함수와의 연결 |
 | [M과 ψ: 코사인 핵과 사인 핵](docs/mertens-psi.md) | $\mu=d_{-1/2}*d_{-1/2}$와 $\varepsilon=d_{-1/2}*d_{1/2}$, ψ의 국소 핵, 네 핵의 아크사인 표현, 소수핵으로 쓴 영점 측도 |
+| [약수별 누적합으로 얻는 M(x)](docs/divisor-cumsum.md) | $\mu(n)/\tau(n)$의 약수별 몫과 누적합이 $M(x)$가 되는 항등식, 매끄러운 시험함수의 1차 법칙, 누적 곡선의 $\mathcal K_{-1/2,-1/2}$ 예측 |
 | [강한 Chowla 추측: 제곱류 층과 4점 Wick 규칙](docs/chowla.md) | $\sum\mu(n)\mu(n+h)$의 제곱류 층·제곱류 표현과 팽창 격자, 극 성분의 소멸, 원시 성분의 OU 법칙, 짧은 구간의 4차 모멘트 사전, 2k차 사다리와 순열 규칙, 이산핵·코사인 언어와 극의 귀환 |
 
 [후속 연구 안내](docs/further-results.md)에 문서별 범위와 수치 기록의 위치를 모았다. **[국소 계산]**, **[휴리스틱]**, **RH** 등의 표시는 각 주장의 범위와 가정을 구분한다.
@@ -41,6 +42,7 @@ $A_x$는 제곱 인수 없는 모형, $\widetilde A_x$는 모든 정수의 $d_z$
 | 영점 봉우리의 국소 극한과 Ng의 분산 | [Ng 쌍대 명제 5.1–5.2](docs/ng-duality.md#section-5-2) |
 | ψ의 극·영점 국소 핵과 M과의 비교 | [M과 ψ 명제 2.1, 표 (2.4)](docs/mertens-psi.md#section-2) |
 | 소수핵으로 쓴 영점 측도 (가정 없음) | [M과 ψ 명제 4.1](docs/mertens-psi.md#section-4) |
+| 약수별 몫의 누적합 = $M(x)$, 누적 곡선과 베타핵 | [약수별 누적합 명제 1.1, 2.1](docs/divisor-cumsum.md#section-1) |
 | Chowla 합의 팽창 항등식과 gcd 분해 | [Chowla 명제 1.1–1.2](docs/chowla.md#section-1-1) |
 | 제곱류 표현, 층별 밀도, 제곱류 일치의 분류 | [Chowla 명제 1.4–1.6](docs/chowla.md#section-1-4) |
 | 짧은 구간의 덧셈 에너지 = 디리클레 다항식의 4차 모멘트 | [Chowla 정리 4.1](docs/chowla.md#section-4-1) |
@@ -52,7 +54,7 @@ $A_x$는 제곱 인수 없는 모형, $\widetilde A_x$는 모든 정수의 $d_z$
 
 ## 검산
 
-Python을 사용한다. 핵심 문서의 검산은 mpmath를, [Ng 쌍대](docs/ng-duality.md#checks), [M과 ψ](docs/mertens-psi.md#checks), [Chowla](docs/chowla.md#checks)의 검산은 numpy와 scipy를 쓴다.
+Python을 사용한다. 핵심 문서의 검산은 mpmath를, [Ng 쌍대](docs/ng-duality.md#checks), [M과 ψ](docs/mertens-psi.md#checks), [Chowla](docs/chowla.md#checks), [약수별 누적합](docs/divisor-cumsum.md#checks)의 검산은 numpy와 scipy를 쓴다.
 
 | 스크립트 | 확인 범위 |
 |:--|:--|
@@ -65,6 +67,7 @@ Python을 사용한다. 핵심 문서의 검산은 mpmath를, [Ng 쌍대](docs/n
 | [check_mertens_bridge.py](scripts/check_mertens_bridge.py) | Ng 쌍대 §5의 국소 극한, Plancherel 등식, $\lvert\zeta\rvert^{-2}$ 평균, Gonek 비율 |
 | [check_mertens_psi.py](scripts/check_mertens_psi.py) | M과 ψ의 합성곱 항등식, 소수별 동전, 네 국소 핵, $\arg\zeta$의 특성함수, 대역 제한 명시공식과 소수만으로 찾은 영점 |
 | [check_chowla.py](scripts/check_chowla.py) | Chowla 합의 팽창·gcd 항등식, 제곱류 표현과 일치 분류, Mirsky 분산과 공분산 격자, 원시 성분, 짧은 구간 이분법, M4와 메아리, 곱셈 모형의 M4, 2k차 사다리와 순열 규칙, 꼭대기의 반례, 이산핵의 동전과 극의 귀환 (`--full`은 $N=2^{25}$) |
+| [check_divisor_cumsum.py](scripts/check_divisor_cumsum.py) | 약수별 몫의 합 = $M(x)$, 몫의 분해, $f_x(1)$의 점근식, 핵 누적함수의 닫힌 꼴, 모멘트와 누적 곡선의 수치 (`--figure`는 그림 생성, matplotlib 필요) |
 
     python -B scripts/check_global_formula.py
     python -B scripts/check_smoothed_formula.py
@@ -75,5 +78,6 @@ Python을 사용한다. 핵심 문서의 검산은 mpmath를, [Ng 쌍대](docs/n
     python -B scripts/check_mertens_bridge.py
     python -B scripts/check_mertens_psi.py
     python -B scripts/check_chowla.py
+    python -B scripts/check_divisor_cumsum.py
 
 수치 검산은 증명을 대체하지 않는다. 주제별 부록의 기존 수치표는 계산 코드와 원자료가 없어 재현하지 않았으며, 위 스크립트의 검증 범위에 포함되지 않는다.
