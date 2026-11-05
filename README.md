@@ -6,7 +6,7 @@
 
 | 문서 | 내용 | 자체 번호 |
 |:--|:--|:--|
-| [주정리](docs/main-theorem.md) | DDT, 이차 베타 법칙, 이산핵과 정확한 변환 | §1–8, 정리 1–2, 부록 A–B |
+| [주정리](docs/main-theorem.md) | DDT, 이차 베타 법칙, 이산핵과 정확한 변환, 임의 차수 전개 | §1–9, 정리 1–3, 부록 A–B |
 | [전역 공식](docs/global-formula.md) | 소수별 합성곱, 영점 곱·가법 공식, 가우스 합산과 이산핵 복원 | §1–3, 정리 1–5 |
 
 주정리를 먼저 읽고 전역 공식으로 이어가면 핵심 흐름을 따라갈 수 있다. 절·정리·명제·수식 번호는 **문서마다 독립적**이며, 다른 문서를 참조할 때는 문서명과 링크를 함께 표시한다. 각 문서 앞에는 필요한 기호와 전제를 정리했다.
@@ -33,6 +33,7 @@ $A_x$는 제곱 인수 없는 모형, $\widetilde A_x$는 모든 정수의 $d_z$
 | 결과 | 위치 |
 |:--|:--|
 | 이차 베타 법칙과 이산핵 평균 | [주정리 정리 1](docs/main-theorem.md#section-2), [정리 2](docs/main-theorem.md#section-8-3) |
+| 임의 차수 베타 법칙, 오차 $O(xL^{\beta-1-J})$ | [주정리 정리 3](docs/main-theorem.md#section-9-1) |
 | 영점 곱과 전역 재구성 | [전역 공식 정리 1–2](docs/global-formula.md#section-1-2) |
 | 평활화된 가법 공식 | [전역 공식 정리 3](docs/global-formula.md#section-2-3) |
 | 원래 정수합의 유한 공식과 정확한 가우스 합산 | [전역 공식 정리 4–5](docs/global-formula.md#section-3-4) |
@@ -54,13 +55,14 @@ $A_x$는 제곱 인수 없는 모형, $\widetilde A_x$는 모든 정수의 $d_z$
 
 ## 검산
 
-Python을 사용한다. 핵심 문서의 검산은 mpmath를, [Ng 쌍대](docs/ng-duality.md#checks), [M과 ψ](docs/mertens-psi.md#checks), [Chowla](docs/chowla.md#checks), [약수별 누적합](docs/divisor-cumsum.md#checks)의 검산은 numpy와 scipy를 쓴다.
+Python을 사용한다. 핵심 문서의 검산은 mpmath를([주정리 §9](docs/main-theorem.md#section-9)는 numpy와 scipy), [Ng 쌍대](docs/ng-duality.md#checks), [M과 ψ](docs/mertens-psi.md#checks), [Chowla](docs/chowla.md#checks), [약수별 누적합](docs/divisor-cumsum.md#checks)의 검산은 numpy와 scipy를 쓴다.
 
 | 스크립트 | 확인 범위 |
 |:--|:--|
 | [check_global_formula.py](scripts/check_global_formula.py) | 소수별 합성곱, 유한 영점 곱, 비틀림 없는 윤곽 적분 |
 | [check_smoothed_formula.py](scripts/check_smoothed_formula.py) | 비틀린 약수합, 가우스 꼬리 상계, 극점·영점 성분의 분해 |
 | [check_desmoothed_formula.py](scripts/check_desmoothed_formula.py) | 정수 격자의 평활화 오차, 경계가 영점 쌍을 가를 때의 윤곽 항등식 |
+| [check_beta_expansion.py](scripts/check_beta_expansion.py) | 주정리 §9의 2차 계수 닫힌 꼴, $J\le6$차 전개와 실측 합 비교, 부록 B.1 표의 재현 (`--x 1e7`) |
 | [check_ng_tail.py](scripts/check_ng_tail.py) | Ng 쌍대 §1의 Gallagher형 평균제곱 부등식과 로그 가중 부분합 |
 | [check_dual_product.py](scripts/check_dual_product.py) | Ng 쌍대 §2의 대칭 비틀기 항등식, 중심 원자 합, 소수별 아크사인 곱 |
 | [check_s1_distribution.py](scripts/check_s1_distribution.py) | Ng 쌍대 §3의 Littlewood 공식, 근사 오차, $S_1$의 분포와 왜도 |
@@ -72,6 +74,7 @@ Python을 사용한다. 핵심 문서의 검산은 mpmath를, [Ng 쌍대](docs/n
     python -B scripts/check_global_formula.py
     python -B scripts/check_smoothed_formula.py
     python -B scripts/check_desmoothed_formula.py
+    python -B scripts/check_beta_expansion.py
     python -B scripts/check_ng_tail.py
     python -B scripts/check_dual_product.py
     python -B scripts/check_s1_distribution.py
@@ -80,4 +83,4 @@ Python을 사용한다. 핵심 문서의 검산은 mpmath를, [Ng 쌍대](docs/n
     python -B scripts/check_chowla.py
     python -B scripts/check_divisor_cumsum.py
 
-수치 검산은 증명을 대체하지 않는다. 주제별 부록의 기존 수치표는 계산 코드와 원자료가 없어 재현하지 않았으며, 위 스크립트의 검증 범위에 포함되지 않는다.
+수치 검산은 증명을 대체하지 않는다. 주제별 부록의 기존 수치표는 계산 코드와 원자료가 없어 재현하지 않았으며, 위 스크립트의 검증 범위에 포함되지 않는다. 예외로 주정리 부록 B.1의 표는 `check_beta_expansion.py --x 1e7`이 재현한다.

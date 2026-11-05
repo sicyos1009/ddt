@@ -52,7 +52,7 @@ S_x(\xi)=xL^{r-1}\sum_{a+b<J}G_{ab}L^{-a-b}\mathcal B_{z-a,w-b}(\xi)+O\!\left(xL
 \tag{1.2}
 $$
 
-여기서 $B_J\ge0$와 오차 상수는 고정된 $z,w,J$에 의존한다. $J=2$가 [주정리 (6.2)](main-theorem.md#equation-6-2)이고, 증명은 [주정리 부록 A.3](main-theorem.md#appendix-a-3)의 테일러 전개를 $J$차까지 늘린 것이다. 베타핵 전개의 계수는 $G$의 테일러 계수에서 나오지만, 이 식 자체는 고정 차수의 점근식이다.
+여기서 $B_J\ge0$와 오차 상수는 고정된 $z,w,J$에 의존한다. $J=2$가 [주정리 (6.2)](main-theorem.md#equation-6-2)이고, 증명은 [주정리 부록 A.3](main-theorem.md#appendix-a-3)의 테일러 전개를 $J$차까지 늘린 것이다. 베타핵 전개의 계수는 $G$의 테일러 계수에서 나오지만, 이 식 자체는 고정 차수의 점근식이다. 정규화 변경까지 포함한 $A_x^{z,w}(F)$의 $J$차 전개는 [주정리 §9의 정리 3](main-theorem.md#section-9-1)이다.
 
 $j$차 핵들의 $k$차 모멘트를 함께 모으면 $\sum_{a+b=j}G_{ab}\langle\mathcal K_{z-a,w-b},u^k\rangle=m_{j,k}/\Gamma(r-j+k)$이고
 
