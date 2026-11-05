@@ -21,9 +21,9 @@
 
 기존 수치표는 해당 주제의 부록으로 옮겼다.
 
-- [주정리의 이차 법칙](main-theorem.md#appendix-b)
+- [주정리의 이차 법칙과 J차 전개](main-theorem.md#appendix-b)
 - [뫼비우스 가중합](mobius-cases.md#appendix-a)
 - [고차 전개의 계수](higher-order.md#appendix-a)
 - [영점 기여와 복원 실험](zero-contributions.md#appendix-a)
 
-이 기록들은 계산 코드와 원자료가 없어 재현하지 못한 초기 원고의 보고값이다. 현재 실행 가능한 [전역 공식의 검산](global-formula.md#checks), [Ng 쌍대의 검산](ng-duality.md#checks), [M과 ψ의 검산](mertens-psi.md#checks), [Chowla의 검산](chowla.md#checks), [약수별 누적합의 검산](divisor-cumsum.md#checks)과 구분한다.
+이 기록들은 계산 코드와 원자료가 없어 재현하지 못한 초기 원고의 보고값이다. 예외로 주정리의 표는 [check_beta_expansion.py](../scripts/check_beta_expansion.py)로 재현했다. 현재 실행 가능한 [전역 공식의 검산](global-formula.md#checks), [Ng 쌍대의 검산](ng-duality.md#checks), [M과 ψ의 검산](mertens-psi.md#checks), [Chowla의 검산](chowla.md#checks), [약수별 누적합의 검산](divisor-cumsum.md#checks)과 구분한다.

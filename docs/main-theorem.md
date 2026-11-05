@@ -1,8 +1,8 @@
 # 주정리: DDT에서 베타핵과 약수별 이산핵으로
 
-**2026-11-03 (DDT 도입 및 이산핵 확장)**
+**2026-11-03 (DDT 도입 및 이산핵 확장)**, **2026-11-06 (임의 차수 전개, §9)**
 
-**DDT의 평균 법칙 → 일반화된 베타핵 → 약수별 이산핵**의 순서로 전개한다. 정리 1은 제곱 인수 없는 정수의 가중 약수합을, 정리 2는 모든 정수의 $d_z$ 가중 약수합을 이차 항까지 근사한다. 두 정리는 유효 Perron 공식과 고전적 영점 없는 영역을 사용하며 RH를 가정하지 않는다.
+**DDT의 평균 법칙 → 일반화된 베타핵 → 약수별 이산핵**의 순서로 전개한다. 정리 1은 제곱 인수 없는 정수의 가중 약수합을, 정리 2는 모든 정수의 $d_z$ 가중 약수합을 이차 항까지 근사한다. 정리 3은 두 정리를 임의의 $J$차로 늘려 오차를 $O(xL^{\beta-1-J})$로 줄인다. 세 정리는 유효 Perron 공식과 고전적 영점 없는 영역을 사용하며 RH를 가정하지 않는다.
 
 주제별 확장은 [후속 연구 안내](further-results.md)에, 정확한 영점 표현과 이산핵 복원은 [전역 공식](global-formula.md)에 있다.
 
@@ -14,8 +14,10 @@
 - [§6. 증명](#section-6)
 - [§7. 특수핵과 끝점 항](#section-7)
 - [§8. 약수별 이산핵으로의 확장](#section-8)
+- [§9. 임의 차수 전개](#section-9)
 - [부록 A. 이동 균등 추정](#appendix-a)
 - [부록 B.1. 주정리의 수치 확인](#appendix-b-1)
+- [부록 B.2. J차 전개의 수치 확인](#appendix-b-2)
 
 주제별 수치 기록은 [후속 연구 안내](further-results.md#numerics)에서 찾을 수 있다.
 
@@ -118,7 +120,7 @@ $$
 \tag{2.4}
 $$
 
-증명은 §6과 부록 A에 있다.
+증명은 §6과 부록 A에 있다. 오차 $O(xL^{\beta-3})$은 국소 인수와 정규화 변경을 2차에서 자른 결과이다. 일반적으로 다음 항 $xL^{r-3}\langle\mathcal K^{(2)}_{z,w},F\rangle$이 영이 아니므로 이 차수에서는 최선이다. 이를 임의의 $J$차로 늘린 것이 [§9의 정리 3](#section-9-1)이다.
 
 특히 $A_x^{z,w}(F)=C(r)xL^{r-1}\langle\mathcal K_{z,w},F\rangle+O_{F,z,w}(xL^{\beta-2})$이므로, 정규화한 합은 분포의 의미에서 $C(r)\mathcal K_{z,w}$로 수렴한다.
 
@@ -909,6 +911,8 @@ $$
 
 이다. (4.4)로 마지막 항을 바꾸면 (8.7)을 얻는다. 필요한 유한 차수 $N$과 오차의 제어는 §6.3과 같다. $\square$
 
+$J$차 판은 [§9의 정리 3](#section-9-1)이며, 이 모형에서는 계수가 Stieltjes 상수만으로 정해진다((9.7)).
+
 특히 $z,w>0$이면 양의 측도들의 정규화한 합이
 
 $$
@@ -1043,6 +1047,185 @@ $$
 이므로 정수별 이산핵을 구분할 수 있다. 기존 항들은 좌표가 연속적으로 움직이고, 새로 들어오는 $n$의 항에서 $\log n/\log x\to1$이기 때문이다.
 
 [전역 공식](global-formula.md)은 이 정확한 변환을 Hadamard 영점 곱과 연결하고, 특이점별 윤곽 적분을 분리한다. [전역 공식 §2](global-formula.md#section-2)는 가우스 평활화된 합을, [전역 공식 §3](global-formula.md#section-3)은 영점 쪽 가우스 합산 규칙으로 원래 정수합과 그 도약을 복원하는 공식을 다룬다.
+
+<a id="section-9"></a>
+
+## 9. 임의 차수 전개
+
+**2026-11-06 (오차항 전개)**
+
+정리 1·2의 오차 $O(xL^{\beta-3})$에는 두 종류의 항이 들어 있다. 하나는 국소 인수 $G$의 테일러 전개를 2차에서 자른 나머지(부록 A.3)이다. 다른 하나는 §6.2에서 $\int_{\sqrt x}^x(\log t)^{r-2}dt=xL^{r-2}(1+O(L^{-1}))$로 근사하며 버린 항이다. 반면 Perron 절단과 왼쪽 윤곽선 이동의 손실은 $xe^{-c\sqrt L}$뿐이다(부록 A.1–A.2). 이 절에서는 앞의 두 단계를 모두 $J$차까지 유지한다.
+
+<a id="section-9-1"></a>
+
+### 9.1. J차 베타 법칙
+
+부록 A.3의 $Z(s)=(s-1)\zeta(s)$를 쓰고, Perron 인자 $1/s$를 뺀 국소 인수와 로그 적분을
+
+<a id="equation-9-1"></a>
+
+$$
+\widetilde G(s_1,s_2)=Z(s_1)^zZ(s_2)^wH_{z,w}(s_1,s_2)=\sum_{a,b\ge0}\widetilde G_{ab}(s_1-1)^a(s_2-1)^b,
+\qquad
+\mathrm{Li}_\alpha(x)=\int_2^x(\log t)^\alpha\,dt
+\tag{9.1}
+$$
+
+로 둔다. 거듭제곱의 가지는 부록 A.3과 같다. $\widetilde G=s_2G$이므로 $\widetilde G_{ab}=G_{ab}+G_{a,b-1}$이고($G_{a,-1}:=0$), $\widetilde G_{00}=C(r)$이다. 각 $\widetilde G_{ab}$는 $z,w$의 전체함수이다. $\mathrm{Li}_{-1}(x)=\mathrm{li}(x)-\mathrm{li}(2)$이다.
+
+**정리 3 ($J$차 베타 법칙).** 고정된 $z,w$와 정수 $J\ge1$에 대해 충분히 큰 유한 정수 $N=N_J(z,w)$가 존재하여, $F\in C^N([0,1])$이면
+
+<a id="equation-9-2"></a>
+
+$$
+\boxed{
+A_x^{z,w}(F)=\sum_{a+b<J}\widetilde G_{ab}\,\big\langle\mathcal K_{z-a,w-b},F\big\rangle\,\mathrm{Li}_{r-1-a-b}(x)
++O_{F,z,w,J}\!\left(xL^{\beta-1-J}\right).
+}
+\tag{9.2}
+$$
+
+$H\equiv1$로 둔 $\widetilde G$에 대해 이산핵 평균 $\widetilde A_x^{z,w}(F)$에도 같은 식이 성립한다(정리 2의 모형).
+
+$\mathrm{Li}_\alpha$를 부분적분하면 $\mathrm{Li}_\alpha(x)=x\sum_{m<M}(-1)^m\alpha^{\underline m}L^{\alpha-m}+O_\alpha(xL^{\Re\alpha-M})$이다. 여기서 $\alpha^{\underline m}=\alpha(\alpha-1)\cdots(\alpha-m+1)$이다. 따라서 (9.2)는 거듭제곱 형태
+
+<a id="equation-9-3"></a>
+
+$$
+A_x^{z,w}(F)=xL^{r-1}\sum_{j<J}L^{-j}\big\langle\mathcal K^{(j)}_{z,w},F\big\rangle+O(xL^{\beta-1-J}),
+\qquad
+\mathcal K^{(j)}_{z,w}=\sum_{i=0}^{j}(-1)^{j-i}(r-1-i)^{\underline{j-i}}\sum_{a+b=i}\widetilde G_{ab}\,\mathcal K_{z-a,w-b}
+\tag{9.3}
+$$
+
+와 동치이다. $J=1$은 1차 법칙이다. $\widetilde G_{10}=\gamma_EzC+H_s$, $\widetilde G_{01}=\gamma_EwC+H_t$이므로 $J=2$는 (2.2)–(2.3)이고, $H\equiv1$이면 (8.6)–(8.7)이다.
+
+두 형태의 오차 차수는 같다. 하지만 (9.2)는 $\mathrm{Li}_\alpha$의 발산하는 점근 급수를 펼치지 않으므로 수치적으로 훨씬 정확하다([부록 B.2](#appendix-b-2)). 극단적인 예로 $(z,w)=(-1,1)$, $F(u)=u$이면 $A_x(u)=-\pi(x)$이다. $i\ge1$이면 $\langle\mathcal K_{-1-a,1-b},u\rangle=(-1-a)/\Gamma(1-i)=0$이므로 (9.2)는 모든 $J$에서 $-\mathrm{Li}_{-1}(x)$, 즉 $\mathrm{li}(x)$를 쓰는 소수 정리이다. (9.3)은 그 점근 급수 $-\tfrac xL(1+\tfrac1L+\tfrac2{L^2}+\cdots)$이다.
+
+<a id="section-9-2"></a>
+
+### 9.2. 2차 계수
+
+$\gamma_1$을 $\zeta(s)=\frac1{s-1}+\gamma_E-\gamma_1(s-1)+\cdots$의 Stieltjes 상수($\gamma_1=-0.0728158\ldots$)라 하고, (2.4)의 $\kappa$와 함께
+
+<a id="equation-9-4"></a>
+
+$$
+\nu(r)=\sum_p\frac{(\log p)^2}{(p+r)^2},
+\qquad
+\lambda(r)=\sum_p(\log p)^2\left[\frac{r+1}{(p-1)(p+r)}+\frac1{(p-1)^2}\right],
+\qquad
+\theta=\gamma_1+\frac{\gamma_E^2}2+\frac\lambda2
+\tag{9.4}
+$$
+
+로 둔다. 국소 인수를 두 번 미분하면 $\partial_s^2\log H(1,1)=-z\lambda-z^2\nu$, $\partial_s\partial_t\log H(1,1)=-zw\nu$이고, $\log Z(s)=\gamma_E(s-1)-(\gamma_1+\gamma_E^2/2)(s-1)^2+\cdots$이다. 따라서 $C(r)\ne0$에서
+
+<a id="equation-9-5"></a>
+
+$$
+\widetilde G_{10}=zC\kappa,\quad \widetilde G_{01}=wC\kappa,
+\qquad
+\sum_{a+b=2}\widetilde G_{ab}\varepsilon_1^a\varepsilon_2^b
+=C\left[\frac{\kappa^2-\nu}2\,(z\varepsilon_1+w\varepsilon_2)^2-\theta\,(z\varepsilon_1^2+w\varepsilon_2^2)\right]
+\tag{9.5}
+$$
+
+이다. 이를 (9.3)에 넣으면 셋째 핵은
+
+<a id="equation-9-6"></a>
+
+$$
+\mathcal K^{(2)}_{z,w}
+=(r-1)(r-2)C\,\mathcal K_{z,w}
+-(r-2)C\kappa\,\big(z\mathcal K_{z-1,w}+w\mathcal K_{z,w-1}\big)
++\widetilde G_{20}\mathcal K_{z-2,w}+\widetilde G_{11}\mathcal K_{z-1,w-1}+\widetilde G_{02}\mathcal K_{z,w-2}
+\tag{9.6}
+$$
+
+이다. 이산핵 모형에서는 $\nu=\lambda=0$, $\kappa=\gamma_E$, $C=1$이며 계수가 정확히 분리된다.
+
+<a id="equation-9-7"></a>
+
+$$
+\widetilde G_{ab}=c_a(z)c_b(w),\qquad Z(s)^z=\sum_{a\ge0}c_a(z)(s-1)^a,\qquad
+c_1(z)=\gamma_Ez,\quad c_2(z)=\frac{z(z-1)}2\gamma_E^2-z\gamma_1.
+\tag{9.7}
+$$
+
+고차 계수는 [검산 스크립트](../scripts/check_beta_expansion.py)가 $(1,1)$ 둘레의 2변수 Cauchy 적분으로 계산한다. 그 값은 (9.5)와 소수 합의 절단 오차 수준인 약 $10^{-6}$까지 일치한다. 수치값은 다음과 같다.
+
+| $(z,w)$ | $C$ | $\kappa$ | $\nu$ | $\lambda$ | $\widetilde G_{20}$ | $\widetilde G_{11}$ | $\widetilde G_{02}$ |
+|:--|--:|--:|--:|--:|--:|--:|--:|
+| $(\tfrac12,\tfrac12)$ | 0.607927 | 1.71714 | 0.54190 | 2.99602 | −0.300961 | 0.365768 | −0.300961 |
+| $(1,1)$ | 0.286747 | 1.97622 | 0.43936 | 3.48209 | −0.029182 | 0.993895 | −0.029182 |
+| $(2,1)$ | 0.114884 | 2.17220 | 0.37508 | 3.88716 | 0.529852 | 0.997971 | 0.015433 |
+| $(-1,1)$ | 1 | 1.33258 | 0.74160 | 2.36756 | 1.794643 | −1.034178 | −0.760465 |
+
+<a id="section-9-3"></a>
+
+### 9.3. 증명
+
+**1단계 (J차 이동 균등 추정).** 부록 A.3의 $G=\widetilde G/s_2$는 $(1,1)$ 중심의 고정된 다원판에서 해석적이다. 경로 위에서는 $|q|/L+|\xi|/L\ll L^{-1/2}$이므로, $G_L^{[J]}=\sum_{a+b<J}G_{ab}\big(\tfrac{q-i\xi}L\big)^a\big(\tfrac qL\big)^b$에 대해 Cauchy 추정으로 (A.7)을 다음과 같이 바꿀 수 있다.
+
+$$
+\big|G_L-G_L^{[J]}\big|\ll_{z,w,J}\frac{(|q|+|\xi|)^J}{L^J},
+\qquad
+\big|\partial_\xi\big(G_L-G_L^{[J]}\big)\big|\ll_{z,w,J}\frac{(|q|+|\xi|)^{J-1}}{L^J}.
+$$
+
+(A.8)의 우변은 $(1+|\xi|)^{m+J+1}L^{-J}$가 된다. 각 단항식에 (5.4)를 $(z-a,w-b)$로 적용하면, $j=0,1$, $|\xi|\le L^{1/4}$에서
+
+<a id="equation-9-8"></a>
+
+$$
+\partial_\xi^jS_x(\xi)=xL^{r-1}\partial_\xi^j\sum_{a+b<J}G_{ab}L^{-a-b}\mathcal B_{z-a,w-b}(\xi)
++O_{z,w,J}\!\left(xL^{\beta-1-J}(1+|\xi|)^{m+J+1}\right)
+\tag{9.8}
+$$
+
+이다. 이는 [고차 전개 (1.2)](higher-order.md#equation-1-2)에 $j=1$의 경우를 더한 것이다.
+
+**2단계 (정규화 변수의 변경을 버리지 않기).** (6.3)의 적분에서 $t\in[\sqrt x,x]$에 (9.8)을 적용한다. 이때 $\int_{\sqrt x}^x(\log t)^{r-2-a-b}dt$를 근사하지 않고 $\mathrm{Li}_{r-2-a-b}(x)$로 바꾸면 $O(\sqrt x\,L^{O(1)})$만 달라진다. 작은 구간은 §6.2와 같이 $|\xi|\sqrt xL^{k_0}$이다. 나머지 적분은 $|\xi|(1+|\xi|)^{m+J+1}xL^{\beta-2-J}$이다. 따라서 $\mathcal B_{ab}:=\mathcal B_{z-a,w-b}$라 쓰면 어떤 $M_J$에 대해 $|\xi|\le L^{1/8}$에서
+
+<a id="equation-9-9"></a>
+
+$$
+\Theta_x(\xi)=\sum_{a+b<J}G_{ab}\Big[xL^{r-1-a-b}\mathcal B_{ab}(\xi)+\mathrm{Li}_{r-2-a-b}(x)\,\xi\mathcal B_{ab}'(\xi)\Big]
++O_{z,w,J}\!\left(xL^{\beta-1-J}(1+|\xi|)^{M_J}\right).
+\tag{9.9}
+$$
+
+**3단계 (푸리에 적분).** §6.3과 같이 $R=L^{1/8}$로 나눈다. 꼬리 추정의 지수만 바뀌어
+
+$$
+N\ge\max\big(M_J+2,\ M_0^{(J)}+2+8J,\ 1+8(k_0+J-\beta)\big)
+$$
+
+이면 충분하다. 여기서 $M_0^{(J)}$는 $a+b<J$인 $\mathcal B_{z-a,w-b}$와 그 1차 주파수 미분을 지배한다. $\mathrm{Li}_\alpha(x)\ll_\alpha xL^{\Re\alpha}$이므로 주항의 꼬리도 같은 방식으로 처리된다. $\xi\mathcal B'_{ab}$의 역변환은 §6.3과 같이 $\langle\mathcal K_{z-a,w-b},uF'\rangle$이므로
+
+<a id="equation-9-10"></a>
+
+$$
+A_x^{z,w}(F)=\sum_{a+b<J}G_{ab}\Big[xL^{r-1-a-b}\langle\mathcal K_{z-a,w-b},F\rangle+\mathrm{Li}_{r-2-a-b}(x)\langle\mathcal K_{z-a,w-b},uF'\rangle\Big]+O(xL^{\beta-1-J}).
+\tag{9.10}
+$$
+
+**4단계 (정리).** $\alpha=r-2-a-b$라 하자. (4.4)에서 $\langle\mathcal K_{z-a,w-b},uF'\rangle=\langle\mathcal K_{z-a,w-b-1},F\rangle-(\alpha+1)\langle\mathcal K_{z-a,w-b},F\rangle$이다. $\frac{d}{dt}\,t(\log t)^{\alpha+1}=(\log t)^{\alpha+1}+(\alpha+1)(\log t)^\alpha$에서는 $xL^{\alpha+1}=\mathrm{Li}_{\alpha+1}(x)+(\alpha+1)\mathrm{Li}_\alpha(x)+O(1)$를 얻는다. 따라서 (9.10)의 괄호는
+
+$$
+\mathrm{Li}_{r-1-a-b}(x)\langle\mathcal K_{z-a,w-b},F\rangle+\mathrm{Li}_{r-2-a-b}(x)\langle\mathcal K_{z-a,w-b-1},F\rangle+O(1)
+$$
+
+이다. 둘째 항의 첨자를 $b\to b-1$로 옮기고 $\widetilde G_{ab}=G_{ab}+G_{a,b-1}$을 쓰면 (9.2)가 된다. 이때 남는 $a+b=J-1$의 항은 $\mathrm{Li}_{r-1-J}(x)\ll xL^{\beta-1-J}$이므로 오차에 들어간다. 이산핵 모형은 정리 2의 증명과 같이 (8.8)–(8.11)과 $H\equiv1$을 쓴다. $\square$
+
+<a id="section-9-4"></a>
+
+### 9.4. 남는 오차
+
+- **모든 차수.** $F\in C^\infty([0,1])$이면 (9.2)는 모든 $J$에서 성립하므로 점근 전개이다. 그러나 수렴하지는 않는다. $\widetilde G$의 수렴 반경은 일반적으로 $\tfrac12$ 이하이고([고차 전개 §2](higher-order.md#section-2)), $\langle\mathcal K_{z-a,w-b},u^k\rangle=(z-a)_k/\Gamma(r-a-b+k)$는 계승으로 자란다. 고정된 $x$에서는 [고차 전개의 휴리스틱](higher-order.md#section-2)처럼 최적 차수가 있다.
+- **유한한 경우.** $r$이 정수이고 $F$가 차수 $k$의 다항식이면 $i\ge r+k$에서 $1/\Gamma(r-i+k)=0$이다. 이때 (9.2)는 유한합이 되고 오차는 모든 $A$에 대해 $O_A(xL^{-A})$이다. 예를 들어 $\sum_{n\le x}\mu^2(n)3^{\omega(n)}$은 세 항 $\mathrm{Li}_2,\mathrm{Li}_1,\mathrm{Li}_0$로 끝난다.
+- **바닥.** 어떤 $J$로도 지울 수 없는 부분은 영점의 진동이다. $(z,w)=(-1,1)$, $F=u$에서는 남는 오차가 정확히 $\mathrm{li}(x)-\mathrm{li}(2)-\pi(x)$이다. 부록 B.2의 다른 경우에도 $J=3$–$5$에서 상대오차가 $10^{-5}$–$10^{-8}$ 규모의 바닥에서 멈춘다. 이 부분은 [전역 공식](global-formula.md)의 영점 성분이 다룬다.
 
 <a id="appendix-a"></a>
 
@@ -1254,15 +1437,15 @@ $$
 =\partial_\xi^j\Big[C\mathcal B_{z,w}+\frac1L\big(G_1\mathcal B_{z-1,w}+G_2\mathcal B_{z,w-1}\big)\Big](\xi)
 $$
 
-이고, 이를 대입하면 (6.2)을 얻는다. 추정 과정에서 $\xi$로 나누지 않았으므로 후보의 합류와 상쇄도 포함한다. 테일러 전개를 $J$차까지 늘리면 같은 방법으로 [고차 전개 (1.2)](higher-order.md#equation-1-2)를 얻는다.
+이고, 이를 대입하면 (6.2)을 얻는다. 추정 과정에서 $\xi$로 나누지 않았으므로 후보의 합류와 상쇄도 포함한다. 테일러 전개를 $J$차까지 늘리면 같은 방법으로 [고차 전개 (1.2)](higher-order.md#equation-1-2)와 (9.8)을 얻는다.
 
 <a id="appendix-b"></a>
 
 ## 부록 B. 수치 확인
 
-아래 표는 초기 원고에 보고된 수치이다. 해당 계산의 코드와 원자료는 현재 저장소에 없어 이번 점검에서는 재현하지 않았다. [전역 공식의 검산 스크립트](global-formula.md#checks)는 별도의 항등식과 윤곽 적분을 확인한다.
+B.1의 표는 초기 원고에 보고된 수치이다. [check_beta_expansion.py](../scripts/check_beta_expansion.py)를 `--x 1e7`로 실행하면 일곱 값과 2차 예측을 모두 다시 계산하며, 다섯 자리까지 일치한다(2026-11-06). [전역 공식의 검산 스크립트](global-formula.md#checks)는 별도의 항등식과 윤곽 적분을 확인한다.
 
-**보고된 방법.** 제곱 인수 없는 수와 $\omega$를 체로 구하고 약수 쌍을 직접 합했다($x\le10^7$).
+**방법.** 체로 소인수를 구하고, 약수 모멘트 $\sum_{d\mid n}z^{\omega(d)}w^{\omega(n/d)}(\log d)^k$ ($k\le4$)를 소수마다 곱셈적으로 갱신해 정확히 합했다($x\le10^7$).
 
 <a id="appendix-b-1"></a>
 
@@ -1280,7 +1463,31 @@ $$
 | $(-1,1)$ | $u$ | −1.07117 | −1.00000 | −1.06204 |
 | $(-1,1)$ | $u^2$ | −0.19026 | 0 | −0.16535 |
 
-남은 오차에 $L^2$을 곱하면 $10^6$과 $10^7$에서 거의 같다: $(\tfrac12,\tfrac12),u^2$은 −0.550→−0.535, $(2,1),1$은 7.91→7.92, $(-1,1),u$는 −2.31→−2.37. 이 계산은 예측한 $L^{-2}$ 오차와 부합한다.
+남은 오차에 $L^2$을 곱하면 $10^6$과 $10^7$에서 거의 같다: $(\tfrac12,\tfrac12),u^2$은 −0.550→−0.535, $(2,1),1$은 7.91→7.92, $(-1,1),u$는 −2.31→−2.37. 이 계산은 예측한 $L^{-2}$ 오차와 부합한다. 이 값들은 (9.6)의 $\langle\mathcal K^{(2)},F\rangle/C$, 즉 −0.464, 7.917, −2에 $O(L^{-1})$ 보정을 더한 것이다.
+
+<a id="appendix-b-2"></a>
+
+### B.2. J차 전개 (정리 3)
+
+$x=10^7$에서 상대오차 $(\text{실측}-\text{예측})/(|C|xL^{r-1})$이다. "정리 1·2"는 (2.2) 또는 (8.6), 즉 (9.3)의 $J=2$이다. 위의 일곱 행은 제곱 인수 없는 모형(정리 1)이고, 아래 세 행은 이산핵 모형(정리 2)이다.
+
+| $(z,w)$ | $F$ | 정리 1·2 | (9.3), $J=6$ | (9.2), $J=3$ | (9.2), $J=4$ | (9.2), $J=6$ |
+|:--|:--|--:|--:|--:|--:|--:|
+| $(\tfrac12,\tfrac12)$ | $u^2$ | $-2.1\cdot10^{-3}$ | $-1.8\cdot10^{-6}$ | $4.0\cdot10^{-6}$ | $4.0\cdot10^{-6}$ | $4.0\cdot10^{-6}$ |
+| $(\tfrac12,\tfrac12)$ | $(u-\tfrac12)^4$ | $-1.7\cdot10^{-3}$ | $-4.2\cdot10^{-6}$ | $7.3\cdot10^{-4}$ | $-1.8\cdot10^{-4}$ | $3.7\cdot10^{-6}$ |
+| $(1,1)$ | $u^2$ | $-8.5\cdot10^{-4}$ | $-1.2\cdot10^{-7}$ | $-1.0\cdot10^{-5}$ | $4.1\cdot10^{-7}$ | $4.1\cdot10^{-7}$ |
+| $(2,1)$ | $1$ | $3.0\cdot10^{-2}$ | $-8.3\cdot10^{-6}$ | $-8.3\cdot10^{-6}$ | $-8.3\cdot10^{-6}$ | $-8.3\cdot10^{-6}$ |
+| $(2,1)$ | $u^2$ | $2.3\cdot10^{-2}$ | $-3.9\cdot10^{-6}$ | $-3.3\cdot10^{-4}$ | $2.1\cdot10^{-5}$ | $-3.9\cdot10^{-6}$ |
+| $(-1,1)$ | $u$ | $-9.1\cdot10^{-3}$ | $4.6\cdot10^{-4}$ | $5.5\cdot10^{-4}$ | $5.5\cdot10^{-4}$ | $5.5\cdot10^{-4}$ |
+| $(-1,1)$ | $u^2$ | $-2.5\cdot10^{-2}$ | $6.8\cdot10^{-4}$ | $9.0\cdot10^{-4}$ | $9.0\cdot10^{-4}$ | $9.0\cdot10^{-4}$ |
+| $(\tfrac12,\tfrac12)$ | $u^2$ | $5.1\cdot10^{-4}$ | $1.2\cdot10^{-6}$ | $-7.0\cdot10^{-8}$ | $-7.0\cdot10^{-8}$ | $-7.0\cdot10^{-8}$ |
+| $(\tfrac12,\tfrac12)$ | $(u-\tfrac12)^4$ | $1.7\cdot10^{-4}$ | $3.9\cdot10^{-7}$ | $-1.4\cdot10^{-6}$ | $-8.9\cdot10^{-9}$ | $-4.1\cdot10^{-8}$ |
+| $(2,1)$ | $u^2$ | $1.7\cdot10^{-3}$ | $8.4\cdot10^{-7}$ | $3.6\cdot10^{-5}$ | $5.2\cdot10^{-7}$ | $7.8\cdot10^{-7}$ |
+
+- 거듭제곱 형태 (9.3)에서는 한 차수마다 오차가 대략 $1/5$–$1/10$로 줄어든다. $(-1,1)$을 제외하면 $J=6$의 오차는 정리 1·2보다 약 $500$–$7000$배 작다.
+- (9.2)는 더 낮은 $J$에서 바닥에 닿는다. 바닥에서는 $J$를 올려도 값이 변하지 않는다. $(2,1),F=1$은 §9.4의 유한한 경우이므로 $J=3$에서 끝난다.
+- $(-1,1)$의 바닥은 소수 계량의 진동이다. $F=u$에서 $5.5\cdot10^{-4}=(\mathrm{li}(10^7)-\mathrm{li}(2)-\pi(10^7))/(10^7/L)$이다($\pi(10^7)=664579$). 이 행에서 (9.3)이 더 작아 보이는 것은 점근 급수가 진동항과 우연히 상쇄된 결과이다.
+- (9.2)의 $J=2$는 정리 1·2와 같은 차수이지만 상수가 다르며, 이 표의 몇 경우에는 오히려 크다. 개선은 $J\ge3$에서 나온다.
 
 <a id="references"></a>
 
