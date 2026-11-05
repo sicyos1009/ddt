@@ -23,7 +23,7 @@ $A_x$는 제곱 인수 없는 모형, $\widetilde A_x$는 모든 정수의 $d_z$
 | [RH 아래 보조 통계의 극한분포](docs/limiting-distribution.md) | 극한분포와 평균제곱 오차의 증명 |
 | [Ng 공식과 소수·약수 쪽 쌍대](docs/ng-duality.md) | Ng 분포의 가정 약화, 가정 없는 쌍대 극한분포, Mertens 함수와의 연결 |
 | [M과 ψ: 코사인 핵과 사인 핵](docs/mertens-psi.md) | $\mu=d_{-1/2}*d_{-1/2}$와 $\varepsilon=d_{-1/2}*d_{1/2}$, ψ의 국소 핵, 네 핵의 아크사인 표현, 소수핵으로 쓴 영점 측도 |
-| [강한 Chowla 추측: 제곱류 층과 4점 Wick 규칙](docs/chowla.md) | $\sum\mu(n)\mu(n+h)$의 제곱류 층과 팽창 격자, 극 성분의 소멸, 원시 성분의 OU 법칙, 짧은 구간의 4차 모멘트 사전, 이산핵·코사인 언어와 극의 귀환 |
+| [강한 Chowla 추측: 제곱류 층과 4점 Wick 규칙](docs/chowla.md) | $\sum\mu(n)\mu(n+h)$의 제곱류 층과 팽창 격자, 극 성분의 소멸, 원시 성분의 OU 법칙, 짧은 구간의 4차 모멘트 사전, 2k차 사다리와 순열 규칙, 이산핵·코사인 언어와 극의 귀환 |
 
 [후속 연구 안내](docs/further-results.md)에 문서별 범위와 수치 기록의 위치를 모았다. **[국소 계산]**, **[휴리스틱]**, **RH** 등의 표시는 각 주장의 범위와 가정을 구분한다.
 
@@ -44,6 +44,8 @@ $A_x$는 제곱 인수 없는 모형, $\widetilde A_x$는 모든 정수의 $d_z$
 | Chowla 합의 팽창 항등식과 gcd 분해 | [Chowla 명제 1.1–1.2](docs/chowla.md#section-1-1) |
 | 짧은 구간의 덧셈 에너지 = 디리클레 다항식의 4차 모멘트 | [Chowla 정리 4.1](docs/chowla.md#section-4-1) |
 | μ의 4점 Wick 규칙(M4)과 제곱류 메아리 | [Chowla 추측 4.3](docs/chowla.md#section-4-2) |
+| 2k차 모멘트 사다리: 덧셈 에너지에서 Steinhaus 모형까지 | [Chowla 정리 4.5](docs/chowla.md#theorem-4-5) |
+| μ의 2k차 순열 규칙(M2k)과 평평한 사다리 | [Chowla 추측 4.7](docs/chowla.md#conjecture-4-7) |
 
 ## 검산
 
@@ -59,7 +61,7 @@ Python을 사용한다. 핵심 문서의 검산은 mpmath를, [Ng 쌍대](docs/n
 | [check_s1_distribution.py](scripts/check_s1_distribution.py) | Ng 쌍대 §3의 Littlewood 공식, 근사 오차, $S_1$의 분포와 왜도 |
 | [check_mertens_bridge.py](scripts/check_mertens_bridge.py) | Ng 쌍대 §5의 국소 극한, Plancherel 등식, $\lvert\zeta\rvert^{-2}$ 평균, Gonek 비율 |
 | [check_mertens_psi.py](scripts/check_mertens_psi.py) | M과 ψ의 합성곱 항등식, 소수별 동전, 네 국소 핵, $\arg\zeta$의 특성함수, 대역 제한 명시공식과 소수만으로 찾은 영점 |
-| [check_chowla.py](scripts/check_chowla.py) | Chowla 합의 팽창·gcd 항등식, Mirsky 분산과 공분산 격자, 원시 성분, 짧은 구간 이분법, M4와 메아리, 이산핵의 동전과 극의 귀환 (`--full`은 $N=2^{25}$) |
+| [check_chowla.py](scripts/check_chowla.py) | Chowla 합의 팽창·gcd 항등식, Mirsky 분산과 공분산 격자, 원시 성분, 짧은 구간 이분법, M4와 메아리, 2k차 사다리와 순열 규칙, 이산핵의 동전과 극의 귀환 (`--full`은 $N=2^{25}$) |
 
     python -B scripts/check_global_formula.py
     python -B scripts/check_smoothed_formula.py
