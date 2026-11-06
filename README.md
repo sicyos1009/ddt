@@ -24,6 +24,8 @@ $A_x$는 제곱 인수 없는 모형, $\widetilde A_x$는 모든 정수의 $d_z$
 | [Ng 공식과 소수·약수 쪽 쌍대](docs/ng-duality.md) | Ng 분포의 가정 약화, 가정 없는 쌍대 극한분포, Mertens 함수와의 연결 |
 | [M과 ψ: 코사인 핵과 사인 핵](docs/mertens-psi.md) | $\mu=d_{-1/2}*d_{-1/2}$와 $\varepsilon=d_{-1/2}*d_{1/2}$, ψ의 국소 핵, 네 핵의 아크사인 표현, 소수핵으로 쓴 영점 측도 |
 | [약수별 누적합으로 얻는 M(x)](docs/divisor-cumsum.md) | $\mu(n)/\tau(n)$의 약수별 몫과 누적합이 $M(x)$가 되는 항등식, 매끄러운 시험함수의 1차 법칙, 누적 곡선의 $\mathcal K_{-1/2,-1/2}$ 예측 |
+| [짝수 중복도 영점과 $d_{1/2}$ 오차항](docs/even-zeros.md) | $\zeta^{1/2}$ 계수합에서 분기절단의 전체 주항을 뺀 잔차 $E$, 짝수 중복도 조건과의 동치, 성장 지수 $=\Theta_{\rm odd}$와 $\Omega_\pm$ |
+| [양의 약수분포의 이차 모멘트](docs/m2-divisor-moment.md) | $(1/2,1/2)$ 약수분포의 $M_2(n)$, 전체 주항, 잔차 $\mathcal E_2$와 단순영점의 동치, $E$에서의 전달 |
 | [강한 Chowla 추측: 제곱류 층과 4점 Wick 규칙](docs/chowla.md) | $\sum\mu(n)\mu(n+h)$의 제곱류 층·제곱류 표현과 팽창 격자, 극 성분의 소멸, 원시 성분의 OU 법칙, 짧은 구간의 4차 모멘트 사전, 2k차 사다리와 순열 규칙, 이산핵·코사인 언어와 극의 귀환 |
 
 [후속 연구 안내](docs/further-results.md)에 문서별 범위와 수치 기록의 위치를 모았다. **[국소 계산]**, **[휴리스틱]**, **RH** 등의 표시는 각 주장의 범위와 가정을 구분한다.
@@ -52,6 +54,9 @@ $A_x$는 제곱 인수 없는 모형, $\widetilde A_x$는 모든 정수의 $d_z$
 | 2k차 모멘트 사다리: 덧셈 에너지에서 Steinhaus 모형까지 | [Chowla 정리 4.5](docs/chowla.md#theorem-4-5) |
 | μ의 2k차 순열 규칙(M2k)과 평평한 사다리 | [Chowla 추측 4.7](docs/chowla.md#conjecture-4-7) |
 | 사다리 꼭대기의 점근적 대각성과 $Y=2\sqrt X$의 반례 | [Chowla 명제 4.8](docs/chowla.md#proposition-4-8) |
+| 짝수 중복도 조건 아래 $d_{1/2}$ 잔차 $E\ll x^\theta\log x$와 그 역 | [짝수 중복도 정리 1, 따름정리 3](docs/even-zeros.md#section-1) |
+| $E$의 성장 지수 $=\Theta_{\rm odd}$, 가정 없는 $\Omega_\pm(x^{1/2-\varepsilon})$ | [짝수 중복도 정리 2](docs/even-zeros.md#section-9) |
+| 이차 모멘트 잔차 $\mathcal E_2\ll x^{\theta+\varepsilon}$ $\iff$ $\Re s>\theta$에 단순영점 없음 | [이차 모멘트 정리 8.1](docs/m2-divisor-moment.md#section-8-1) |
 
 ## 검산
 
