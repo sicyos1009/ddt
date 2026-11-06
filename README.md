@@ -27,6 +27,7 @@ $A_x$는 제곱 인수 없는 모형, $\widetilde A_x$는 모든 정수의 $d_z$
 | [짝수 중복도 영점과 $d_{1/2}$ 오차항](docs/even-zeros.md) | $\zeta^{1/2}$ 계수합에서 분기절단의 전체 주항을 뺀 잔차 $E$, 짝수 중복도 조건과의 동치, 성장 지수 $=\Theta_{\rm odd}$와 $\Omega_\pm$ |
 | [양의 약수분포의 이차 모멘트](docs/m2-divisor-moment.md) | $(1/2,1/2)$ 약수분포의 $M_2(n)$, 전체 주항, 잔차 $\mathcal E_2$와 단순영점의 동치, $E$에서의 전달 |
 | [강한 Chowla 추측: 제곱류 층과 4점 Wick 규칙](docs/chowla.md) | $\sum\mu(n)\mu(n+h)$의 제곱류 층·제곱류 표현과 팽창 격자, 극 성분의 소멸, 원시 성분의 OU 법칙, 짧은 구간의 4차 모멘트 사전, 2k차 사다리와 순열 규칙, 이산핵·코사인 언어와 극의 귀환 |
+| [사인과 코사인으로 쓴 RH 판정법](docs/sine-cosine-rh.md) | 로그 동전의 켤레성, Littlewood 상쇄와 임계선 위 켤레 변환으로 쓴 두 판정법, 선 밖 영점의 결손 |
 
 [후속 연구 안내](docs/further-results.md)에 문서별 범위와 수치 기록의 위치를 모았다. **[국소 계산]**, **[휴리스틱]**, **RH** 등의 표시는 각 주장의 범위와 가정을 구분한다.
 
@@ -57,10 +58,12 @@ $A_x$는 제곱 인수 없는 모형, $\widetilde A_x$는 모든 정수의 $d_z$
 | 짝수 중복도 조건 아래 $d_{1/2}$ 잔차 $E\ll x^\theta\log x$와 그 역 | [짝수 중복도 정리 1, 따름정리 3](docs/even-zeros.md#section-1) |
 | $E$의 성장 지수 $=\Theta_{\rm odd}$, 가정 없는 $\Omega_\pm(x^{1/2-\varepsilon})$ | [짝수 중복도 정리 2](docs/even-zeros.md#section-9) |
 | 이차 모멘트 잔차 $\mathcal E_2\ll x^{\theta+\varepsilon}$ $\iff$ $\Re s>\theta$에 단순영점 없음 | [이차 모멘트 정리 8.1](docs/m2-divisor-moment.md#section-8-1) |
+| 코사인·사인 쪽의 Littlewood 상쇄와 RH의 동치 | [사인·코사인 판정법 1](docs/sine-cosine-rh.md#section-2) |
+| 임계선 위 사인 쪽이 코사인 쪽의 켤레 변환인 것과 RH의 동치 | [사인·코사인 판정법 2](docs/sine-cosine-rh.md#section-3) |
 
 ## 검산
 
-Python을 사용한다. 핵심 문서의 검산은 mpmath를([주정리 §9](docs/main-theorem.md#section-9)는 numpy와 scipy), [Ng 쌍대](docs/ng-duality.md#checks), [M과 ψ](docs/mertens-psi.md#checks), [Chowla](docs/chowla.md#checks), [약수별 누적합](docs/divisor-cumsum.md#checks)의 검산은 numpy와 scipy를 쓴다.
+Python을 사용한다. 핵심 문서의 검산은 mpmath를([주정리 §9](docs/main-theorem.md#section-9)는 numpy와 scipy), [Ng 쌍대](docs/ng-duality.md#checks), [M과 ψ](docs/mertens-psi.md#checks), [Chowla](docs/chowla.md#checks), [약수별 누적합](docs/divisor-cumsum.md#checks), [사인·코사인 판정법](docs/sine-cosine-rh.md#checks)의 검산은 numpy와 scipy를 쓴다.
 
 | 스크립트 | 확인 범위 |
 |:--|:--|
@@ -75,6 +78,7 @@ Python을 사용한다. 핵심 문서의 검산은 mpmath를([주정리 §9](doc
 | [check_mertens_psi.py](scripts/check_mertens_psi.py) | M과 ψ의 합성곱 항등식, 소수별 동전, 네 국소 핵, $\arg\zeta$의 특성함수, 대역 제한 명시공식과 소수만으로 찾은 영점 |
 | [check_chowla.py](scripts/check_chowla.py) | Chowla 합의 팽창·gcd 항등식, 제곱류 표현과 일치 분류, Mirsky 분산과 공분산 격자, 원시 성분, 짧은 구간 이분법, M4와 메아리, 곱셈 모형의 M4, 2k차 사다리와 순열 규칙, 꼭대기의 반례, 이산핵의 동전과 극의 귀환 (`--full`은 $N=2^{25}$) |
 | [check_divisor_cumsum.py](scripts/check_divisor_cumsum.py) | 약수별 몫의 합 = $M(x)$, 몫의 분해, $f_x(1)$의 점근식, 핵 누적함수의 닫힌 꼴, 모멘트와 누적 곡선의 수치 (`--figure`는 그림 생성, matplotlib 필요) |
+| [check_sine_cosine.py](scripts/check_sine_cosine.py) | 로그 동전, 코사인·사인 쪽의 Littlewood 상쇄, 켤레 변환 공식, 임계선 위 톱니의 재현, 높이와 구간 통계, 그림 1–3 생성(`--figures`) |
 
     python -B scripts/check_global_formula.py
     python -B scripts/check_smoothed_formula.py
@@ -87,5 +91,6 @@ Python을 사용한다. 핵심 문서의 검산은 mpmath를([주정리 §9](doc
     python -B scripts/check_mertens_psi.py
     python -B scripts/check_chowla.py
     python -B scripts/check_divisor_cumsum.py
+    python -B scripts/check_sine_cosine.py
 
 수치 검산은 증명을 대체하지 않는다. 주제별 부록의 기존 수치표는 계산 코드와 원자료가 없어 재현하지 않았으며, 위 스크립트의 검증 범위에 포함되지 않는다. 예외로 주정리 부록 B.1의 표는 `check_beta_expansion.py --x 1e7`이 재현한다.
