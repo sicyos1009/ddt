@@ -592,6 +592,35 @@ $$
 
 유수 $-\tfrac14$는 [주정리 §7](main-theorem.md#section-7)의 $\langle\mathcal K_{-1/2,-1/2},u^2\rangle=-\tfrac14$와 같다. 이는 [영점 기여 (1.1)](zero-contributions.md#equation-1-1)을 $H\equiv1$인 $d_z$ 모형에 적용한 국소 핵과 일치한다. 이전 판 §8.2의 "부호 변화가 $F$와 $F''$에 동시에 작용한다"는 논증은 이 보조정리로 대체된다.
 
+<a id="simple-zero-exact-contribution"></a>
+
+**[국소 계산] 단순영점 기여의 상쇄와 적분을 끝낸 정확식.** 고정된 비자명 단순영점 $\rho$에 대해
+
+$$
+\Delta_{2,\rho}(x):=\operatorname*{Res}_{s=\rho}
+\left(F_2(s)\frac{x^s}{s}\right)
+=-\frac{\zeta'(\rho)}{4\rho}x^\rho
+$$
+
+라 놓고, [(5.5)](#equation-5-5)의 하한 $2$ 규약으로 그 기여를 정하면
+
+$$
+\boxed{
+\begin{aligned}
+\mathcal E_{2,\rho}(x)
+&:=\frac{\Delta_{2,\rho}(x)}{(\log x)^2}
++2\int_2^x\frac{\Delta_{2,\rho}(t)}{t(\log t)^3}\,dt\\
+&=\frac{\zeta'(\rho)}4\left[
+\frac{x^\rho}{\log x}-\frac{2^\rho}{\log2}
+-\rho\bigl(\operatorname{Ei}(\rho\log x)-\operatorname{Ei}(\rho\log2)\bigr)
+-\frac{2^\rho}{\rho(\log2)^2}
+\right],\qquad x\ge2.
+\end{aligned}
+}
+$$
+
+여기서 $x^\rho=e^{\rho\log x}$이고 $\operatorname{Ei}$는 주가지이다. 마지막 경계항은 $\mathcal E_{2,\rho}(2)=\Delta_{2,\rho}(2)/(\log2)^2$를 고정한다. 중복도 $m\ge2$인 영점의 유수 기여는 $0$이다.
+
 <a id="section-8-3"></a>
 
 ### 8.3. $\Delta|g|$ 항등식
