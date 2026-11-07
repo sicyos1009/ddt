@@ -8,13 +8,18 @@ $(1/2,1/2)$ 약수분포의 이차 모멘트 $M_2$와 전체 주항을 제거한
 | [§8.2–8.3](#section-8-2) | 단순영점 기여의 정확식과 $\sigma,r$의 완전 상쇄 |
 | [§8.4–8.5](#section-8-4) | 단순극을 보존하는 평균 추정과 임의 유한 차수의 로그 전개 |
 | [정리 8.1](#section-8-1) | $\mathcal E_2$의 성장 지수 $=\Theta_{\rm simple}$ |
+| [명제 5.1](#section-5-3) | $a_2(n)$의 비산술 부분 $b(n)=\sum_{d\mid n}\Lambda(d)\log d$의 점별 영점 표현 |
+| [명제 10.1](#section-10-2) | $4\Delta_2=x\,\mathcal G+O(\sqrt x\log x)$, $\mathcal G$는 $\psi-x$의 두 이산–연속 차 |
+| [명제 10.2](#section-10-3) | 영점 하나가 $\mathcal G$에 주는 기여 $\zeta'(\rho)x^{\rho-1}$, 중복 영점의 소멸 **[국소 계산]** |
+| [따름정리 10.3](#section-10-4) | $x\mathcal G$의 성장 판정과 $\Theta_{\rm simple}$ |
 
 - [§1–3. 약수분포와 이차 모멘트](#section-1)
-- [§4–5. 부분합과 전체 주항](#section-4)
+- [§4–5. 부분합, 전체 주항, $b(n)$의 영점 표현](#section-4)
 - [§6. 관련 잔차 $E$의 기호](#section-6)
 - [§7. $\mathcal E_2$의 멜린 변환](#section-7)
 - [§8. 단순영점의 기여와 전역 성장](#section-8)
 - [§9. 전체 주항의 점근 전개](#section-9)
+- [§10. ψ를 통한 이산–연속 분해](#section-10)
 - [참고 문헌](#references)
 
 자연로그를 쓰며, 비자명 영점 $\rho=\beta+i\gamma_\rho$의 중복도는 $m_\rho$로 쓴다. 절과 수식 번호는 이 문서 안에서 독립적이다.
@@ -176,6 +181,93 @@ $$
 $$
 
 이다. 하한에서는 $\Delta_2(2)=(\log2)^2\mathcal E_2(2)$이다.
+
+<a id="section-5-3"></a>
+
+### 5.3. $b(n)$의 점별 영점 표현
+
+§3의 항등식에서 $(\log n)^2$을 뺀 부분을
+<a id="equation-5-8"></a>
+
+$$
+b(n):=\sum_{d\mid n}\Lambda(d)\log d
+=\frac12\sum_{p^a\parallel n}a(a+1)(\log p)^2,
+\qquad
+4a_2(n)=(\log n)^2+b(n)
+\tag{5.8}
+$$
+
+로 쓴다. 두 번째 표현은 $\Lambda(p^k)\log p^k=k(\log p)^2$를 $k=1,\dots,a$에 대해 더한 것이다. $b(n)$은 [극한분포 §1](limiting-distribution.md#section-1)의 $c_n$과 같은 수이다. $\sum_n\Lambda(n)n^{-s}=-\zeta'/\zeta$를 미분하면 $\sum_n\Lambda(n)\log n\,n^{-s}=(\zeta'/\zeta)'$이고, 여기에 $\zeta$를 곱하면 $\Re s>1$에서
+
+$$
+\widehat b(s):=\sum_{n\ge1}\frac{b(n)}{n^s}
+=\zeta(s)\Bigl(\frac{\zeta'}{\zeta}\Bigr)'(s)
+=\zeta''(s)-\frac{\zeta'(s)^2}{\zeta(s)},
+\qquad
+4F_2=\zeta''+\widehat b
+$$
+
+이다. 두 번째 등식은 (5.1)과 같다.
+
+**주항.** $\zeta''(1+h)=2h^{-3}+O(1)$을 (5.2)의 $4F_2$에서 빼면 $\widehat b(1+h)=h^{-3}+\gamma h^{-2}-ch^{-1}+O(1)$이다. $x^{1+h}/(1+h)=x\bigl[1+(L-1)h+(\tfrac12L^2-L+1)h^2+O(h^3)\bigr]$이므로
+<a id="equation-5-9"></a>
+
+$$
+\boxed{
+Q_b(x):=\operatorname*{Res}_{s=1}\widehat b(s)\frac{x^s}{s}
+=x\left[\frac12L^2+(\gamma-1)L+1-\gamma-c\right].
+}
+\tag{5.9}
+$$
+
+같은 전개로 $\operatorname{Res}_{s=1}\zeta''(s)x^s/s=x(L^2-2L+2)$이고, 두 유수의 합 $4Q_2(x)=x(L^2-2L+2)+Q_b(x)$는 (5.3)과 일치한다. [극한분포 §1](limiting-distribution.md#section-1)의 주항은 $xP_2(\log x)=Q_b(x)$이다.
+
+**경로 이동.** $S_b(x):=\sum_{n\le x}b(n)$으로 두고, 영점의 높이가 아닌 $T>0$과 정수 $K\ge0$을 고정한다. 직사각형 $[-2K-1,2]\times[-T,T]$의 경계에서 $\widehat b(s)x^s/s$를 반시계 방향으로 적분하고, 오른쪽 변의 적분을 $I_{\rm right}$, 나머지 세 변의 적분의 합을 $I_{\rm rest}$라 하자. 경로 안의 유수는 다음과 같다.
+
+- $s=1$: $Q_b(x)$.
+- $s=0$: $\zeta(0)=-\tfrac12\ne0$이므로 $\widehat b$는 정칙이고, 유수는 상수 $\widehat b(0)$이다.
+- 비자명 영점 $\rho$: §8.2의 계산에서 $\zeta'^2/\zeta$는 $\rho$에서 $(s-\rho)^{m_\rho-2}$의 차수를 가지므로 $m_\rho\ge2$이면 $\widehat b$가 정칙이고, $m_\rho=1$이면 $\operatorname{Res}_{s=\rho}\widehat b=-\zeta'(\rho)$이다. 임계띠의 실수축에는 영점이 없으므로($0<\sigma<1$에서 $\zeta(\sigma)<0$) $\rho$와 $\bar\rho$를 묶어 $\gamma_\rho>0$만 센다.
+- 자명 영점 $s=-2k$ ($1\le k\le K$): $\zeta''$는 정칙이고 $-\zeta'^2/\zeta$의 유수는 $-\zeta'(-2k)$이므로 유수는 $\zeta'(-2k)x^{-2k}/(2k)$이다.
+
+따라서 $\mathcal R_{T,K}(x):=\bigl(S_b(x)-I_{\rm right}\bigr)-I_{\rm rest}$로 정의하면, $x\ge1$에서 정확히
+<a id="equation-5-10"></a>
+
+$$
+S_b(x)=Q_b(x)+\widehat b(0)
+-2\Re\sum_{\substack{0<\gamma_\rho\le T\\ m_\rho=1}}\frac{\zeta'(\rho)}{\rho}x^\rho
++\sum_{k=1}^{K}\frac{\zeta'(-2k)}{2k}x^{-2k}
++\mathcal R_{T,K}(x)
+\tag{5.10}
+$$
+
+이다. $S_b(x)-I_{\rm right}$는 높이 $T$에서 자른 Perron 공식의 절단오차이다. 정수 $x$에서 Perron 적분은 $S_b(x)-\tfrac12b(x)$를 근사하므로, 끝점의 $\tfrac12b(x)$도 이 절단오차에 들어간다.
+
+**명제 5.1 (가정 없음).** 정수 $n\ge2$에서
+<a id="equation-5-11"></a>
+
+$$
+\boxed{
+\begin{aligned}
+b(n)
+&=Q_b(n)-Q_b(n-1)
+-2\Re\sum_{\substack{0<\gamma_\rho\le T\\ m_\rho=1}}
+\frac{\zeta'(\rho)}{\rho}\bigl[n^{\rho}-(n-1)^{\rho}\bigr]\\
+&\quad+\sum_{k=1}^{K}\frac{\zeta'(-2k)}{2k}\bigl[n^{-2k}-(n-1)^{-2k}\bigr]
++\mathcal R_{T,K}(n)-\mathcal R_{T,K}(n-1).
+\end{aligned}
+}
+\tag{5.11}
+$$
+
+**증명.** (5.10)을 $x=n$과 $x=n-1$에 쓰고 빼면 $b(n)=S_b(n)-S_b(n-1)$이고 상수 $\widehat b(0)$은 소거된다. $n=2$일 때는 $S_b(1)=0$이다. $\square$
+
+영점의 위치나 단순성은 가정하지 않았다. 단순영점은 임계선 밖에 있어도 그대로 들어가고, 중복 영점은 항을 남기지 않는다. §8.2의 $\Delta_{2,\rho}=c_\rho x^\rho/\rho$, $c_\rho=-\zeta'(\rho)/4$에서
+
+$$
+-\frac{\zeta'(\rho)}{\rho}x^\rho=4\Delta_{2,\rho}(x)
+$$
+
+이므로, (5.10)의 영점항은 $\Delta_{2,\rho}+\Delta_{2,\bar\rho}$를 4배한 것이고 (5.11)의 영점항은 그 차분이다. (5.8)의 $(\log n)^2$ 부분은 $\zeta''$에서 오며 영점항을 주지 않으므로, $a_2(n)$의 영점 성분은 모두 $b(n)$에서 나온다. (5.10)은 [극한분포 §1](limiting-distribution.md#section-1)의 명시적 공식에서 자명 영점의 $K$개 항과 상수 $\widehat b(0)$을 분리한 형태이다. 이 절에서는 $\mathcal R_{T,K}$의 크기를 추정하지 않으며, 절단오차의 평균제곱 추정은 [극한분포 §3](limiting-distribution.md#section-3)에 있다.
 
 <a id="section-6"></a>
 
@@ -528,6 +620,222 @@ $$
 
 앞의 두 항은 [주정리 (8.12)](main-theorem.md#equation-8-12)와 일치한다. $\mathcal E_2$의 정의에는 (5.4)의 전체 주항을 사용한다.
 
+<a id="section-10"></a>
+
+## 10. ψ를 통한 이산–연속 분해
+
+$\Delta_2$를 소수 쪽 오차 $\Delta_\psi(x):=\psi(x)-x$, $\psi(x)=\sum_{n\le x}\Lambda(n)$로 직접 쓴다. 입력은 §5.3의 $b=(\Lambda\log)*1$ 하나이고, 이산–연속 차가 두 번 들어간다. $y=\sqrt x$, $\Psi_1(t):=\sum_{n\le t}\Lambda(n)\log n$으로 둔다.
+
+<a id="section-10-1"></a>
+
+### 10.1. 두 이산–연속 차
+
+첫 번째 차는 소수 로그 질량 $\Lambda(n)\log n$을 연속 질량 $\log t\,dt$와 비교한다. $t\ge1$에서
+<a id="equation-10-1"></a>
+
+$$
+\mathcal C(t):=\frac1t\left[\Psi_1(t)-\int_1^t\log u\,du\right],
+\qquad
+(\mathcal Wf)(t):=\frac1t\left[f(t)\log t-\int_1^t\frac{f(u)}u\,du\right]
+\tag{10.1}
+$$
+
+로 두면
+<a id="equation-10-2"></a>
+
+$$
+\boxed{\mathcal C=\mathcal W\Delta_\psi.}
+\tag{10.2}
+$$
+
+**증명.** Stieltjes 부분적분으로 $\Psi_1(t)=\int_{1}^{t}\log u\,d\psi(u)=\psi(t)\log t-\int_1^t\psi(u)u^{-1}\,du$이다. 같은 식을 $\psi$ 대신 $u\mapsto u$에 적용하면 $\int_1^t\log u\,du=t\log t-\int_1^t du$이고, 두 식을 빼면 된다. $\square$
+
+상수함수에 대해서는 $\mathcal W1=0$이다. 또 $\int_1^t\log u\,du=t\log t-t+1$이므로 $\Psi_1(t)=t\,\mathcal C(t)+t\log t-t+1$이다.
+
+두 번째 차는 첫 번째 오차를 약수 방향으로 평균한다.
+<a id="equation-10-3"></a>
+
+$$
+(\mathcal Df)(x):=\sum_{m\le\sqrt x}\frac{f(x/m)}m-\int_{\sqrt x}^{\infty}\frac{f(t)}t\,dt.
+\tag{10.3}
+$$
+
+$x=e^{\tau}$로 쓰면 $1/m$ 가중 이산합과 로그 좌표의 연속 적분을 비교하는 연산이다. 두 차는 같은 꼴이지만, 첫 번째는 $\Lambda(n)\log n$ 질량을, 두 번째는 $1/m$ 가중치를 쓴다.
+
+**수렴.** 고전적 소수정리 $\Delta_\psi(t)\ll t\exp(-\delta\sqrt{\log t})$ ($\delta>0$) [4, 6장]에서, (10.1)의 첫 항은 $\Delta_\psi(t)\log t/t$이고 둘째 항은 $\int_1^t$를 $\sqrt t$에서 나누어 추정하면 $\mathcal C(t)\ll\exp(-\delta'\sqrt{\log t})$이다. 따라서
+<a id="equation-10-4"></a>
+
+$$
+\kappa_\Lambda:=\int_1^\infty\frac{\mathcal C(t)}t\,dt
+\tag{10.4}
+$$
+
+는 절대수렴하고, $(\mathcal D\mathcal C)(x)$의 적분도 수렴한다.
+
+<a id="section-10-2"></a>
+
+### 10.2. 합성식
+
+**명제 10.1 (가정 없음).** $\mathcal G:=\mathcal D\mathcal C=\mathcal D\mathcal W\Delta_\psi$로 두면 $x\ge2$에서
+<a id="equation-10-5"></a>
+
+$$
+\boxed{
+4\Delta_2(x)=x\,\mathcal G(x)+O(\sqrt x\log x),
+\qquad
+\mathcal E_2(x)=\frac14\mathscr L(\mathrm{id}\cdot\mathcal G)(x)+O\!\left(\frac{\sqrt x}{\log x}\right).
+}
+\tag{10.5}
+$$
+
+여기서 $\mathscr L(\mathrm{id}\cdot\mathcal G)(x)=x\mathcal G(x)/L^2+2\int_2^x\mathcal G(t)(\log t)^{-3}\,dt$이다. 또
+<a id="equation-10-6"></a>
+
+$$
+\boxed{\kappa_\Lambda=-(\gamma^2+2\gamma_1).}
+\tag{10.6}
+$$
+
+**증명.** (i) *로그 제곱 부분.* (5.8)과 $4Q_2=x(L^2-2L+2)+Q_b$에서
+
+$$
+4\Delta_2(x)=\Bigl[\sum_{2\le n\le x}(\log n)^2-x(L^2-2L+2)\Bigr]+\bigl[S_b(x)-Q_b(x)\bigr].
+$$
+
+$\int_1^x(\log t)^2\,dt=x(L^2-2L+2)-2$이고 $(\log t)^2$은 단조증가하므로 첫 괄호는 $O(L^2)$이다.
+
+(ii) *쌍곡선법.* $S_b(x)=\sum_{dm\le x}\Lambda(d)\log d$에 분할점 $y=\sqrt x$의 디리클레 쌍곡선법을 쓰면
+
+$$
+S_b(x)=\sum_{m\le y}\Psi_1(x/m)+\sum_{d\le y}\Lambda(d)\log d\Bigl\lfloor\frac xd\Bigr\rfloor-\Psi_1(y)\lfloor y\rfloor
+$$
+
+이다. 바닥함수를 풀 때 생기는 $\sum_{d\le y}\Lambda(d)\log d\,\{x/d\}$와 $\{y\}\Psi_1(y)$는 Chebyshev 상계로 둘 다 $O(\Psi_1(y))=O(\sqrt x\log x)$이다. 남는 $d$ 쪽 합은 Stieltjes 적분으로 정확히
+
+$$
+x\sum_{d\le y}\frac{\Lambda(d)\log d}d=\frac xy\Psi_1(y)+x\int_1^y\frac{\Psi_1(t)}{t^2}\,dt
+$$
+
+이고, $x/y=y$이므로 첫 항이 $y\Psi_1(y)$와 상쇄된다. 따라서
+<a id="equation-10-7"></a>
+
+$$
+S_b(x)=\sum_{m\le y}\Psi_1(x/m)+x\int_1^y\frac{\Psi_1(t)}{t^2}\,dt+O(\sqrt x\log x).
+\tag{10.7}
+$$
+
+(iii) *이산–연속 분리.* (10.7)에 $\Psi_1(t)=t\,\mathcal C(t)+t\log t-t+1$을 넣고 $\int_1^y\mathcal C(t)\,dt/t=\kappa_\Lambda-\int_y^\infty\mathcal C(t)\,dt/t$를 쓰면, $\mathcal C$가 들어간 항은 정확히 $x\,\mathcal G(x)+x\kappa_\Lambda$로 모인다. 나머지는
+
+$$
+P(x):=\sum_{m\le y}\Bigl[\frac xm\log\frac xm-\frac xm+1\Bigr]+x\int_1^y\frac{t\log t-t+1}{t^2}\,dt
+$$
+
+이다. $\sum_{m\le y}1/m=\log y+\gamma+O(1/y)$, $\sum_{m\le y}\log m/m=\tfrac12(\log y)^2+\gamma_1+O(\log y/y)$와 $\log y=L/2$에서
+
+$$
+P(x)=x\Bigl[\frac12L^2+(\gamma-1)L+1-\gamma-\gamma_1\Bigr]+O(\sqrt x\log x)
+$$
+
+이다. 따라서 $S_b(x)=x\,\mathcal G(x)+x\kappa_\Lambda+P(x)+O(\sqrt x\log x)$이다.
+
+(iv) *상수 $\kappa_\Lambda$.* $\Re s>1$에서 $\int_1^\infty\Psi_1(t)t^{-s-1}\,dt=s^{-1}(\zeta'/\zeta)'(s)$이고, $t\log t-t+1$의 같은 변환은 $(s-1)^{-2}-(s-1)^{-1}+s^{-1}$이므로
+
+$$
+\int_1^\infty\mathcal C(t)\,t^{-s}\,dt=\frac1s\Bigl(\frac{\zeta'}{\zeta}\Bigr)'(s)-\frac1{(s-1)^2}+\frac1{s-1}-\frac1s
+$$
+
+이다. 왼쪽은 (10.4)의 절대수렴과 지배수렴 정리로 $s\to1^+$에서 $\kappa_\Lambda$로 간다. $\log\zeta(1+h)=-\log h+\gamma h-(\gamma_1+\tfrac12\gamma^2)h^2+O(h^3)$에서 $(\zeta'/\zeta)'(1+h)=h^{-2}-(\gamma^2+2\gamma_1)+O(h)$이고, 오른쪽에 넣으면 $h^{-2}$와 $h^{-1}$ 항이 상쇄되어 (10.6)을 얻는다.
+
+(v) *주항의 상쇄.* (10.6)과 $c=\gamma^2+3\gamma_1$에서 $\kappa_\Lambda+1-\gamma-\gamma_1=1-\gamma-c$이므로 $x\kappa_\Lambda+P(x)=Q_b(x)+O(\sqrt x\log x)$이다. (iii)과 합치면 $S_b(x)-Q_b(x)=x\,\mathcal G(x)+O(\sqrt x\log x)$이고, (i)과 합쳐 (10.5)의 첫 식을 얻는다.
+
+(vi) *$\mathscr L$의 적용.* (5.5)와 선형성에서 $\mathcal E_2=\tfrac14\mathscr L(\mathrm{id}\cdot\mathcal G)+\tfrac14\mathscr L r$이고, $|r(t)|\ll\sqrt t\log t$이면
+
+$$
+\mathscr Lr(x)\ll\frac{\sqrt x}{L}+\int_2^x\frac{dt}{\sqrt t(\log t)^2}\ll\frac{\sqrt x}{L}.
+\qquad\square
+$$
+
+오차 $O(\sqrt x\log x)$는 (ii)의 바닥함수에서만 나온다. 나머지 단계는 정확하거나 그보다 작은 오차를 준다. 이 오차는 임계선 위 영점 기여의 크기 $x^{1/2}$보다 크므로, (10.5)는 $1/2$보다 큰 성장 지수를 정확히 옮기지만 $\sqrt x$ 규모의 진동을 분해하지는 않는다(§10.4).
+
+<a id="section-10-3"></a>
+
+### 10.3. 영점 하나의 기여 [국소 계산]
+
+$\psi$의 명시적 공식 [4, 12장]에서 중복도 $m_\rho$인 비자명 영점은 $\Delta_\psi$에 $-m_\rho t^\rho/\rho$를 준다. 따라서 이 절에서는 $t\mapsto t^\rho$ ($t\ge1$)에 $\mathcal D\mathcal W$를 적용한다.
+
+**명제 10.2.** $\rho=\beta+i\gamma_\rho$, $0<\beta<1$을 고정하면 $x\to\infty$일 때
+<a id="equation-10-8"></a>
+
+$$
+\boxed{
+\mathcal D\mathcal W[t^\rho](x)
+=x^{\rho-1}\Bigl(\zeta(\rho)L+\zeta'(\rho)-\frac{\zeta(\rho)}{\rho}\Bigr)
++O_\rho\bigl(x^{\beta/2-1}L\bigr).
+}
+\tag{10.8}
+$$
+
+특히 $\rho$가 영점이면 $\mathcal D\mathcal W[t^\rho](x)=\zeta'(\rho)x^{\rho-1}+O_\rho(x^{\beta/2-1}L)$이다.
+
+**증명.** $\int_1^tu^{\rho-1}\,du=(t^\rho-1)/\rho$에서
+
+$$
+\mathcal W[t^\rho](t)=t^{\rho-1}\log t-\frac{t^{\rho-1}-t^{-1}}{\rho}.
+$$
+
+$\sigma>0$, $s\ne1$에서 정확히
+
+$$
+\sum_{m\le y}m^{-s}=\zeta(s)+\frac{y^{1-s}}{1-s}+E(s,y),
+\qquad
+E(s,y)=s\int_y^\infty\{t\}t^{-s-1}\,dt-\{y\}y^{-s}
+$$
+
+이다. 이를 $s$로 미분하면 $E$와 $\partial_sE$는 고정된 $\rho$에서 $O_\rho(y^{-\beta}\log y)$이다. $a=1-\rho$라 쓰면 $\Re a>0$이고, 위 식과 그 미분에서
+
+$$
+\sum_{m\le y}\frac{(x/m)^{\rho-1}\log(x/m)}m
+=x^{\rho-1}\bigl(\zeta(\rho)L+\zeta'(\rho)\bigr)
++x^{\rho-1}y^{a}\Bigl(\frac{L-\log y}{a}+\frac1{a^2}\Bigr)
++O_\rho(x^{\beta-1}y^{-\beta}L)
+$$
+
+이다. $y^2=x$이므로 $x^{\rho-1}y^a=y^{-a}$이고 $L-\log y=\log y$이다. 한편
+
+$$
+\int_y^\infty t^{\rho-2}\log t\,dt=y^{-a}\Bigl(\frac{\log y}{a}+\frac1{a^2}\Bigr)
+$$
+
+이므로 경계항이 정확히 상쇄되어 $\mathcal D[t^{\rho-1}\log t](x)=x^{\rho-1}(\zeta(\rho)L+\zeta'(\rho))+O(x^{\beta/2-1}L)$이다. 같은 방법으로 $\mathcal D[t^{\rho-1}](x)=x^{\rho-1}\zeta(\rho)+O(x^{\beta/2-1})$이고, $\mathcal D[t^{-1}](x)=(\lfloor y\rfloor-y)/x=O(x^{-1})$이다. 세 식을 합치면 (10.8)이다. $\square$
+
+따라서 중복도 $m_\rho$인 영점의 $x\mathcal G$에 대한 국소 기여는
+
+$$
+-m_\rho\frac{\zeta'(\rho)}{\rho}x^\rho+O_\rho(x^{\beta/2}L)
+=\begin{cases}
+4\Delta_{2,\rho}(x)+O_\rho(x^{\beta/2}L),&m_\rho=1,\\
+O_\rho(x^{\beta/2}L),&m_\rho\ge2
+\end{cases}
+$$
+
+이다. 이는 §8.2와 명제 10.1에 맞는다. 오차 $x^{\beta/2}L$은 (10.5)의 오차 규모 안에 있다. $\mathcal D$의 이산합은 영점항 $x^{\rho-1}\log x$를 $\zeta(\rho)L+\zeta'(\rho)$로 바꾼다. 앞의 인자는 모든 영점에서, 뒤의 인자는 중복 영점에서 사라진다. $\Delta_\psi$의 성장 지수는 모든 영점의 실수부 상한이지만 $x\mathcal G$는 단순영점만 보는 이유가 이 상쇄이다. $|\mathcal C|$를 항별로 추정하면 이 상쇄를 잃으므로, 성장률을 추정할 때는 합과 적분을 함께 유지해야 한다. 무한 영점합에서 $\mathcal D\mathcal W$와 합의 순서를 바꾸는 문제는 다루지 않는다.
+
+<a id="section-10-4"></a>
+
+### 10.4. 성장 판정
+
+**따름정리 10.3 (가정 없음).** 각 $\tfrac12\le\theta<1$에 대해
+
+$$
+x\,\mathcal G(x)=O_\varepsilon(x^{\theta+\varepsilon})\ \text{모든 }\varepsilon>0
+\quad\Longleftrightarrow\quad
+\Re\rho>\theta\text{인 단순영점이 없음}.
+$$
+
+$\Theta_{\rm simple}>\tfrac12$이면 $\inf\{\alpha:x\mathcal G(x)=O(x^\alpha)\}=\Theta_{\rm simple}$이다.
+
+**증명.** $\theta\ge\tfrac12$이므로 명제 10.1의 오차 $O(\sqrt x\log x)$는 $O(x^{\theta+\varepsilon})$에 들어간다. 따라서 $x\mathcal G=O(x^{\theta+\varepsilon})$과 $\Delta_2=O(x^{\theta+\varepsilon})$은 동치이고, 정리 8.1의 동치를 $\Delta_2$에 대해 쓰면 된다($\Delta_2$와 $\mathcal E_2$의 성장 지수는 같다). 둘째 주장은 $\alpha>\tfrac12$에서 같은 논법을 쓴 것이다. $\square$
+
 <a id="references"></a>
 
 ## 참고 문헌
@@ -535,4 +843,4 @@ $$
 1. Kohji Matsumoto, *Recent Developments in the Mean Square Theory of the Riemann Zeta and Other Zeta-Functions*, in *Number Theory* (2000), pp. 241–286, §1, 식 (1.1). [공개본](https://nagoya.repo.nii.ac.jp/records/18330), [DOI](https://doi.org/10.1007/978-3-0348-7023-8_14).
 2. N. Levinson, *More than one third of zeros of Riemann's zeta-function are on $\sigma=1/2$*, Adv. Math. 13 (1974), 383–436; D. R. Heath-Brown, *Simple zeros of the Riemann zeta-function on the critical line*, Bull. London Math. Soc. 11 (1979), 17–18.
 3. J. B. Conrey, *More than two fifths of the zeros of the Riemann zeta function are on the critical line*, J. Reine Angew. Math. 399 (1989), 1–26.
-4. H. L. Montgomery, R. C. Vaughan, *Multiplicative Number Theory I*, Cambridge (2007), §15.1: Landau의 정리.
+4. H. L. Montgomery, R. C. Vaughan, *Multiplicative Number Theory I*, Cambridge (2007): 6장(소수정리의 오차항), 12장(명시적 공식), §15.1(Landau의 정리).
