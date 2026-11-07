@@ -11,7 +11,7 @@ $(1/2,1/2)$ 약수분포의 이차 모멘트 $M_2$와 전체 주항을 제거한
 | [명제 5.1](#section-5-3) | $a_2(n)$의 비산술 부분 $b(n)=\sum_{d\mid n}\Lambda(d)\log d$의 점별 영점 표현 |
 | [명제 10.1](#section-10-2) | $4\Delta_2=x\,\mathcal G+O(\sqrt x\log x)$, $\mathcal G$는 $\psi-x$의 두 이산–연속 차 |
 | [명제 10.2](#section-10-3) | 영점 하나가 $\mathcal G$에 주는 기여 $\zeta'(\rho)x^{\rho-1}$, 중복 영점의 소멸 **[국소 계산]** |
-| [따름정리 10.3](#section-10-4) | $x\mathcal G$의 성장 판정과 $\Theta_{\rm simple}$ |
+| [따름정리 10.3–10.4](#section-10-4) | $x\mathcal G$의 성장 판정과 $\Theta_{\rm simple}$, 첫 번째 차 $R=\Psi_1-x\log x+x$의 판정과 RH |
 
 - [§1–3. 약수분포와 이차 모멘트](#section-1)
 - [§4–5. 부분합, 전체 주항, $b(n)$의 영점 표현](#section-4)
@@ -835,6 +835,54 @@ $$
 $\Theta_{\rm simple}>\tfrac12$이면 $\inf\{\alpha:x\mathcal G(x)=O(x^\alpha)\}=\Theta_{\rm simple}$이다.
 
 **증명.** $\theta\ge\tfrac12$이므로 명제 10.1의 오차 $O(\sqrt x\log x)$는 $O(x^{\theta+\varepsilon})$에 들어간다. 따라서 $x\mathcal G=O(x^{\theta+\varepsilon})$과 $\Delta_2=O(x^{\theta+\varepsilon})$은 동치이고, 정리 8.1의 동치를 $\Delta_2$에 대해 쓰면 된다($\Delta_2$와 $\mathcal E_2$의 성장 지수는 같다). 둘째 주장은 $\alpha>\tfrac12$에서 같은 논법을 쓴 것이다. $\square$
+
+두 번째 차 $\mathcal D$를 거치기 전의 첫 번째 오차 $\mathcal C$로 같은 판정을 하면, 이번에는 모든 영점이 대상이 된다.
+
+**따름정리 10.4 (가정 없음).**
+<a id="equation-10-9"></a>
+
+$$
+R(x):=\Psi_1(x)-x\log x+x=x\,\mathcal C(x)+1
+\tag{10.9}
+$$
+
+로 두면 각 $\tfrac12\le\theta<1$에 대해
+
+$$
+R(x)=O_\varepsilon(x^{\theta+\varepsilon})\ \text{모든 }\varepsilon>0
+\quad\Longleftrightarrow\quad
+\Re\rho>\theta\text{인 비자명 영점이 없음}
+$$
+
+이다. 영점의 중복도는 따지지 않는다. 특히
+
+$$
+\boxed{R(x)=O_\varepsilon(x^{1/2+\varepsilon})\ \text{모든 }\varepsilon>0\quad\Longleftrightarrow\quad\text{RH}.}
+$$
+
+**증명.** (⇐) $\Re\rho>\theta$인 영점이 없으면 명시적 공식 [4, 12장]과 $N(T+1)-N(T)\ll\log T$에서 $\Delta_\psi(x)\ll x^\theta(\log x)^2$이다. (10.2)를 풀어 쓰면
+
+$$
+R(x)-1=x\,\mathcal C(x)=\Delta_\psi(x)\log x-\int_1^x\frac{\Delta_\psi(t)}t\,dt
+$$
+
+이므로 $R(x)\ll x^\theta(\log x)^3$이다.
+
+(⇒) $R(x)=O(x^{\theta+\varepsilon})$이면 $\mathcal C(t)=(R(t)-1)/t=O(t^{\theta+\varepsilon-1})$이므로 $\int_1^\infty\mathcal C(t)t^{-s}\,dt$는 $\Re s>\theta+\varepsilon$에서 절대수렴하고 정칙이다. §10.2 (iv)에서 이 적분은 $\Re s>1$에서
+
+$$
+\frac1s\Bigl(\frac{\zeta'}{\zeta}\Bigr)'(s)-\frac1{(s-1)^2}+\frac1{s-1}-\frac1s
+$$
+
+와 같다. 따라서 이 함수는 $\Re s>\theta+\varepsilon$으로 정칙하게 연장된다. $s=1$에서는 $(\zeta'/\zeta)'(1+h)=h^{-2}+O(1)$이므로 극이 상쇄된다. 한편 $m$중 영점 $\rho$ 근방에서는 $\log\zeta(s)=m\log(s-\rho)+(\text{정칙})$이므로
+
+$$
+\Bigl(\frac{\zeta'}{\zeta}\Bigr)'(s)=(\log\zeta(s))''=-\frac{m}{(s-\rho)^2}+O(1)
+$$
+
+이고, $m\ge1$이면 이중극이 남는다. $1/s$는 $\rho$에서 $0$이 아니므로 $\Re\rho>\theta+\varepsilon$인 영점은 없다. $\varepsilon\to0$으로 보내면 된다. $\square$
+
+따름정리 10.3과 10.4를 나란히 놓으면 두 이산–연속 차의 역할이 갈린다. 첫 번째 차까지의 $\mathcal C$는 $(\log\zeta)''$의 이중극 $-m_\rho/(s-\rho)^2$ 때문에 중복도와 관계없이 모든 영점을 보고, 판정 대상은 $\Theta:=\sup\Re\rho$이다($\theta=\tfrac12$이면 RH). 두 번째 차 $\mathcal D$까지 거친 $\mathcal G$는 명제 10.2의 상쇄 때문에 단순영점만 보고, 판정 대상은 $\Theta_{\rm simple}\le\Theta$이다. 이는 [영점 기여 §4](zero-contributions.md#section-4)에서 $\psi-x$가 중복 영점도 계수 $-m_\rho/\rho$로 포착한다는 관찰과 맞는다.
 
 <a id="references"></a>
 
