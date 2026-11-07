@@ -61,6 +61,7 @@ $A_x$는 제곱 인수 없는 모형, $\widetilde A_x$는 모든 정수의 $d_z$
 | $b(n)$의 점별 영점 표현: 단순영점만 남고 중복 영점은 사라짐 | [이차 모멘트 명제 5.1](docs/m2-divisor-moment.md#section-5-3) |
 | $4\Delta_2=x\,\mathcal G+O(\sqrt x\log x)$, $\mathcal G=\mathcal D\mathcal W(\psi-\mathrm{id})$와 $\kappa_\Lambda=-(\gamma^2+2\gamma_1)$ | [이차 모멘트 명제 10.1](docs/m2-divisor-moment.md#section-10-2) |
 | 이산–연속 평균이 영점항을 $\zeta'(\rho)x^{\rho-1}$로 바꾸는 국소 계산, $x\mathcal G$의 성장 판정 | [이차 모멘트 명제 10.2, 따름정리 10.3](docs/m2-divisor-moment.md#section-10-3) |
+| $\sum_{n\le x}\Lambda(n)\log n-x\log x+x=O(x^{1/2+\varepsilon})$ $\iff$ RH (중복 영점 포함) | [이차 모멘트 따름정리 10.4](docs/m2-divisor-moment.md#section-10-4) |
 | 코사인·사인 쪽의 Littlewood 상쇄와 RH의 동치 | [사인·코사인 판정법 1](docs/sine-cosine-rh.md#section-2) |
 | 임계선 위 사인 쪽이 코사인 쪽의 켤레 변환인 것과 RH의 동치 | [사인·코사인 판정법 2](docs/sine-cosine-rh.md#section-3) |
 
