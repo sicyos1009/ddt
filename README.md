@@ -25,7 +25,7 @@ $A_x$는 제곱 인수 없는 모형, $\widetilde A_x$는 모든 정수의 $d_z$
 | [M과 ψ: 코사인 핵과 사인 핵](docs/mertens-psi.md) | $\mu=d_{-1/2}*d_{-1/2}$와 $\varepsilon=d_{-1/2}*d_{1/2}$, ψ의 국소 핵, 네 핵의 아크사인 표현, 소수핵으로 쓴 영점 측도 |
 | [약수별 누적합으로 얻는 M(x)](docs/divisor-cumsum.md) | $\mu(n)/\tau(n)$의 약수별 몫과 누적합이 $M(x)$가 되는 항등식, 매끄러운 시험함수의 1차 법칙, 누적 곡선의 $\mathcal K_{-1/2,-1/2}$ 예측 |
 | [짝수 중복도 영점과 $d_{1/2}$ 오차항](docs/even-zeros.md) | $\zeta^{1/2}$ 계수합에서 분기절단의 전체 주항을 뺀 잔차 $E$, 짝수 중복도 조건과의 동치, 성장 지수 $=\Theta_{\rm odd}$와 $\Omega_\pm$ |
-| [양의 약수분포의 이차 모멘트](docs/m2-divisor-moment.md) | $(1/2,1/2)$ 약수분포의 $M_2(n)$, 전체 주항, 단순영점 기여의 정확식과 로그 전개, $\mathcal E_2$의 성장 지수 $=\Theta_{\rm simple}$, $b(n)=\sum_{d\mid n}\Lambda(d)\log d$의 점별 영점 표현, $\psi-x$를 통한 이산–연속 분해 |
+| [양의 약수분포의 이차 모멘트](docs/m2-divisor-moment.md) | $(1/2,1/2)$ 약수분포의 $M_2(n)$, 전체 주항, 단순영점 기여의 정확식과 로그 전개, $\mathcal E_2$의 성장 지수 $=\Theta_{\rm simple}$, $b(n)=\sum_{d\mid n}\Lambda(d)\log d$의 점별 영점 표현, $\psi-x$를 통한 이산–연속 분해, 약수 형태별 분해 |
 | [강한 Chowla 추측: 제곱류 층과 4점 Wick 규칙](docs/chowla.md) | $\sum\mu(n)\mu(n+h)$의 제곱류 층·제곱류 표현과 팽창 격자, 극 성분의 소멸, 원시 성분의 OU 법칙, 짧은 구간의 4차 모멘트 사전, 2k차 사다리와 순열 규칙, 이산핵·코사인 언어와 극의 귀환 |
 | [사인과 코사인으로 쓴 RH 판정법](docs/sine-cosine-rh.md) | 로그 동전의 켤레성, Littlewood 상쇄와 임계선 위 켤레 변환으로 쓴 두 판정법, 선 밖 영점의 결손 |
 
@@ -62,6 +62,7 @@ $A_x$는 제곱 인수 없는 모형, $\widetilde A_x$는 모든 정수의 $d_z$
 | $4\Delta_2=x\,\mathcal G+O(\sqrt x\log x)$, $\mathcal G=\mathcal D\mathcal W(\psi-\mathrm{id})$와 $\kappa_\Lambda=-(\gamma^2+2\gamma_1)$ | [이차 모멘트 명제 10.1](docs/m2-divisor-moment.md#section-10-2) |
 | 이산–연속 평균이 영점항을 $\zeta'(\rho)x^{\rho-1}$로 바꾸는 국소 계산, $x\mathcal G$의 성장 판정 | [이차 모멘트 명제 10.2, 따름정리 10.3](docs/m2-divisor-moment.md#section-10-3) |
 | $\sum_{n\le x}\Lambda(n)\log n-x\log x+x=O(x^{1/2+\varepsilon})$ $\iff$ RH (중복 영점 포함) | [이차 모멘트 따름정리 10.4](docs/m2-divisor-moment.md#section-10-4) |
+| 약수 형태별 분해: $M_2-g=C_{\mathbf e}+Q_{\mathbf e}+\delta$ (완전제곱) | [이차 모멘트 명제 11.1](docs/m2-divisor-moment.md#section-11-2) |
 | 코사인·사인 쪽의 Littlewood 상쇄와 RH의 동치 | [사인·코사인 판정법 1](docs/sine-cosine-rh.md#section-2) |
 | 임계선 위 사인 쪽이 코사인 쪽의 켤레 변환인 것과 RH의 동치 | [사인·코사인 판정법 2](docs/sine-cosine-rh.md#section-3) |
 

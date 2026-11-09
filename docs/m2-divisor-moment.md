@@ -12,6 +12,7 @@ $(1/2,1/2)$ 약수분포의 이차 모멘트 $M_2$와 전체 주항을 제거한
 | [명제 10.1](#section-10-2) | $4\Delta_2=x\,\mathcal G+O(\sqrt x\log x)$, $\mathcal G$는 $\psi-x$의 두 이산–연속 차 |
 | [명제 10.2](#section-10-3) | 영점 하나가 $\mathcal G$에 주는 기여 $\zeta'(\rho)x^{\rho-1}$, 중복 영점의 소멸 **[국소 계산]** |
 | [따름정리 10.3–10.4](#section-10-4) | $x\mathcal G$의 성장 판정과 $\Theta_{\rm simple}$, 첫 번째 차 $R=\Psi_1-x\log x+x$의 판정과 RH |
+| [명제 11.1](#section-11-2) | 형태별 완전제곱 분해 $\varpi=C_{\mathbf e}+Q_{\mathbf e}+\delta$, $\mathcal E_2=\sum_{\mathbf e}W_{\mathbf e}+O(1)$ |
 
 - [§1–3. 약수분포와 이차 모멘트](#section-1)
 - [§4–5. 부분합, 전체 주항, $b(n)$의 영점 표현](#section-4)
@@ -20,6 +21,7 @@ $(1/2,1/2)$ 약수분포의 이차 모멘트 $M_2$와 전체 주항을 제거한
 - [§8. 단순영점의 기여와 전역 성장](#section-8)
 - [§9. 전체 주항의 점근 전개](#section-9)
 - [§10. ψ를 통한 이산–연속 분해](#section-10)
+- [§11. 약수 형태별 분해](#section-11)
 - [참고 문헌](#references)
 
 자연로그를 쓰며, 비자명 영점 $\rho=\beta+i\gamma_\rho$의 중복도는 $m_\rho$로 쓴다. 절과 수식 번호는 이 문서 안에서 독립적이다.
@@ -883,6 +885,114 @@ $$
 이고, $m\ge1$이면 이중극이 남는다. $1/s$는 $\rho$에서 $0$이 아니므로 $\Re\rho>\theta+\varepsilon$인 영점은 없다. $\varepsilon\to0$으로 보내면 된다. $\square$
 
 따름정리 10.3과 10.4를 나란히 놓으면 두 이산–연속 차의 역할이 갈린다. 첫 번째 차까지의 $\mathcal C$는 $(\log\zeta)''$의 이중극 $-m_\rho/(s-\rho)^2$ 때문에 중복도와 관계없이 모든 영점을 보고, 판정 대상은 $\Theta:=\sup\Re\rho$이다($\theta=\tfrac12$이면 RH). 두 번째 차 $\mathcal D$까지 거친 $\mathcal G$는 명제 10.2의 상쇄 때문에 단순영점만 보고, 판정 대상은 $\Theta_{\rm simple}\le\Theta$이다. 이는 [영점 기여 §4](zero-contributions.md#section-4)에서 $\psi-x$가 중복 영점도 계수 $-m_\rho/\rho$로 포착한다는 관찰과 맞는다.
+
+<a id="section-11"></a>
+
+## 11. 약수 형태별 분해
+
+$\mathcal E_2$를 $n$의 지수 형태별 기여로 나눈다. 소수를 $p_1<\cdots<p_r$로 정렬해 $n=\prod_ip_i^{e_i}$의 **순서 있는 지수열** $\mathbf e=(e_1,\dots,e_r)$을 형태로 삼는다. 따라서 $p<q$에서 $p^2q$와 $pq^2$는 다른 형태이다. $\ell=\log n$, $\lambda_i=\log p_i$로 두면 $\sum_ie_i\lambda_i=\ell$이다.
+
+<a id="section-11-1"></a>
+
+### 11.1. 점별 분해
+
+<a id="equation-11-1"></a>
+
+$$
+g(t):=\frac38+\frac{\gamma}{4\log t}-\frac{c}{4(\log t)^2},
+\qquad
+\varpi(n):=M_2(n)-g(n)
+=\frac{\mathcal N(n)-2\gamma\ell+2c}{8\ell^2},
+\qquad
+\mathcal N(n):=2b(n)-\ell^2.
+\tag{11.1}
+$$
+
+**증명.** (3.1)과 (5.8)에서 $M_2=\tfrac14+b/(4\ell^2)$이므로 $M_2-\tfrac38=(2b-\ell^2)/(8\ell^2)$이다. $\square$
+
+(5.8)의 $2b=\sum_ie_i(e_i+1)\lambda_i^2$와 $\ell^2=(\sum_ie_i\lambda_i)^2$에서 $\mathcal N(n)=\sum_ie_i\lambda_i^2-2\sum_{i<j}e_ie_j\lambda_i\lambda_j$이다.
+
+$T_2(x)=\sum_{2\le n\le x}M_2(n)$이고, (5.6)의 $\mathcal P_2$는 $\mathcal P_2(x)=\int_2^xg(t)\,dt+\tfrac34+\kappa_2$이다. 형태 $\mathbf e$의 정수 집합을 $\mathcal A_{\mathbf e}(x)$, 개수를 $A_{\mathbf e}(x)$라 하고
+
+$$
+W_{\mathbf e}(x):=\sum_{n\in\mathcal A_{\mathbf e}(x)}\varpi(n),
+\qquad
+B(x):=\sum_{2\le n\le x}g(n)-\mathcal P_2(x)
+$$
+
+로 두면
+
+<a id="equation-11-2"></a>
+
+$$
+\boxed{\mathcal E_2(x)=\sum_{\mathbf e}W_{\mathbf e}(x)+B(x),\qquad B(x)=O(1).}
+\tag{11.2}
+$$
+
+$g$는 $[2,\infty)$에서 유계이고 단조인 부분들의 합이므로 합과 적분의 차는 유계이고, $B=O(1)$이다. 형태별 기여는 분자의 평균이 아니라, 항마다 $8\ell^2$로 나눈 뒤 더한 $W_{\mathbf e}$로 기록한다.
+
+<a id="section-11-2"></a>
+
+### 11.2. 형태별 완전제곱 구조
+
+**명제 11.1.** 형태 $\mathbf e$에서
+$$
+H_{\mathbf e}:=\sum_i\frac{e_i}{e_i+1},\qquad
+C_{\mathbf e}:=\frac18\Bigl(\frac1{H_{\mathbf e}}-1\Bigr),\qquad
+\delta(\ell):=-\frac{\gamma}{4\ell}+\frac{c}{4\ell^2}
+$$
+로 두면 정확히
+
+<a id="equation-11-3"></a>
+
+$$
+\boxed{
+\varpi(n)=C_{\mathbf e}+Q_{\mathbf e}(n)+\delta(\ell),\qquad
+Q_{\mathbf e}(n):=\frac1{8\ell^2}\sum_ie_i(e_i+1)\Bigl(\lambda_i-\frac{\ell}{H_{\mathbf e}(e_i+1)}\Bigr)^2\ge0.
+}
+\tag{11.3}
+$$
+
+**증명.** 제곱을 풀고 $\sum_ie_i\lambda_i=\ell$, $\sum_ie_i/(e_i+1)=H_{\mathbf e}$를 쓰면
+$8\ell^2Q_{\mathbf e}=\sum_ie_i(e_i+1)\lambda_i^2-2\ell^2/H_{\mathbf e}+\ell^2/H_{\mathbf e}=2b-\ell^2/H_{\mathbf e}$이다. 따라서 $\mathcal N-8\ell^2Q_{\mathbf e}=\ell^2(1/H_{\mathbf e}-1)=8\ell^2C_{\mathbf e}$이고, 나머지 $(-2\gamma\ell+2c)/(8\ell^2)=\delta(\ell)$이다. $\square$
+
+$a=\log p$, $b'=\log q$, $d=\log r$ ($p<q<r$)로 쓰면
+
+| 형태 | $C_{\mathbf e}$ | $Q_{\mathbf e}(n)$ |
+|---|---:|---|
+| $p^m$ | $\frac1{8m}$ | $0$ |
+| $pq$ | $0$ | $\frac{(a-b')^2}{8\ell^2}$ |
+| $p^2q$ | $-\frac1{56}$ | $\frac{(3a-2b')^2}{28\ell^2}$ |
+| $pq^2$ | $-\frac1{56}$ | $\frac{(2a-3b')^2}{28\ell^2}$ |
+| $p^3q$ | $-\frac1{40}$ | $\frac{3(2a-b')^2}{20\ell^2}$ |
+| $pq^3$ | $-\frac1{40}$ | $\frac{3(a-2b')^2}{20\ell^2}$ |
+| $pqr$ | $-\frac1{24}$ | $\frac{(a-b')^2+(b'-d)^2+(d-a)^2}{12\ell^2}$ |
+
+따라서 각 형태의 기여는
+$$
+W_{\mathbf e}=C_{\mathbf e}A_{\mathbf e}+\sum_{n\in\mathcal A_{\mathbf e}}Q_{\mathbf e}(n)+\sum_{n\in\mathcal A_{\mathbf e}}\delta(\log n)
+$$
+의 세 부분으로 나뉜다. 지수 형태가 상수를, 소인수 로그 크기의 배치가 제곱항을 정한다. $H_{\mathbf e}\ge1$이면 $C_{\mathbf e}\le0$이고, $C_{\mathbf e}>0$인 형태는 소수 거듭제곱뿐이다.
+
+<a id="section-11-3"></a>
+
+### 11.3. 수치 기록
+
+$x=10^6$에서의 형태별 값이다. 전체 합, $p$와 $pqr$ 행은 독립 계산으로 재현했고(체와 $M_2=\tfrac14+b/(4\ell^2)$), 나머지 행은 보고값이다.
+
+| 형태 | $A_{\mathbf e}$ | 비율 | $W_{\mathbf e}$ |
+|---|---:|---:|---:|
+| $p$ | 78,498 | 7.849808% | +8,926.968894 |
+| $pq$ | 209,867 | 20.986721% | +8,361.396044 |
+| $p^2q$ | 43,004 | 4.300404% | +1,815.683227 |
+| $pq^2$ | 860 | 0.086000% | −2.430617 |
+| $p^3q$ | 17,369 | 1.736902% | +506.594146 |
+| $pq^3$ | 90 | 0.009000% | −0.847145 |
+| $pqr$ | 206,964 | 20.696421% | −1,777.937956 |
+| 그 밖의 형태 | 443,347 | 44.334744% | −17,830.445982 |
+| **전체** | **999,999** | **100%** | **−1.019388** |
+
+$pqr$층의 세 부분은 $-8623.500000+9152.514298-2306.952254$이다. $B(10^6)\approx-0.9446$을 더하면 $\mathcal E_2(10^6)\approx-1.9640$이다. 형태 사이와 각 형태 안의 세 부분 사이에 큰 상쇄가 있으며, 제곱근 수준의 상계를 이 분해에서 얻는 것은 별도의 추정 문제이다.
 
 <a id="references"></a>
 
