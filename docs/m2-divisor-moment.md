@@ -77,7 +77,7 @@ $$
 4a_2(n)=(\log n)^2+\sum_{d\mid n}\Lambda(d)\log d.
 $$
 
-여기서 $\Lambda$는 폰 망골트 함수이다. 이 식은 §5의 $4F_2=\zeta''+\zeta(\log\zeta)''$에서 계수를 비교하면 얻는다. 고정된 $c$에 소수 $p$를 곱한 계열 $n=cp$에서 $M_2$가 그리는 띠는 [cp 계열 문서](m2-cp-families.md)에서 다룬다.
+여기서 $\Lambda$는 폰 망골트 함수이다. 이 식은 §5의 $4F_2=\zeta''+\zeta(\log\zeta)''$에서 계수를 비교하면 얻는다. 고정된 $c$에 소수 $p$를 곱한 계열 $n=cp$에서 $M_2$가 그리는 띠는 [cp 계열 문서](m2-cp-families.md)에서 다룬다. $M_2$를 점별 주항 $p_2=\mathcal P_2'$과 오차 $e_2$로 나눈 분해와 그 가법 핵은 [가법 핵 문서](m2-additive-core.md)에서 다룬다.
 
 <a id="section-4"></a>
 

@@ -26,7 +26,8 @@ $A_x$는 제곱 인수 없는 모형, $\widetilde A_x$는 모든 정수의 $d_z$
 | [약수별 누적합으로 얻는 M(x)](docs/divisor-cumsum.md) | $\mu(n)/\tau(n)$의 약수별 몫과 누적합이 $M(x)$가 되는 항등식, 매끄러운 시험함수의 1차 법칙, 누적 곡선의 $\mathcal K_{-1/2,-1/2}$ 예측 |
 | [짝수 중복도 영점과 $d_{1/2}$ 오차항](docs/even-zeros.md) | $\zeta^{1/2}$ 계수합에서 분기절단의 전체 주항을 뺀 잔차 $E$, 짝수 중복도 조건과의 동치, 성장 지수 $=\Theta_{\rm odd}$와 $\Omega_\pm$ |
 | [양의 약수분포의 이차 모멘트](docs/m2-divisor-moment.md) | $(1/2,1/2)$ 약수분포의 $M_2(n)$, 전체 주항, 단순영점 기여의 정확식과 로그 전개, $\mathcal E_2$의 성장 지수 $=\Theta_{\rm simple}$, $b(n)=\sum_{d\mid n}\Lambda(d)\log d$의 점별 영점 표현, $\psi-x$를 통한 이산–연속 분해 |
-| [$cp$ 계열의 이차 모멘트](docs/m2-cp-families.md) | 띠 $n=cp$의 정확식과 재귀형, U자 모양과 최소점 $p^*\le c$, 두 띠의 안정성 부등식, 띠 평균의 점근식, 소수정리 적분 예측기의 오차 상계, 평균 $3/8$과 Poisson–Dirichlet(1) |
+| [$cp$ 계열의 이차 모멘트](docs/m2-cp-families.md) | 띠 $n=cp$의 정확식과 재귀형, 서로소 이차 가법성, U자 모양과 최소점 $p^*\le c$, 두 띠의 안정성 부등식, 띠 평균의 점근식, 소수정리 적분 예측기의 오차 상계, 평균 $3/8$과 Poisson–Dirichlet(1) |
+| [$M_2$의 가법 핵](docs/m2-additive-core.md) | 점별 분해 $M_2=p_2+e_2$와 $\sum e_2=\mathcal E_2+$톱니, $e_2$의 코사이클과 가법 핵 $b-\gamma\log$, Poisson–Dirichlet 층과 소수 거듭제곱 층, Beurling 판정, 분배법칙과 분극 항등식, 이동 상관의 세 영역, 꼬인 톱니와 기약 Hermite 항등식 |
 | [강한 Chowla 추측: 제곱류 층과 4점 Wick 규칙](docs/chowla.md) | $\sum\mu(n)\mu(n+h)$의 제곱류 층·제곱류 표현과 팽창 격자, 극 성분의 소멸, 원시 성분의 OU 법칙, 짧은 구간의 4차 모멘트 사전, 2k차 사다리와 순열 규칙, 이산핵·코사인 언어와 극의 귀환 |
 | [사인과 코사인으로 쓴 RH 판정법](docs/sine-cosine-rh.md) | 로그 동전의 켤레성, Littlewood 상쇄와 임계선 위 켤레 변환으로 쓴 두 판정법, 선 밖 영점의 결손 |
 
@@ -65,13 +66,17 @@ $A_x$는 제곱 인수 없는 모형, $\widetilde A_x$는 모든 정수의 $d_z$
 | $\sum_{n\le x}\Lambda(n)\log n-x\log x+x=O(x^{1/2+\varepsilon})$ $\iff$ RH (중복 영점 포함) | [이차 모멘트 따름정리 10.4](docs/m2-divisor-moment.md#section-10-4) |
 | $4M_2(cp)-1=(1-t)^2+t^2(4M_2(c)-1)$, 띠의 최소점 $p^*=e^{b(c)/\log c}\le c$ | [cp 계열 명제 1.1, 2.1](docs/m2-cp-families.md#section-1) |
 | 띠 평균 $E_X(c)=\tfrac12-\frac{\log c}{2\log X}+\frac{(\log c)^2-2\log c+b(c)}{4(\log X)^2}+O_c((\log X)^{-3})$ | [cp 계열 정리 4.1, 따름정리 4.2](docs/m2-cp-families.md#section-4) |
+| 서로소 이차 가법성 $M_2(mn)=s^2M_2(m)+t^2M_2(n)+\tfrac{st}2$, 띠 평균 $=F_c(\log(Y/e))+O_c((\log X)^{-3})$ | [cp 계열 명제 1.3, 따름정리 4.3](docs/m2-cp-families.md#proposition-1-3) |
 | 소수정리 적분 예측기의 $c$에 균등한 오차 $\ll\log Y\,e^{-a\sqrt{\log Y}}$ | [cp 계열 정리 5.1](docs/m2-cp-families.md#section-5) |
+| $\sum_{n\le x}e_2(n)=\mathcal E_2(x)+\widetilde B_1(x)p_2(x)+C+o(1)$, $e_2=(b-\beta)/(4\log^2n)$ | [가법 핵 명제 1.1, 정리 1.2](docs/m2-additive-core.md#section-1) |
+| $2h(n)h(n+1)=h(n(n+1))^2-\tfrac14h(n^2)^2-\tfrac14h((n+1)^2)^2$, 이동 상관의 정확한 개수 공식 | [가법 핵 명제 6.2, 보조정리 7.1](docs/m2-additive-core.md#section-6) |
+| 기약 Hermite 항등식으로 꼬인 톱니를 $\mathcal E_2$형 톱니로 바꾸기 | [가법 핵 보조정리 8.1, 명제 8.2](docs/m2-additive-core.md#section-8) |
 | 코사인·사인 쪽의 Littlewood 상쇄와 RH의 동치 | [사인·코사인 판정법 1](docs/sine-cosine-rh.md#section-2) |
 | 임계선 위 사인 쪽이 코사인 쪽의 켤레 변환인 것과 RH의 동치 | [사인·코사인 판정법 2](docs/sine-cosine-rh.md#section-3) |
 
 ## 검산
 
-Python을 사용한다. 핵심 문서의 검산은 mpmath를([주정리 §9](docs/main-theorem.md#section-9)는 numpy와 scipy), [Ng 쌍대](docs/ng-duality.md#checks), [M과 ψ](docs/mertens-psi.md#checks), [Chowla](docs/chowla.md#checks), [약수별 누적합](docs/divisor-cumsum.md#checks), [사인·코사인 판정법](docs/sine-cosine-rh.md#checks), [cp 계열](docs/m2-cp-families.md#checks)의 검산은 numpy와 scipy를 쓴다.
+Python을 사용한다. 핵심 문서의 검산은 mpmath를([주정리 §9](docs/main-theorem.md#section-9)는 numpy와 scipy), [Ng 쌍대](docs/ng-duality.md#checks), [M과 ψ](docs/mertens-psi.md#checks), [Chowla](docs/chowla.md#checks), [약수별 누적합](docs/divisor-cumsum.md#checks), [사인·코사인 판정법](docs/sine-cosine-rh.md#checks), [cp 계열](docs/m2-cp-families.md#checks), [가법 핵](docs/m2-additive-core.md#checks)의 검산은 numpy와 scipy를 쓴다.
 
 | 스크립트 | 확인 범위 |
 |:--|:--|
@@ -87,7 +92,8 @@ Python을 사용한다. 핵심 문서의 검산은 mpmath를([주정리 §9](doc
 | [check_chowla.py](scripts/check_chowla.py) | Chowla 합의 팽창·gcd 항등식, 제곱류 표현과 일치 분류, Mirsky 분산과 공분산 격자, 원시 성분, 짧은 구간 이분법, M4와 메아리, 곱셈 모형의 M4, 2k차 사다리와 순열 규칙, 꼭대기의 반례, 이산핵의 동전과 극의 귀환 (`--full`은 $N=2^{25}$) |
 | [check_divisor_cumsum.py](scripts/check_divisor_cumsum.py) | 약수별 몫의 합 = $M(x)$, 몫의 분해, $f_x(1)$의 점근식, 핵 누적함수의 닫힌 꼴, 모멘트와 누적 곡선의 수치 (`--figure`는 그림 생성, matplotlib 필요) |
 | [check_sine_cosine.py](scripts/check_sine_cosine.py) | 로그 동전, 코사인·사인 쪽의 Littlewood 상쇄, 켤레 변환 공식, 임계선 위 톱니의 재현, 높이와 구간 통계, 그림 1–3 생성(`--figures`) |
-| [check_cp_families.py](scripts/check_cp_families.py) | cp 계열의 정확식과 재귀형, U자 모양, 1,225쌍의 안정성 부등식, 띠 평균의 점근식, 예측기 오차, 부록 A의 모든 표 (`--figure`는 그림 생성, matplotlib 필요) |
+| [check_cp_families.py](scripts/check_cp_families.py) | cp 계열의 정확식과 재귀형, 서로소 이차 가법성, U자 모양, 1,225쌍의 안정성 부등식과 $M$만의 차, 띠 평균의 점근식, 예측기 오차, 작은 띠의 손실, 부록 A의 모든 표 (`--figure`는 그림 생성, matplotlib 필요) |
+| [check_m2_additive_core.py](scripts/check_m2_additive_core.py) | $p_2/e_2$ 분해와 합의 대응, 코사이클과 가법 핵, 분할 통계량 표현, 점별 분배법칙, 분극 항등식, 이동 상관의 개수 공식과 절단 영역, 기약 Hermite 항등식 |
 
     python -B scripts/check_global_formula.py
     python -B scripts/check_smoothed_formula.py
@@ -102,5 +108,6 @@ Python을 사용한다. 핵심 문서의 검산은 mpmath를([주정리 §9](doc
     python -B scripts/check_divisor_cumsum.py
     python -B scripts/check_sine_cosine.py
     python -B scripts/check_cp_families.py
+    python -B scripts/check_m2_additive_core.py
 
 수치 검산은 증명을 대체하지 않는다. 주제별 부록의 기존 수치표는 계산 코드와 원자료가 없어 재현하지 않았으며, 위 스크립트의 검증 범위에 포함되지 않는다. 예외로 주정리 부록 B.1의 표는 `check_beta_expansion.py --x 1e7`이 재현한다.
