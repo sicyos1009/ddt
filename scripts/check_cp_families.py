@@ -242,6 +242,70 @@ def check_asymptotics():
         print(f"  c = {c:>2}: " + "; ".join(row))
 
 
+def check_additivity():
+    """Prop 1.3 (1.5) and Prop 3.2 (3.7)-(3.8)."""
+    worst = 0.0
+    for m in range(2, 150):
+        for n in range(2, 150):
+            if math.gcd(m, n) != 1:
+                continue
+            s = math.log(m) / math.log(m * n)
+            t = 1 - s
+            worst = max(worst, abs(m2(m * n) - (s * s * m2(m) + t * t * m2(n) + s * t / 2)))
+    print(f"Prop 1.3 (1.5) on coprime m, n < 150: max error {worst:.1e}")
+    assert worst < 1e-13
+    x = 20002
+    cs = list(range(2, 200, 4))
+    worst = 0.0
+    viol = 0
+    for c1, c2 in combinations(cs, 2):
+        lo, hi = min(c1, c2), max(c1, c2)
+        p = PRIMES[(PRIMES <= x // hi)]
+        p = p[(lo * hi) % p != 0].astype(float)
+        v = np.log(p)
+        ul, uh, bl, bh = math.log(lo), math.log(hi), b_of(lo), b_of(hi)
+        ml, mh = m2(lo), m2(hi)
+        tl, th = ul / (ul + v), uh / (uh + v)
+        d = band(ul, bl, v) - band(uh, bh, v)
+        exact = (th - tl) * (0.5 - (th + tl) * ml) + th * th * (ml - mh)
+        worst = max(worst, float(np.max(np.abs(d - exact))))
+        bound = (1 - tl) * (uh - ul) / (2 * (uh + v)) + th * th * abs(ml - mh)
+        first_old = (uh - ul) / (2 * (uh + v))
+        viol += int(np.any(np.abs(d) > bound + 1e-15) or np.any((1 - tl) * first_old > first_old + 1e-15))
+    print(f"Prop 3.2 on {len(cs) * (len(cs) - 1) // 2} pairs: (3.7) max error {worst:.1e}, "
+          f"(3.8) violated {viol} times")
+    assert worst < 1e-13 and viol == 0
+
+
+def check_shifted_value():
+    print("Corollary 4.3: lambda^3 (E_X(c) - F_c(log(Y/e)))")
+    for c in (2, 6, 30):
+        u, bc = math.log(c), b_of(c)
+        row = []
+        for k in (5, 6, 7, 8):
+            x = 10 ** k
+            if x // c > PRIME_LIMIT:
+                continue
+            e = band_mean(c, x)[0]
+            lam = math.log(x)
+            f = band(u, bc, lam - u - 1)
+            row.append(f"10^{k}: {(e - f) * lam ** 3:+.4f}")
+        print(f"  c = {c:>2}: " + "; ".join(row))
+
+
+def check_small_bands():
+    """Prop 7.1 (a): D_c - D~_c = pi(Y) - li(Y) exactly (the excluded prime factors cancel)."""
+    from scipy.special import expi
+    x = 10 ** 6
+    c = np.arange(2, x // 2 + 1)
+    y = x / c
+    pi_y = np.searchsorted(PRIMES, y, side="right")
+    li_y = expi(np.log(y)) - expi(math.log(2))
+    total = np.abs(pi_y - li_y).sum()
+    print(f"Prop 7.1 (a), x = 10^6: sum_c |D_c - D~_c| / x = {total / x:.4f}")
+    assert total / x > 1 / 70
+
+
 def check_mean():
     x = 10 ** 6
     spf = np.zeros(x + 1, dtype=np.int64)
@@ -332,6 +396,9 @@ def main():
     check_near_pairs()
     check_predictor()
     check_asymptotics()
+    check_additivity()
+    check_shifted_value()
+    check_small_bands()
     check_mean()
     if args.figure:
         write_figure(args.figure)

@@ -13,12 +13,17 @@ $$
 | 결과 | 내용 | 범위 |
 |:--|:--|:--|
 | [명제 1.1](#section-1) | 띠의 정확식과 재귀형 $4M_2(cp)-1=(1-t)^2+t^2(4M_2(c)-1)$ | 정확한 항등식 |
+| [명제 1.3](#proposition-1-3) | 서로소 이차 가법성 $M_2(mn)=s^2M_2(m)+t^2M_2(n)+\tfrac{st}2$, 띠의 $M$만의 꼴 $M_2(cp)=\tfrac12-\tfrac t2+t^2M_2(c)$ | 정확한 항등식 |
 | [명제 2.1](#section-2) | 띠의 U자 모양, 최소점 $p^*=e^{b(c)/\log c}\le c$와 최솟값 | 가정 없음 |
 | [명제 3.1](#section-3) | 두 띠의 차: 정확한 분해와 안정성 부등식 | 가정 없음 |
+| [명제 3.2](#proposition-3-2) | 두 띠의 차를 $M$만으로 쓴 정확식과 (3.3)의 개선 | 가정 없음 |
 | [정리 4.1](#section-4) | 띠 평균의 1차 법칙 $E_X(c)=\tfrac12-\frac{\log c}{2\log X}+O_c((\log X)^{-2})$ | Chebyshev 상하계 |
 | [따름정리 4.2](#corollary-4-2) | 2차 항 $(u^2-2u+b(c))/(4\lambda^2)$ | 소수정리 |
+| [따름정리 4.3](#corollary-4-3) | 띠 평균 = $p=Y/e$에서의 띠 값, $E_X(c)=F_c(\log(Y/e))+O_c(\lambda^{-3})$ | 소수정리 |
+| [명제 4.4](#proposition-4-4) | $c$에 균등한 1차 법칙 | Chebyshev 상하계 |
 | [정리 5.1](#section-5) | 소수정리 적분 예측기의 균등한 오차 상계 | 고전적 영점 없는 영역 |
 | [명제 6.1](#section-6) | 정수 전체의 평균 $3/8$과 Poisson–Dirichlet(1) | 가정 없음 |
+| [명제 7.1](#section-7) | 띠별 오차를 절댓값으로 합할 때의 장애: 작은 띠의 $\gg x$ 손실과 지수 손실 | 가정 없음 |
 | [부록 A](#appendix-a) | 수치 기록 | 수치, 재현 가능 |
 
 - [§1. 띠의 정확식](#section-1)
@@ -27,6 +32,7 @@ $$
 - [§4. 띠 위의 평균](#section-4)
 - [§5. 소수정리 적분 예측기](#section-5)
 - [§6. 띠 분해와 전체 평균](#section-6)
+- [§7. $\mathcal E_2$로 옮길 때의 장애](#section-7)
 - [부록 A. 수치 기록](#appendix-a)
 - [검산](#checks)
 
@@ -83,6 +89,36 @@ $$
 **보조정리 1.2.** $c\ge2$이면 $0<b(c)\le(\log c)^2$이고, 등호는 $c$가 소수일 때만 성립한다.
 
 **증명.** $a\ge1$에서 $a(a+1)/2\le a^2$이므로 $b(c)\le\sum a^2(\log q)^2\le(\sum a\log q)^2=(\log c)^2$이다. 첫 부등식의 등호는 모든 지수가 $1$일 때, 둘째는 소인수가 하나일 때만 성립한다. $\square$
+
+<a id="proposition-1-3"></a>
+
+**명제 1.3 (서로소 이차 가법성).** $a_2(n)=(\log n)^2M_2(n)$, $a_2(1)=0$으로 둔다. $\gcd(m,n)=1$, $m,n\ge1$, $mn\ge2$이고 $s=\log m/\log mn$, $t=1-s$이면
+
+<a id="equation-1-5"></a>
+
+$$
+\boxed{
+a_2(mn)=a_2(m)+a_2(n)+\tfrac12\log m\log n,\qquad
+M_2(mn)=s^2M_2(m)+t^2M_2(n)+\tfrac{st}2.
+}
+\tag{1.5}
+$$
+
+$n=p$이면 $M_2(p)=\tfrac12$이므로, $t=u/L$로 바꿔 쓰면
+
+<a id="equation-1-6"></a>
+
+$$
+\boxed{
+M_2(cp)=\frac12-\frac t2+t^2M_2(c),\qquad
+a_2(cp)-a_2(c)=\tfrac12\log p\,\log(cp)\qquad(p\nmid c).
+}
+\tag{1.6}
+$$
+
+**증명.** $4a_2=(\log\cdot)^2+b$이고 $b$는 서로소 곱에서 가법적이므로 $4a_2(mn)=(\log m+\log n)^2+b(m)+b(n)$을 전개하면 첫 식이다. $(\log mn)^2$로 나누면 둘째 식이다. (1.6)은 $m=c$, $n=p$이다. $\square$
+
+확률로 읽으면 $D_{mn}=D_mD_n$이 독립이고 평균이 $\tfrac12\log m$, $\tfrac12\log n$이므로 (1.5)는 $\mathbb E(X+Y)^2=\mathbb EX^2+\mathbb EY^2+2\,\mathbb EX\,\mathbb EY$이다. (1.3)과 (1.4)는 (1.6)을 $b$로 쓴 것이고, 명제 3.1은 (1.6) 두 개의 차이다. 이 가법성에서 출발한 점별 주항·오차 분해는 [$M_2$의 가법 핵](m2-additive-core.md)에서 다룬다.
 
 띠 하나는 $c$의 두 불변량 $(\log c,\,b(c))$, 또는 동치로 $(\log c,\,M_2(c))$만으로 정해진다. 보조정리 1.2에서 $\tfrac14<F_c(v)<\tfrac12$ ($v>0$)이고 $p\to\infty$이면 $M_2(cp)\to\tfrac12$이다. 서로 다른 $c$의 계열은 겹칠 수 있다. 예를 들어 $210=30\cdot7=42\cdot5=70\cdot3$은 세 띠에 동시에 속한다. 겹치지 않는 분할은 §6.1에 둔다.
 
@@ -208,6 +244,36 @@ $$
 
 을 평균값 정리로 얻었다. (3.3)은 그보다 강하고, 증명에 평균값 정리가 필요 없다. 두 계열의 차는 $\log c$의 차와 $b$의 차로 제어된다. 둘이 모두 가까우면 띠가 거의 겹친다([부록 A.3](#appendix-a)).
 
+<a id="proposition-3-2"></a>
+
+**명제 3.2 ($M$만으로 쓴 두 띠의 차).** $t_\pm=u_\pm/L_\pm$로 두면
+
+<a id="equation-3-7"></a>
+
+$$
+\boxed{
+M_2(c_-p)-M_2(c_+p)
+=(t_+-t_-)\Bigl[\tfrac12-(t_++t_-)M_2(c_-)\Bigr]+t_+^2\bigl[M_2(c_-)-M_2(c_+)\bigr]
+}
+\tag{3.7}
+$$
+
+이고
+
+<a id="equation-3-8"></a>
+
+$$
+|M_2(c_-p)-M_2(c_+p)|
+\le(1-t_-)\frac{\log(c_+/c_-)}{2\log(pc_+)}+t_+^2\,|M_2(c_+)-M_2(c_-)|
+\tag{3.8}
+$$
+
+이다.
+
+**증명.** $f_c(t):=\tfrac12-\tfrac t2+t^2M_2(c)$로 두면 (1.6)에서 $M_2(c_\pm p)=f_{c_\pm}(t_\pm)$이다. $f_{c_-}(t_-)-f_{c_-}(t_+)=(t_+-t_-)[\tfrac12-(t_++t_-)M_2(c_-)]$에 $f_{c_-}(t_+)-f_{c_+}(t_+)=t_+^2[M_2(c_-)-M_2(c_+)]$를 더하면 (3.7)이다. $t_+-t_-=(u_+L_--u_-L_+)/(L_-L_+)=(u_+-u_-)v/(L_-L_+)\ge0$이고 $v/L_-=1-t_-$이다. $M_2\in[\tfrac14,\tfrac12]$, $t_\pm\le1$에서 대괄호는 $[-\tfrac12,\tfrac12]$에 있으므로 (3.8)이 나온다. $\square$
+
+(3.8)의 첫 항은 (3.3)의 첫 항에 $1-t_-$를 곱한 것이다. 둘째 항은 $b$의 차 대신 $M_2(c)$의 차로 쓴 것이며, (3.3)의 둘째 항과는 대소가 정해지지 않는다.
+
 서로 다른 $c_1\ne c_2$에서 $b(c_1)=b(c_2)$가 정확히 성립할 수 있는지는 $\{(\log q)^2\}$의 유리수 위 선형독립성 문제이다. 삼각수 $a(a+1)/2$는 단사이므로 $c_1\ne c_2$이면 계수 벡터가 $0$이 아니다. 선형독립성은 Schanuel 추측에서 따라 나오지만, 이 문서는 그 문제를 다루지 않는다. 수치 탐색의 근접 쌍은 수치적으로 가까울 뿐이다.
 
 <a id="section-4"></a>
@@ -282,6 +348,38 @@ $$
 $$
 
 이고 $\delta_p^2$의 평균은 $O_c(1)$이므로 $m_1=\lambda^{-1}+\lambda^{-2}+O_c(\lambda^{-3})$이다. 정리 4.1의 $m_2$와 함께 (4.1)에 넣는다. $\square$
+
+<a id="corollary-4-3"></a>
+
+**따름정리 4.3 (띠 평균은 $p=Y/e$에서의 띠 값).** 같은 조건에서
+
+<a id="equation-4-4"></a>
+
+$$
+\boxed{E_X(c)=F_c\bigl(\log(Y/e)\bigr)+O_c(\lambda^{-3}).}
+\tag{4.4}
+$$
+
+**증명.** $v=\lambda-u-1$이면 $L=\lambda-1$이고, (1.3)에서 $F_c(v)=\tfrac12-\frac u{2(\lambda-1)}+\frac{u^2+b(c)}{4(\lambda-1)^2}=\tfrac12-\frac u{2\lambda}+\frac{u^2-2u+b(c)}{4\lambda^2}+O_c(\lambda^{-3})$이다. 이는 (4.3)의 주부와 같다. $\square$
+
+(4.4)의 내용은 $\log(Y/p)$의 평균이 $1$이라는 것뿐이다. 부록 A.4에서 $m_2/4$의 실측값이 $1/(4\lambda^2)$보다 $1/(4(\lambda-1)^2)$에 가까운 것도 이것으로 설명된다.
+
+<a id="proposition-4-4"></a>
+
+**명제 4.4 ($c$에 균등한 1차 법칙).** 절대상수 $Y_0$가 있어 $Y\ge Y_0$이고 $\omega(c)\le Y/(4\log Y)$인 모든 $c\ge2$에 대해, $t_X:=\log c/\log X$로 두면
+
+<a id="equation-4-5"></a>
+
+$$
+E_X(c)=\frac12-\frac{t_X}2+t_X^2M_2(c)+O\Bigl(\frac{t_X}{\lambda}+\frac1{\sqrt Y}\Bigr)
+\tag{4.5}
+$$
+
+이고, 함축 상수는 $c$에 의존하지 않는다. 주부는 $F_c(\log Y)$, 즉 (1.6)의 $t$를 $t_X$로 바꾼 값이다.
+
+**증명.** (4.1)에서 주부와의 차는 $-\tfrac u2(m_1-\lambda^{-1})+\tfrac{u^2+b}4(m_2-\lambda^{-2})$이다. $p\le\sqrt Y$인 항은 $u/L,\,u/\lambda\le1$, $(u^2+b)/L^2,\,(u^2+b)/\lambda^2\le2$이므로 각각 $O(1)$이고, 그 개수의 비율은 $\pi(\sqrt Y)/|S_c(X)|\ll Y^{-1/2}$이다. 여기서 $|S_c(X)|\ge\pi(Y)-\omega(c)\ge\tfrac34\pi(Y)$를 썼다. $p>\sqrt Y$인 항은 정리 4.1 증명 (ii)의 부등식과 (i)의 균등한 상계 $\overline{\delta}\ll1$에서 $u\,\lambda^{-2}+(u^2+b)\lambda^{-3}\ll u\lambda^{-2}$이다. 마지막 부등식은 $b\le u^2$와 $u\le\lambda$이다. $\square$
+
+정리 4.1의 $O_c$는 $c$에 대해 합할 때 쓸 수 없으므로, 띠를 모아 $\mathcal E_2$로 옮길 때는 (4.5)를 쓴다.
 
 띠의 순서는 1차로 $\log c$가 정한다. $b(c)$는 $\lambda^{-2}$ 차수에서 계수 $m_2/4=\tfrac1{4\lambda^2}(1+O_c(\lambda^{-1}))$로만 들어간다. $b$가 거의 같아도 $\log c$가 다르면 평균이 $\Delta\log c/(2\lambda)$ 규모로 벌어진다. 초기 노트가 관찰한 기울기 $H_X\approx0.0034\,b(c)$의 $0.0034$는 50개 띠에서 평균한 $m_2/4$이다. 상수가 아니라 $1/(4\lambda^2)\approx0.0025$에 $O(\lambda^{-1})$ 보정이 붙은 값이다([부록 A.4](#appendix-a)).
 
@@ -402,6 +500,32 @@ $$
 
 (ii) $r(n):=\prod_{q^a\parallel n,\,a\ge2}q^a$로 두면 $s(n)\le(\log r(n))^2/(\log n)^2\le\log r(n)/\log n$이다. $a\ge2$에서 $a\log q\le2\sum_{k=2}^a\log q$이므로 $\sum_{n\le x}\log r(n)\le2x\sum_q\sum_{k\ge2}\log q/q^k\ll x$이다. $n\le\sqrt x$를 따로 세면 $\frac1x\sum_{n\le x}s(n)\ll1/\log x$이다. $\square$
 
+<a id="section-7"></a>
+
+## 7. $\mathcal E_2$로 옮길 때의 장애
+
+§4–5의 띠 평균과 예측기는 띠 하나의 진술이다. 이를 $c$에 대해 모아 [$\mathcal E_2$](m2-divisor-moment.md#section-4)로 옮길 때 띠별 오차를 절댓값으로 합하면 정보가 사라진다. $X=x$로 고정하고 정리 5.1 증명의 $N_c,D_c,\widetilde N_c,\widetilde D_c$를 쓴다.
+
+**명제 7.1.** (a) $x\to\infty$이면
+
+$$
+\sum_{c\le x/2}|D_c-\widetilde D_c|\gg x,\qquad \sum_{c\le x/2}|N_c-\widetilde N_c|\gg x.
+$$
+
+(b) 띠마다 $|N_c-\widetilde N_c|\le A\,Y^{\vartheta}$ ($0\le\vartheta<1$)만 쓰면, $c\le\sqrt x$에서 삼각부등식으로 얻는 상계는 $\asymp A\,x^{(1+\vartheta)/2}/(1-\vartheta)$이고, 이는 $x^\vartheta$보다 크다.
+
+**증명.** (a) 홀수 $c\in(x/2.3,\,x/2]$이면 $Y\in[2,2.3)$이므로 $S_c(X)=\{2\}$, $D_c=1$, $N_c=g_c(2)\ge\tfrac14$이다. $Y$ 이하의 소수 중 $c$를 나누는 것이 없으므로 $\widetilde D_c=\operatorname{li}(Y)\le(Y-2)/\log2<0.44$이고 $\widetilde N_c\le\tfrac12\operatorname{li}(Y)<0.22$이다. 그런 $c$는 $\gg x$개이다. (b) $\sum_{c\le\sqrt x}(x/c)^\vartheta=x^\vartheta\sum_{c\le\sqrt x}c^{-\vartheta}$이다. $\square$
+
+(a)의 손실은 소수 계수의 오차를 얼마나 잘 알든 생긴다. 작은 띠에서는 예측기가 무의미하고, 큰 띠에서도 지수가 $\vartheta$에서 $(1+\vartheta)/2$로 나빠진다. 정리 8.1의 지수 $\Theta_{\rm simple}$을 보려면 $c$에 대한 합을 부호를 유지한 채 해야 한다.
+
+부호를 유지하는 정확한 형태는 $a_2$ 쪽에 있다. (1.6)의 가법성을 모든 소수 거듭제곱으로 확장하면 $b=1*(\Lambda\log)$이고, $\Psi_1(y):=\sum_{d\le y}\Lambda(d)\log d$로 두면
+
+$$
+4U_2(x)=\sum_{2\le n\le x}(\log n)^2+\sum_{m\le x}\Psi_1(x/m),\qquad \mathcal E_2=\mathscr L\Delta_2
+$$
+
+이다. 둘째 합은 "띠 $c=m$에 모든 소수 거듭제곱을 붙인 것"이다. 첫 합에서 $x(L^2-2L+2)$를 빼면 $O(\log^2x)$이므로 $4\Delta_2=\sum_m\Psi_1(x/m)-Q_b(x)+O(\log^2x)$이다. $M_2$ 정규화는 $\mathscr L$ 안에 정확히 들어가므로 띠 위 U자 모양은 정규화에서 생긴 것이고, 산술적 정보는 $\Psi_1$에 있다. 이 방향의 정리는 [이차 모멘트 §10](m2-divisor-moment.md#section-10)과 [$M_2$의 가법 핵](m2-additive-core.md)에 있다.
+
 <a id="appendix-a"></a>
 
 ## 부록 A. 수치 기록
@@ -451,6 +575,16 @@ $b(14)\approx b(30)$이지만 평균은 $0.028$ 차이가 난다(정리 4.1의 $
 
 **A.6. 명제 6.1.** $x=10^6$에서 $M_2$의 평균은 $0.386166$이다. [이차 모멘트 (9.1)](m2-divisor-moment.md#section-9)의 처음 세 항 $\tfrac38+\tfrac{\gamma}{4L}+\tfrac{\gamma-\gamma^2-3\gamma_1}{4L^2}\approx0.3861$과 맞는다. $s(n)$의 평균은 $0.008561$이다.
 
+**A.7. 따름정리 4.3과 명제 7.1.** $\lambda^3(E_X(c)-F_c(\log(Y/e)))$는 다음과 같이 유계로 남는다.
+
+| $c$ | $X=10^5$ | $10^6$ | $10^7$ | $10^8$ |
+|---:|---:|---:|---:|---:|
+| 2 | −1.228 | −1.101 | −1.010 | −0.951 |
+| 6 | −2.498 | −2.502 | −2.384 | −2.282 |
+| 30 | −2.875 | −3.677 | −3.841 | −3.832 |
+
+$x=10^6$에서 $\sum_{c\le x/2}|D_c-\widetilde D_c|/x=0.3620$이다. 명제 7.1 (a)의 증명에서 쓴 구간만으로 얻는 하계 $1/70$보다 훨씬 크다.
+
 <a id="checks"></a>
 
 ## 검산
@@ -460,6 +594,9 @@ $b(14)\approx b(30)$이지만 평균은 $0.028$ 차이가 난다(정리 4.1의 $
 - (1.1): $n\le3000$에서 약수합 정의와 $10^{-15}$ 안에서 맞는다. (1.2)–(1.4)는 $c<400$과 처음 60개 소수에서 맞는다. 보조정리 1.2는 $c<10^4$에서 확인한다.
 - 명제 2.1: $c\le2000$에서 U자 모양, $p^*\le c$, 최솟값의 닫힌 꼴.
 - 명제 3.1: 1,225쌍에서 (3.1)의 항등식과 부등식 사슬.
+- 명제 1.3: $m,n<150$의 서로소 쌍에서 (1.5). 명제 3.2: 같은 1,225쌍에서 (3.7)의 항등식과 (3.8)의 상계, (3.8) 첫 항 $\le$ (3.3) 첫 항.
+- 따름정리 4.3: $c=2,6,30$, $X=10^5,\dots,10^8$에서 $\lambda^3(E_X(c)-F_c(\log(Y/e)))$가 유계로 남는다.
+- 명제 7.1 (a): $x=10^6$에서 $\sum_c|D_c-\widetilde D_c|/x$.
 - 부록 A의 모든 표. `--figure`로 위 그림을 다시 만든다.
 
 수치 확인은 증명을 대체하지 않는다.
